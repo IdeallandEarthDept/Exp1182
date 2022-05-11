@@ -1,8 +1,12 @@
 package com.deeplake.exp1182.util;
 
-import net.minecraft.commands.arguments.CompoundTag;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.player.Player;
+
+import static com.deeplake.exp1182.util.IDLNBTDef.IDEALLAND;
 
 public class IDLNBT {
     //Handle those which need to be stored into players permanently
@@ -60,10 +64,10 @@ public class IDLNBT {
             return BlockPos.ZERO;
         }
 
-        INBT inbt = getPlyrIdlTagSafe(player).get(key);
+        Tag inbt = getPlyrIdlTagSafe(player).get(key);
         if (inbt instanceof CompoundTag)
         {
-            return NBTUtil.readBlockPos((CompoundTag) inbt);
+            return NbtUtils.readBlockPos((CompoundTag) inbt);
         }
         return BlockPos.ZERO;
     }
@@ -153,7 +157,7 @@ public class IDLNBT {
         CompoundTag data = getTagSafe(playerData, Player.PERSISTED_NBT_TAG);
         CompoundTag idl_data = getPlyrIdlTagSafe(player);
 
-        idl_data.put(key, NBTUtil.writeBlockPos(value));
+        idl_data.put(key, NbtUtils.writeBlockPos(value));
 
         data.put(IDEALLAND, idl_data);
         playerData.put(Player.PERSISTED_NBT_TAG, data);
