@@ -1,6 +1,8 @@
 package com.deeplake.exp1182.setup;
 
 import com.deeplake.exp1182.Main;
+import com.deeplake.exp1182.entities.client.model.WorldBossModel;
+import com.deeplake.exp1182.entities.client.render.BossRenderer;
 import com.deeplake.exp1182.entities.demo.ThiefModel;
 import com.deeplake.exp1182.manasystem.client.KeyBindings;
 import com.deeplake.exp1182.manasystem.client.KeyInputHandler;
@@ -36,12 +38,13 @@ public class ClientSetup {
 
     @SubscribeEvent
     public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(ThiefModel.THIEF_LAYER, ThiefModel::createBodyLayer);
+//        event.registerLayerDefinition(ThiefModel.THIEF_LAYER, ThiefModel::createBodyLayer);
+        event.registerLayerDefinition(WorldBossModel.NORMAL_LAYER, WorldBossModel::createBodyLayer);
     }
 
     @SubscribeEvent
     public static void onRegisterRenderer(EntityRenderersEvent.RegisterRenderers event) {
-//        event.registerEntityRenderer(ModEntities.THIEF.get(), ThiefRenderer::new);
+        event.registerEntityRenderer(ModEntities.WORLD_BOSS.get(), BossRenderer::new);
     }
 
     @SubscribeEvent

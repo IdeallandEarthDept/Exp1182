@@ -2,6 +2,7 @@ package com.deeplake.exp1182.datagen;
 
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.setup.ModBlocks;
+import com.deeplake.exp1182.setup.ModEntities;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
 
@@ -36,7 +37,7 @@ public class TutLanguageProvider extends LanguageProvider {
 //        add(ModItems.MYSTERIOUS_INGOT.get(), "Mysterious Ingot");
 //        add(ModItems.THIEF_EGG.get(), "Thief Egg");
 //
-//        add(Registration.THIEF.get(), "Thief");
+        add(ModEntities.WORLD_BOSS.get(), "World Boss");
 //
 //        add(KeyBindings.KEY_CATEGORIES_TUTORIAL, "Tutorial Keys");
 //        add(KeyBindings.KEY_GATHER_MANA, "Gather Mana");

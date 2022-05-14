@@ -1,22 +1,35 @@
 package com.deeplake.exp1182.setup;
 
 import com.deeplake.exp1182.Main;
+import com.deeplake.exp1182.entities.EntityWorldBoss;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
+@Mod.EventBusSubscriber(modid = Main.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, Main.MOD_ID);
 
-    @SubscribeEvent
-    public static void onAttributeCreate(EntityAttributeCreationEvent event) {
-//        event.put(ModEntities.THIEF.get(), ThiefEntity.prepareAttributes().build());
-    }
-//    public static final RegistryObject<EntityType<ThiefEntity>> THIEF = ENTITIES.register("thief", () -> EntityType.Builder.of(ThiefEntity::new, MobCategory.CREATURE)
+    //    public static final RegistryObject<EntityType<ThiefEntity>> THIEF = ENTITIES.register("thief", () -> EntityType.Builder.of(ThiefEntity::new, MobCategory.CREATURE)
 //            .sized(0.6f, 1.95f)
 //            .clientTrackingRange(8)
 //            .setShouldReceiveVelocityUpdates(false)
 //            .build("thief"));
+
+        public static final RegistryObject<EntityType<EntityWorldBoss>> WORLD_BOSS = ENTITIES.register("world_boss", () -> EntityType.Builder.of(EntityWorldBoss::new, MobCategory.MONSTER)
+            .sized(0.6f, 1.95f)
+            .clientTrackingRange(8)
+            .setShouldReceiveVelocityUpdates(false)
+            .build("world_boss"));
+
+    @SubscribeEvent
+    public static void onAttributeCreate(EntityAttributeCreationEvent event) {
+        event.put(ModEntities.WORLD_BOSS.get(), EntityWorldBoss.prepareAttributes().build());
+    }
+
 }
