@@ -1,7 +1,7 @@
 package com.deeplake.exp1182.datagen;
 
 import com.deeplake.exp1182.Main;
-import com.deeplake.exp1182.setup.Registration;
+import com.deeplake.exp1182.setup.ModBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
@@ -16,30 +16,30 @@ public class TutBlockTags extends BlockTagsProvider {
 
     @Override
     protected void addTags() {
-        tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(Registration.GENERATOR.get())
-                .add(Registration.POWERGEN.get())
-                .add(Registration.MYSTERIOUS_ORE_OVERWORLD.get())
-                .add(Registration.MYSTERIOUS_ORE_NETHER.get())
-                .add(Registration.MYSTERIOUS_ORE_END.get())
-                .add(Registration.MYSTERIOUS_ORE_DEEPSLATE.get());
-        tag(BlockTags.NEEDS_IRON_TOOL)
-                .add(Registration.GENERATOR.get())
-                .add(Registration.POWERGEN.get())
-                .add(Registration.MYSTERIOUS_ORE_OVERWORLD.get())
-                .add(Registration.MYSTERIOUS_ORE_NETHER.get())
-                .add(Registration.MYSTERIOUS_ORE_END.get())
-                .add(Registration.MYSTERIOUS_ORE_DEEPSLATE.get());
-        tag(Tags.Blocks.ORES)
-                .add(Registration.MYSTERIOUS_ORE_OVERWORLD.get())
-                .add(Registration.MYSTERIOUS_ORE_NETHER.get())
-                .add(Registration.MYSTERIOUS_ORE_END.get())
-                .add(Registration.MYSTERIOUS_ORE_DEEPSLATE.get());
-        tag(Registration.MYSTERIOUS_ORE)
-                .add(Registration.MYSTERIOUS_ORE_OVERWORLD.get())
-                .add(Registration.MYSTERIOUS_ORE_NETHER.get())
-                .add(Registration.MYSTERIOUS_ORE_END.get())
-                .add(Registration.MYSTERIOUS_ORE_DEEPSLATE.get());
+//        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+//                .add(ModBlocks.GENERATOR.get())
+//                .add(ModBlocks.POWERGEN.get())
+//                .add(ModBlocks.MYSTERIOUS_ORE_OVERWORLD.get())
+//                .add(ModBlocks.MYSTERIOUS_ORE_NETHER.get())
+//                .add(ModBlocks.MYSTERIOUS_ORE_END.get())
+//                .add(ModBlocks.MYSTERIOUS_ORE_DEEPSLATE.get());
+//        tag(BlockTags.NEEDS_IRON_TOOL)
+//                .add(ModBlocks.GENERATOR.get())
+//                .add(ModBlocks.POWERGEN.get())
+//                .add(ModBlocks.MYSTERIOUS_ORE_OVERWORLD.get())
+//                .add(ModBlocks.MYSTERIOUS_ORE_NETHER.get())
+//                .add(ModBlocks.MYSTERIOUS_ORE_END.get())
+//                .add(ModBlocks.MYSTERIOUS_ORE_DEEPSLATE.get());
+//        tag(Tags.Blocks.ORES)
+//                .add(ModBlocks.MYSTERIOUS_ORE_OVERWORLD.get())
+//                .add(ModBlocks.MYSTERIOUS_ORE_NETHER.get())
+//                .add(ModBlocks.MYSTERIOUS_ORE_END.get())
+//                .add(ModBlocks.MYSTERIOUS_ORE_DEEPSLATE.get());
+//        tag(ModBlocks.MYSTERIOUS_ORE)
+//                .add(ModBlocks.MYSTERIOUS_ORE_OVERWORLD.get())
+//                .add(ModBlocks.MYSTERIOUS_ORE_NETHER.get())
+//                .add(ModBlocks.MYSTERIOUS_ORE_END.get())
+//                .add(ModBlocks.MYSTERIOUS_ORE_DEEPSLATE.get());
     }
 
     @Override

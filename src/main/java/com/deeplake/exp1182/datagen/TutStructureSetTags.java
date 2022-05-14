@@ -22,9 +22,9 @@ public class TutStructureSetTags extends TagsProvider<StructureSet> {
 
     @Override
     protected void addTags() {
-        tag(Registration.MYSTERIOUS_DIMENSION_STRUCTURE_SET)
-                .add(ResourceKey.create(BuiltinRegistries.STRUCTURE_SETS.key(), new ResourceLocation(Main.MOD_ID, "portal")))
-                .add(ResourceKey.create(BuiltinRegistries.STRUCTURE_SETS.key(), new ResourceLocation(Main.MOD_ID, "thiefden")))
+//        tag(Registration.MYSTERIOUS_DIMENSION_STRUCTURE_SET)
+//                .add(ResourceKey.create(BuiltinRegistries.STRUCTURE_SETS.key(), new ResourceLocation(Main.MOD_ID, "portal")))
+//                .add(ResourceKey.create(BuiltinRegistries.STRUCTURE_SETS.key(), new ResourceLocation(Main.MOD_ID, "thiefden")))
         ;
     }
 
