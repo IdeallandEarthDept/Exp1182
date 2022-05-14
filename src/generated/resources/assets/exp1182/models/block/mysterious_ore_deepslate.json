@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "exp1182:block/mysterious_ore_deepslate"
-  }
-}
