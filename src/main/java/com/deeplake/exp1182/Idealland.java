@@ -3,7 +3,6 @@ package com.deeplake.exp1182;
 import com.deeplake.exp1182.setup.ClientSetup;
 import com.deeplake.exp1182.setup.ModSetup;
 import com.deeplake.exp1182.setup.Registration;
-import com.mojang.logging.LogUtils;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,23 +17,24 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.slf4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.stream.Collectors;
 
-// The value here should match an entry in the META-INF/mods.toml file
-@Mod("exp1182")
-public class Idealland
-{
-    // Directly reference a slf4j LOGGER
-    private static final Logger LOGGER = LogUtils.getLogger();
-    public static final String MOD_ID = "exp1182";
-    public static final boolean SHOW_WARN = true;
+@Mod(Idealland.MOD_ID)
+public class Idealland {
 
-    public Idealland()
-    {
+    public static final Logger LOGGER = LogManager.getLogger();
+    public static final String MOD_ID = "Idealland";
+    private static final boolean SHOW_WARN = true;
+
+    public Idealland() {
+
         // Register the deferred registry
+        ModSetup.setup();
         Registration.init();
+        com.deeplake.exp1182.setup.Config.register();
 
         // Register the setup method for modloading
         IEventBus modbus = FMLJavaModLoadingContext.get().getModEventBus();

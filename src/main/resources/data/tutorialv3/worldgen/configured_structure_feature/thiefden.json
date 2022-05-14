@@ -1,0 +1,12 @@
+{
+  "type": "Idealland:thiefden",
+  "config": {
+    "start_pool": "Idealland:thiefden/start_pool",
+    "size": 2
+  },
+
+  "biomes": "#Idealland:has_structure/thiefden",
+  "adapt_noise": true,
+  "spawn_overrides": {
+  }
+}
