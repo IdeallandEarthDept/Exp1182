@@ -1,7 +1,7 @@
 package com.deeplake.exp1182.setup;
 
 import com.deeplake.exp1182.Main;
-import com.deeplake.exp1182.entities.ThiefModel;
+import com.deeplake.exp1182.entities.demo.ThiefModel;
 import com.deeplake.exp1182.manasystem.client.KeyBindings;
 import com.deeplake.exp1182.manasystem.client.KeyInputHandler;
 import net.minecraft.client.renderer.texture.TextureAtlas;

@@ -1,4 +1,4 @@
-package com.deeplake.exp1182.entities;
+package com.deeplake.exp1182.entities.demo;
 
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;

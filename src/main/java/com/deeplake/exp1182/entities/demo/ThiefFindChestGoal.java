@@ -1,4 +1,4 @@
-package com.deeplake.exp1182.entities;
+package com.deeplake.exp1182.entities.demo;
 
 import com.deeplake.exp1182.varia.Tools;
 import net.minecraft.core.BlockPos;
