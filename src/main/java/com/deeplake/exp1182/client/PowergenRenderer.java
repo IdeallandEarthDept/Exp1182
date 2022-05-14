@@ -1,6 +1,6 @@
 package com.deeplake.exp1182.client;
 
-import com.deeplake.exp1182.Idealland;
+import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.blocks.PowergenBE;
 import com.deeplake.exp1182.blocks.PowergenConfig;
 import com.deeplake.exp1182.setup.Registration;
@@ -23,7 +23,7 @@ import static java.lang.Boolean.TRUE;
 
 public class PowergenRenderer implements BlockEntityRenderer<PowergenBE> {
 
-    public static final ResourceLocation HALO = new ResourceLocation(Idealland.MOD_ID, "effect/halo");
+    public static final ResourceLocation HALO = new ResourceLocation(Main.MOD_ID, "effect/halo");
 
     public PowergenRenderer(BlockEntityRendererProvider.Context context) {
     }

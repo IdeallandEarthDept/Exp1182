@@ -1,6 +1,6 @@
 package com.deeplake.exp1182.client;
 
-import com.deeplake.exp1182.Idealland;
+import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.blocks.GeneratorBE;
 import com.deeplake.exp1182.blocks.GeneratorBlock;
 import com.deeplake.exp1182.varia.ClientTools;
@@ -187,7 +187,7 @@ public class GeneratorBakedModel implements IDynamicBakedModel {
                     }
                 } catch (Exception e) {
                     // In case a certain mod has a bug we don't want to cause everything to crash. Instead we log the problem
-                    Idealland.LOGGER.log(Level.ERROR, "A block '" + generatingBlock.getBlock().getRegistryName().toString() + "' caused a crash!");
+                    Main.LOGGER.log(Level.ERROR, "A block '" + generatingBlock.getBlock().getRegistryName().toString() + "' caused a crash!");
                 }
             }
         }

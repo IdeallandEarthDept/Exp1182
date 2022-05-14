@@ -1,6 +1,6 @@
 package com.deeplake.exp1182.setup;
 
-import com.deeplake.exp1182.Idealland;
+import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.client.GeneratorModelLoader;
 import com.deeplake.exp1182.client.PowergenRenderer;
 import com.deeplake.exp1182.client.PowergenScreen;
@@ -26,7 +26,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import static net.minecraftforge.client.gui.ForgeIngameGui.HOTBAR_ELEMENT;
 
-@Mod.EventBusSubscriber(modid = Idealland.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Main.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientSetup {
 
     public static void init(FMLClientSetupEvent event) {

@@ -1,6 +1,6 @@
 package com.deeplake.exp1182.datagen;
 
-import com.deeplake.exp1182.Idealland;
+import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.setup.Registration;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
@@ -11,7 +11,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 public class TutItemTags extends ItemTagsProvider {
 
     public TutItemTags(DataGenerator generator, BlockTagsProvider blockTags, ExistingFileHelper helper) {
-        super(generator, blockTags, Idealland.MOD_ID, helper);
+        super(generator, blockTags, Main.MOD_ID, helper);
     }
 
     @Override

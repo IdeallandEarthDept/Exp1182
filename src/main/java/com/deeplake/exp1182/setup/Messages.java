@@ -1,6 +1,6 @@
 package com.deeplake.exp1182.setup;
 
-import com.deeplake.exp1182.Idealland;
+import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.manasystem.network.PacketGatherMana;
 import com.deeplake.exp1182.manasystem.network.PacketSyncManaToClient;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +21,7 @@ public class Messages {
 
     public static void register() {
         SimpleChannel net = NetworkRegistry.ChannelBuilder
-                .named(new ResourceLocation(Idealland.MOD_ID, "messages"))
+                .named(new ResourceLocation(Main.MOD_ID, "messages"))
                 .networkProtocolVersion(() -> "1.0")
                 .clientAcceptedVersions(s -> true)
                 .serverAcceptedVersions(s -> true)

@@ -1,5 +1,6 @@
 package com.deeplake.exp1182.datagen;
 
+import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.setup.Registration;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -29,7 +30,7 @@ public class TutRecipes extends RecipeProvider {
                 .define('x', Tags.Items.GEMS_DIAMOND)
                 .define('#', Tags.Items.INGOTS_IRON)
                 .define('m', Registration.MYSTERIOUS_INGOT.get())
-                .group("Idealland")
+                .group(Main.MOD_ID)
                 .unlockedBy("mysterious", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.MYSTERIOUS_INGOT.get()))
                 .save(consumer);
         ShapedRecipeBuilder.shaped(Registration.POWERGEN.get())
@@ -39,7 +40,7 @@ public class TutRecipes extends RecipeProvider {
                 .define('x', Tags.Items.DUSTS_REDSTONE)
                 .define('#', Tags.Items.INGOTS_IRON)
                 .define('m', Registration.MYSTERIOUS_INGOT.get())
-                .group("Idealland")
+                .group(Main.MOD_ID)
                 .unlockedBy("mysterious", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.MYSTERIOUS_INGOT.get()))
                 .save(consumer);
 

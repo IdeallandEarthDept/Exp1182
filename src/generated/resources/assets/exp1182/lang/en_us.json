@@ -1,0 +1,20 @@
+{
+  "block.exp1182.generator": "Generator",
+  "block.exp1182.mysterious_ore_deepslate": "Mysterious ore",
+  "block.exp1182.mysterious_ore_end": "Mysterious ore",
+  "block.exp1182.mysterious_ore_nether": "Mysterious ore",
+  "block.exp1182.mysterious_ore_overworld": "Mysterious ore",
+  "block.exp1182.portal": "Mysterious Portal",
+  "block.exp1182.powergen": "Power generator",
+  "entity.exp1182.thief": "Thief",
+  "item.exp1182.mysterious_ingot": "Mysterious Ingot",
+  "item.exp1182.raw_mysterious_chunk": "Mysterious Raw Chunk",
+  "item.exp1182.thief": "Thief Egg",
+  "itemGroup.tab1": "Tutorial",
+  "key.categories.tutorial": "Tutorial Keys",
+  "key.gatherMana": "Gather Mana",
+  "message.generator": "Generate ores from ingots!",
+  "message.nomana": "No mana on this location",
+  "message.powergen": "Power generator generating %s per tick!",
+  "screen.tutorial.powergen": "Power generator"
+}

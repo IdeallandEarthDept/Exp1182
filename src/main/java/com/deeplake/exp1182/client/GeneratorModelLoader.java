@@ -1,6 +1,6 @@
 package com.deeplake.exp1182.client;
 
-import com.deeplake.exp1182.Idealland;
+import com.deeplake.exp1182.Main;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
@@ -21,13 +21,13 @@ import java.util.function.Function;
 
 public class GeneratorModelLoader implements IModelLoader<GeneratorModelLoader.GeneratorModelGeometry> {
 
-    public static final ResourceLocation GENERATOR_LOADER = new ResourceLocation(Idealland.MOD_ID, "generatorloader");
+    public static final ResourceLocation GENERATOR_LOADER = new ResourceLocation(Main.MOD_ID, "generatorloader");
 
-    public static final ResourceLocation GENERATOR_FRONT_POWERED = new ResourceLocation(Idealland.MOD_ID, "block/generator_front_powered");
-    public static final ResourceLocation GENERATOR_FRONT = new ResourceLocation(Idealland.MOD_ID, "block/generator_front");
-    public static final ResourceLocation GENERATOR_SIDE = new ResourceLocation(Idealland.MOD_ID, "block/generator_side");
-    public static final ResourceLocation GENERATOR_ON = new ResourceLocation(Idealland.MOD_ID, "block/generator_on");
-    public static final ResourceLocation GENERATOR_OFF = new ResourceLocation(Idealland.MOD_ID, "block/generator_off");
+    public static final ResourceLocation GENERATOR_FRONT_POWERED = new ResourceLocation(Main.MOD_ID, "block/generator_front_powered");
+    public static final ResourceLocation GENERATOR_FRONT = new ResourceLocation(Main.MOD_ID, "block/generator_front");
+    public static final ResourceLocation GENERATOR_SIDE = new ResourceLocation(Main.MOD_ID, "block/generator_side");
+    public static final ResourceLocation GENERATOR_ON = new ResourceLocation(Main.MOD_ID, "block/generator_on");
+    public static final ResourceLocation GENERATOR_OFF = new ResourceLocation(Main.MOD_ID, "block/generator_off");
 
     public static final Material MATERIAL_FRONT_POWERED = ForgeHooksClient.getBlockMaterial(GENERATOR_FRONT_POWERED);
     public static final Material MATERIAL_FRONT = ForgeHooksClient.getBlockMaterial(GENERATOR_FRONT);

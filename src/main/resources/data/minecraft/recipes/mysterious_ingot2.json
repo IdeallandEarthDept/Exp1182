@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "exp1182:raw_mysterious_chunk"
+  },
+  "result": "exp1182:mysterious_ingot",
+  "experience": 0.0,
+  "cookingtime": 100
+}

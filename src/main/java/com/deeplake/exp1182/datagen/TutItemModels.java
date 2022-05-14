@@ -1,6 +1,6 @@
 package com.deeplake.exp1182.datagen;
 
-import com.deeplake.exp1182.Idealland;
+import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.setup.Registration;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -9,7 +9,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 public class TutItemModels extends ItemModelProvider {
 
     public TutItemModels(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, Idealland.MOD_ID, existingFileHelper);
+        super(generator, Main.MOD_ID, existingFileHelper);
     }
 
     @Override

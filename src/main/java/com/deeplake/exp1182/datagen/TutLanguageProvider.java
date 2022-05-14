@@ -1,6 +1,6 @@
 package com.deeplake.exp1182.datagen;
 
-import com.deeplake.exp1182.Idealland;
+import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.manasystem.client.KeyBindings;
 import com.deeplake.exp1182.manasystem.network.PacketGatherMana;
 import com.deeplake.exp1182.setup.Registration;
@@ -15,7 +15,7 @@ import static com.deeplake.exp1182.setup.ModSetup.TAB_NAME;
 public class TutLanguageProvider extends LanguageProvider {
 
     public TutLanguageProvider(DataGenerator gen, String locale) {
-        super(gen, Idealland.MOD_ID, locale);
+        super(gen, Main.MOD_ID, locale);
     }
 
     @Override

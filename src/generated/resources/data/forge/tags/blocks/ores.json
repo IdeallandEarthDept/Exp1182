@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "exp1182:mysterious_ore_overworld",
+    "exp1182:mysterious_ore_nether",
+    "exp1182:mysterious_ore_end",
+    "exp1182:mysterious_ore_deepslate"
+  ]
+}

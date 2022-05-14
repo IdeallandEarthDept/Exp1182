@@ -1,6 +1,6 @@
 package com.deeplake.exp1182.manasystem.data;
 
-import com.deeplake.exp1182.Idealland;
+import com.deeplake.exp1182.Main;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -14,7 +14,7 @@ public class ManaEvents {
     public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event){
         if (event.getObject() instanceof Player) {
             if (!event.getObject().getCapability(PlayerManaProvider.PLAYER_MANA).isPresent()) {
-                event.addCapability(new ResourceLocation(Idealland.MOD_ID, "playermana"), new PlayerManaProvider());
+                event.addCapability(new ResourceLocation(Main.MOD_ID, "playermana"), new PlayerManaProvider());
             }
         }
     }

@@ -1,6 +1,6 @@
 package com.deeplake.exp1182.util;
 
-import com.deeplake.exp1182.Idealland;
+import com.deeplake.exp1182.Main;
 import com.mojang.math.Vector3d;
 import net.minecraft.Util;
 import net.minecraft.client.resources.language.I18n;
@@ -9,7 +9,6 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -18,7 +17,6 @@ import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.api.distmarker.Dist;
@@ -235,7 +233,7 @@ public class CommonFunctions {
     }
 
     public static void LogPlayerAction(LivingEntity living, String action){
-        Idealland.Log(String.format("%s(%s): %s",living.getName(), living.getStringUUID(), action));
+        Main.Log(String.format("%s(%s): %s",living.getName(), living.getStringUUID(), action));
     }
 
     public static boolean repairItem(ItemStack stack, int amount)
@@ -400,7 +398,7 @@ public class CommonFunctions {
 
     public static ResourceLocation getResLoc(String key)
     {
-        return new ResourceLocation(Idealland.MOD_ID, key);
+        return new ResourceLocation(Main.MOD_ID, key);
     }
 
     public static AABB ServerAABB(Vector3d from, Vector3d to)

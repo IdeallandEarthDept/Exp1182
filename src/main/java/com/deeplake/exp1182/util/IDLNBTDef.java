@@ -1,6 +1,6 @@
 package com.deeplake.exp1182.util;
 
-import com.deeplake.exp1182.Idealland;
+import com.deeplake.exp1182.Main;
 
 public class IDLNBTDef {
     //GENERAL:
@@ -11,17 +11,17 @@ public class IDLNBTDef {
     public static final String BLOCK_STATE = "blstate";
     public static final String BLOCK_POS = "blpos";
 
-    public static final String DESC_FAKE = Idealland.MOD_ID + ".desc.fake";
+    public static final String DESC_FAKE = Main.MOD_ID + ".desc.fake";
 
     public static final String LAMP_MARK = "lamp_lit";
 
     //Map
     public static final String ORI_POS = "ori_pos";
-    public static final String MAP_MARK_PLAYER_APHRODITE = Idealland.MOD_ID + ".map.player.aphrodite";
-    public static final String MAP_MARK_PLAYER_POPOLON = Idealland.MOD_ID + ".map.player.popolon";
-    public static final String MAP_MARK_BLANK = Idealland.MOD_ID + ".map.blank";
-    public static final String MAP_MARK_PASS = Idealland.MOD_ID + ".map.pass";
-    public static final String MAP_MARK_BOSS = Idealland.MOD_ID + ".map.boss";
+    public static final String MAP_MARK_PLAYER_APHRODITE = Main.MOD_ID + ".map.player.aphrodite";
+    public static final String MAP_MARK_PLAYER_POPOLON = Main.MOD_ID + ".map.player.popolon";
+    public static final String MAP_MARK_BLANK = Main.MOD_ID + ".map.blank";
+    public static final String MAP_MARK_PASS = Main.MOD_ID + ".map.pass";
+    public static final String MAP_MARK_BOSS = Main.MOD_ID + ".map.boss";
 
     //Revival
     public static final String NO_REVIVE = "no_revive";
@@ -226,7 +226,7 @@ public class IDLNBTDef {
     // public static final String INIT_DONE = "inited";
 
     //prefix
-    public static final String MSG_PREFIX = Idealland.MOD_ID + ".msg.";
+    public static final String MSG_PREFIX = Main.MOD_ID + ".msg.";
 
     public static final String ARTIFACT_KEY = "idealland.item.artifact.desc";
 

@@ -4,7 +4,6 @@ import com.deeplake.exp1182.setup.ClientSetup;
 import com.deeplake.exp1182.setup.ModSetup;
 import com.deeplake.exp1182.setup.Registration;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -22,14 +21,14 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.stream.Collectors;
 
-@Mod(Idealland.MOD_ID)
-public class Idealland {
+@Mod(Main.MOD_ID)
+public class Main {
 
     public static final Logger LOGGER = LogManager.getLogger();
     public static final String MOD_ID = "exp1182";
     private static final boolean SHOW_WARN = true;
 
-    public Idealland() {
+    public Main() {
 
         // Register the deferred registry
         ModSetup.setup();
@@ -57,7 +56,7 @@ public class Idealland {
     {
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+//        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

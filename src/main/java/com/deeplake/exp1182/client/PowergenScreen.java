@@ -1,6 +1,6 @@
 package com.deeplake.exp1182.client;
 
-import com.deeplake.exp1182.Idealland;
+import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.blocks.PowergenContainer;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -12,7 +12,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class PowergenScreen extends AbstractContainerScreen<PowergenContainer> {
 
-    private final ResourceLocation GUI = new ResourceLocation(Idealland.MOD_ID, "textures/gui/powergen_gui.png");
+    private final ResourceLocation GUI = new ResourceLocation(Main.MOD_ID, "textures/gui/powergen_gui.png");
 
     public PowergenScreen(PowergenContainer container, Inventory inv, Component name) {
         super(container, inv, name);

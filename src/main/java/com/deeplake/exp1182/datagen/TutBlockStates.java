@@ -1,6 +1,6 @@
 package com.deeplake.exp1182.datagen;
 
-import com.deeplake.exp1182.Idealland;
+import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.setup.Registration;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
@@ -18,7 +18,7 @@ import static com.deeplake.exp1182.client.GeneratorModelLoader.GENERATOR_LOADER;
 public class TutBlockStates  extends BlockStateProvider {
 
     public TutBlockStates(DataGenerator gen, ExistingFileHelper helper) {
-        super(gen, Idealland.MOD_ID, helper);
+        super(gen, Main.MOD_ID, helper);
     }
 
     @Override
