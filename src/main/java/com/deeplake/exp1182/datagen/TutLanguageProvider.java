@@ -1,10 +1,15 @@
 package com.deeplake.exp1182.datagen;
 
 import com.deeplake.exp1182.Idealland;
+import com.deeplake.exp1182.manasystem.client.KeyBindings;
+import com.deeplake.exp1182.manasystem.network.PacketGatherMana;
 import com.deeplake.exp1182.setup.Registration;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
 
+import static com.deeplake.exp1182.blocks.GeneratorBlock.MESSAGE_GENERATOR;
+import static com.deeplake.exp1182.blocks.PowergenBlock.MESSAGE_POWERGEN;
+import static com.deeplake.exp1182.blocks.PowergenBlock.SCREEN_TUTORIAL_POWERGEN;
 import static com.deeplake.exp1182.setup.ModSetup.TAB_NAME;
 
 public class TutLanguageProvider extends LanguageProvider {

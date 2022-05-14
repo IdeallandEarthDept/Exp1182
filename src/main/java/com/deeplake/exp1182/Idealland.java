@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 public class Idealland {
 
     public static final Logger LOGGER = LogManager.getLogger();
-    public static final String MOD_ID = "Idealland";
+    public static final String MOD_ID = "exp1182";
     private static final boolean SHOW_WARN = true;
 
     public Idealland() {

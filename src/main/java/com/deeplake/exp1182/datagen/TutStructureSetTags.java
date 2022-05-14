@@ -14,7 +14,11 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 public class TutStructureSetTags extends TagsProvider<StructureSet> {
 
     public TutStructureSetTags(DataGenerator generator, ExistingFileHelper helper) {
-        super(generator, BuiltinRegistries.STRUCTURE_SETS, Idealland.MOD_ID, helper, TagManager.getTagDir(BuiltinRegistries.STRUCTURE_SETS.key()).substring(5));
+        super(generator,
+                BuiltinRegistries.STRUCTURE_SETS,
+                Idealland.MOD_ID,
+                helper);
+//                TagManager.getTagDir(BuiltinRegistries.STRUCTURE_SETS.key()).substring(5));
     }
 
     @Override

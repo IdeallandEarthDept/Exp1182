@@ -13,7 +13,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class TutBiomeTags extends TagsProvider<Biome> {
 
     public TutBiomeTags(DataGenerator generator, ExistingFileHelper helper) {
-        super(generator, BuiltinRegistries.BIOME, Idealland.MOD_ID, helper, TagManager.getTagDir(BuiltinRegistries.BIOME.key()).substring(5));
+        super(generator,
+                BuiltinRegistries.BIOME,
+                Idealland.MOD_ID,
+                helper);
+//                TagManager.getTagDir(BuiltinRegistries.BIOME.key()).substring(5));
     }
 
     @Override

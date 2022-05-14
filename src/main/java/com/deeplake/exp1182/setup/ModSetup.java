@@ -1,5 +1,11 @@
 package com.deeplake.exp1182.setup;
 
+import com.deeplake.exp1182.Idealland;
+import com.deeplake.exp1182.entities.ThiefEntity;
+import com.deeplake.exp1182.manasystem.data.ManaEvents;
+import com.deeplake.exp1182.worldgen.dimensions.Dimensions;
+import com.deeplake.exp1182.worldgen.ores.Ores;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -11,10 +17,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
-@Mod.EventBusSubscriber(modid = Idealland.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = Idealland.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModSetup {
-    public static void init(final FMLCommonSetupEvent event) {
-    }
 
     public static final String TAB_NAME = "Idealland";
 

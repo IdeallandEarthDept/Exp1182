@@ -1,7 +1,7 @@
 {
-  "type": "Idealland:mysterious",
+  "type": "exp1182:mysterious",
   "generator": {
-    "type": "Idealland:mysterious_chunkgen",
+    "type": "exp1182:mysterious_chunkgen",
     "settings": {
       "base": 65,
       "verticalvariance": 10,

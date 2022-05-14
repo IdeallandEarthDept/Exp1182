@@ -1,0 +1,12 @@
+{
+  "type": "exp1182:thiefden",
+  "config": {
+    "start_pool": "exp1182:thiefden/start_pool",
+    "size": 2
+  },
+
+  "biomes": "#exp1182:has_structure/thiefden",
+  "adapt_noise": true,
+  "spawn_overrides": {
+  }
+}

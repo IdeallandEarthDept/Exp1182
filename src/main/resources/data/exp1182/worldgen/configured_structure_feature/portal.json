@@ -1,11 +1,11 @@
 {
-  "type": "Idealland:portal",
+  "type": "exp1182:portal",
   "config": {
-    "start_pool": "Idealland:portal/start_pool",
+    "start_pool": "exp1182:portal/start_pool",
     "size": 2
   },
 
-  "biomes": "#Idealland:has_structure/portal",
+  "biomes": "#exp1182:has_structure/portal",
   "adapt_noise": true,
   "spawn_overrides": {
     "monster": {
