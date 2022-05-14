@@ -11,9 +11,9 @@ public class Dimensions {
     public static final ResourceKey<Level> MYSTERIOUS = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(Main.MOD_ID, "mysterious"));
 
     public static void register() {
-        Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Main.MOD_ID, "mysterious_chunkgen"),
-                MysteriousChunkGenerator.CODEC);
-        Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Main.MOD_ID, "biomes"),
-                MysteriousBiomeProvider.CODEC);
+//        Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(Main.MOD_ID, "mysterious_chunkgen"),
+//                MysteriousChunkGenerator.CODEC);
+//        Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(Main.MOD_ID, "biomes"),
+//                MysteriousBiomeProvider.CODEC);
     }
 }

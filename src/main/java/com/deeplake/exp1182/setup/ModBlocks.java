@@ -10,6 +10,7 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
@@ -19,6 +20,8 @@ import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import static com.deeplake.exp1182.util.CommonDef.JUMP_FACTOR_MJDS;
 
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Main.MOD_ID);
@@ -41,23 +44,37 @@ public class ModBlocks {
 //    public static final TagKey<Item> MYSTERIOUS_ORE_ITEM = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(Main.MOD_ID, "mysterious_ore"));
 
     //MJDS Blocks
-    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS = BlockBehaviour.Properties.of(Material.STONE).strength(-1f);
+    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS = BlockBehaviour.Properties.of(Material.STONE).strength(-1f).jumpFactor(JUMP_FACTOR_MJDS);
 
     static final String NAME_FLAME_BG = "flame_bg";
+    static int index = 0;
 
-    public static final RegistryObject<Block> FLAME_BG1 = BLOCKS.register(NAME_FLAME_BG+1, () -> new Block(BLOCK_PROP_MJDS));
+    static RegistryObject<Block> getFlameBG()
+    {
+        index++;
+        return BLOCKS.register(NAME_FLAME_BG+index, () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
+    }
+
+
+    public static final RegistryObject<Block> FLAME_BG1 = getFlameBG();
     public static final RegistryObject<Item> FLAME_BG1_ITEM = fromBlock(FLAME_BG1);
 
-    public static final RegistryObject<Block> FLAME_BG2 = BLOCKS.register(NAME_FLAME_BG+2, () -> new Block(BLOCK_PROP_MJDS));
+    public static final RegistryObject<Block> FLAME_BG2 = getFlameBG();
     public static final RegistryObject<Item> FLAME_BG2_ITEM = fromBlock(FLAME_BG2);
 
-    public static final RegistryObject<Block> FLAME_BG3 = BLOCKS.register(NAME_FLAME_BG+3, () -> new Block(BLOCK_PROP_MJDS));
+    public static final RegistryObject<Block> FLAME_BG3 = getFlameBG();
     public static final RegistryObject<Item> FLAME_BG3_ITEM = fromBlock(FLAME_BG3);
 
-    public static final RegistryObject<Block> FLAME_BG4 = BLOCKS.register(NAME_FLAME_BG+4, () -> new Block(BLOCK_PROP_MJDS));
+    public static final RegistryObject<Block> FLAME_BG4 = getFlameBG();
     public static final RegistryObject<Item> FLAME_BG4_ITEM = fromBlock(FLAME_BG4);
 
+    public static final RegistryObject<Block> FLAME_FLOOR = BLOCKS.register("flame_wall", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
+    public static final RegistryObject<Item> FLAME_FLOOR_ITEM = fromBlock(FLAME_FLOOR);
 
+    public static final BlockBehaviour.Properties BLOCK_PROP_LADDER = BlockBehaviour.Properties.of(Material.DECORATION).strength(-1).sound(SoundType.LADDER).noOcclusion().jumpFactor(JUMP_FACTOR_MJDS);
+
+    public static final RegistryObject<Block> FLAME_LADDER = BLOCKS.register("flame_ladder", () -> new LadderBlockMJDS(BLOCK_PROP_MJDS));
+    public static final RegistryObject<Item> FLAME_LADDER_ITEM = fromBlock(FLAME_LADDER);
 
 
 

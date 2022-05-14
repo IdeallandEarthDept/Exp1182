@@ -1,7 +1,7 @@
 package com.deeplake.exp1182.setup;
 
-import com.deeplake.exp1182.blocks.GeneratorConfig;
-import com.deeplake.exp1182.blocks.PowergenConfig;
+import com.deeplake.exp1182.blocks.demo.GeneratorConfig;
+import com.deeplake.exp1182.blocks.demo.PowergenConfig;
 import com.deeplake.exp1182.manasystem.ManaConfig;
 import com.deeplake.exp1182.worldgen.ores.OresConfig;
 import net.minecraftforge.common.ForgeConfigSpec;

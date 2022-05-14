@@ -1,5 +1,7 @@
 package com.deeplake.exp1182.util;
 
+import com.deeplake.exp1182.blocks.BaseBlockMJDS;
+import com.deeplake.exp1182.blocks.IBlockMJDS;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -31,11 +33,11 @@ public class DesignUtil {
 //        return false;
 //    }
 
-//    public static boolean isInMJDS(Entity entity)
-//    {
-//        Block block = entity.level.getBlockState(getBlockPosBelowThatAffectsMyMovement(entity)).getBlock();
-//        return block instanceof BaseBlockMJDS || block instanceof LadderBlockMJDS || block instanceof BlockWallGlass;
-//    }
+    public static boolean isInMJDS(Entity entity)
+    {
+        Block block = entity.level.getBlockState(getBlockPosBelowThatAffectsMyMovement(entity)).getBlock();
+        return block instanceof BaseBlockMJDS;// || block instanceof LadderBlockMJDS || block instanceof BlockWallGlass;
+    }
 
 //    public static boolean isCreatureMJDS(LivingEntity entity)
 //    {
@@ -55,7 +57,7 @@ public class DesignUtil {
     public static boolean isWithOffsetMJDS(Level world, BlockPos pos, Entity entity)
     {
         //todo
-        return false;
-//        return world.getBlockState(getBlockPosBelowThatAffectsMyMovement(entity).offset(pos)).getBlock() instanceof IBlockMJDS;
+//        return false;
+        return world.getBlockState(getBlockPosBelowThatAffectsMyMovement(entity).offset(pos)).getBlock() instanceof IBlockMJDS;
     }
 }

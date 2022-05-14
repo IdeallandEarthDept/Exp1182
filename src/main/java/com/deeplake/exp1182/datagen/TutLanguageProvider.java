@@ -15,6 +15,9 @@ public class TutLanguageProvider extends LanguageProvider {
     protected void addTranslations() {
 
         add(ModBlocks.FLAME_BG1.get(), "MJDS Flame BG 1");
+        add(ModBlocks.FLAME_BG2.get(), "MJDS Flame BG 2");
+        add(ModBlocks.FLAME_BG3.get(), "MJDS Flame BG 3");
+        add(ModBlocks.FLAME_BG4.get(), "MJDS Flame BG 4");
 
 //        add("itemGroup." + TAB_NAME, "Tutorial");
 //        add(MESSAGE_POWERGEN, "Power generator generating %s per tick!");

@@ -16,6 +16,7 @@ public class TutBlockTags extends BlockTagsProvider {
 
     @Override
     protected void addTags() {
+        tag(BlockTags.CLIMBABLE).add(ModBlocks.FLAME_LADDER.get());
 //        tag(BlockTags.MINEABLE_WITH_PICKAXE)
 //                .add(ModBlocks.GENERATOR.get())
 //                .add(ModBlocks.POWERGEN.get())
