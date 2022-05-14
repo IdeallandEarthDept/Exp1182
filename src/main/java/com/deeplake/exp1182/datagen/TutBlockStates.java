@@ -28,11 +28,11 @@ public class TutBlockStates  extends BlockStateProvider {
 //        simpleBlock(ModBlocks.MYSTERIOUS_ORE_END.get());
 //        simpleBlock(ModBlocks.MYSTERIOUS_ORE_DEEPSLATE.get());
 
-        simpleBlock(ModBlocks.FLAME_BG1.get());
-        simpleBlock(ModBlocks.FLAME_BG2.get());
-        simpleBlock(ModBlocks.FLAME_BG3.get());
-        simpleBlock(ModBlocks.FLAME_BG4.get());
-//        simpleBlock(ModBlocks.FLAME_LADDER.get());
+//        simpleBlock(ModBlocks.FLAME_BG1.get());
+//        simpleBlock(ModBlocks.FLAME_BG2.get());
+//        simpleBlock(ModBlocks.FLAME_BG3.get());
+//        simpleBlock(ModBlocks.FLAME_BG4.get());
+        simpleBlock(ModBlocks.FLAME_FLOOR.get());
     }
 
     private void registerPortal() {

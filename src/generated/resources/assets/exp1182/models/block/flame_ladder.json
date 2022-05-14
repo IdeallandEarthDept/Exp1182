@@ -1,8 +1,8 @@
 {
     "ambientocclusion": false,
     "textures": {
-        "particle": "backtones:block/flame_ladder",
-        "texture": "backtones:block/flame_ladder"
+        "particle": "exp1182:block/flame_ladder",
+        "texture": "exp1182:block/flame_ladder"
     },
     "elements": [
         {   "from": [ 0, 0, 15.2 ],
