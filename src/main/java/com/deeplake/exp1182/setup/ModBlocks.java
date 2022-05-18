@@ -73,7 +73,7 @@ public class ModBlocks {
 
     public static final BlockBehaviour.Properties BLOCK_PROP_LADDER = BlockBehaviour.Properties.of(Material.DECORATION).strength(-1).sound(SoundType.LADDER).noOcclusion().jumpFactor(JUMP_FACTOR_MJDS);
 
-    public static final RegistryObject<Block> FLAME_LADDER = BLOCKS.register("flame_ladder", () -> new LadderBlockMJDS(BLOCK_PROP_MJDS));
+    public static final RegistryObject<Block> FLAME_LADDER = BLOCKS.register("flame_ladder", () -> new LadderBlockMJDS(BLOCK_PROP_LADDER));
     public static final RegistryObject<Item> FLAME_LADDER_ITEM = fromBlock(FLAME_LADDER);
 
 

@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import javax.annotation.Nonnull;
 
 public class BossRenderer extends MobRenderer<EntityWorldBoss, WorldBossModel> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/entity/thief.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/entity/skin_gargoyle.png");
 
     public BossRenderer(EntityRendererProvider.Context context) {
         super(context, new WorldBossModel(context.bakeLayer(WorldBossModel.NORMAL_LAYER)), 1f);

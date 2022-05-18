@@ -19,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -401,12 +402,12 @@ public class CommonFunctions {
         return new ResourceLocation(Main.MOD_ID, key);
     }
 
-    public static AABB ServerAABB(Vector3d from, Vector3d to)
+    public static AABB ServerAABB(Vec3 from, Vec3 to)
     {
         return new AABB(from.x, from.y, from.z, to.x, to.y, to.z);
     }
 
-    public static AABB ServerAABB(Vector3d origin, float range)
+    public static AABB ServerAABB(Vec3 origin, float range)
     {
         return new AABB(origin.x - range, origin.y - range, origin.z - range,
                 origin.x + range, origin.y + range, origin.z + range);

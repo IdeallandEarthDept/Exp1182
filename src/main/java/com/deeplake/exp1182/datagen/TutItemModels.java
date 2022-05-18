@@ -25,7 +25,8 @@ public class TutItemModels extends ItemModelProvider {
 //        withExistingParent(ModBlocks.FLAME_BG3_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg3"));
 //        withExistingParent(ModBlocks.FLAME_BG4_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg4"));
 //        withExistingParent(ModBlocks.FLAME_LADDER_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_ladder"));
-        withExistingParent(ModBlocks.FLAME_FLOOR_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_wall"));
+//        withExistingParent(ModBlocks.FLAME_FLOOR_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_wall"));
+        withExistingParent(ModItems.BOSS_EGG.get().getRegistryName().getPath(), mcLoc("item/template_spawn_egg"));
 
 //        withExistingParent(ModBlocks.GENERATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/generator"));
 //        withExistingParent(ModBlocks.POWERGEN_ITEM.get().getRegistryName().getPath(), modLoc("block/powergen/main"));
