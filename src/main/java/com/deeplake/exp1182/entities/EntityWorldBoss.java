@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.BossEvent;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -14,8 +15,12 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.AbstractIllager;
+import net.minecraft.world.entity.monster.Illusioner;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Fireball;
 import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.level.Level;
@@ -129,26 +134,38 @@ public class EntityWorldBoss extends Monster {
 
         updateTarget();
 
-        shootFireballAimed(0);
+
 
         switch (curState) {
             case NONE -> {
             }
             case BARRAGE_1 -> {
-                shootFireball(0);
+                for (float angle = 0; angle < 360f; angle += 90f)
+                {
+                    shootFireball(angle);
+                }
             }
             case BARRAGE_2 -> {
-                shootFireball(90);
+                for (float angle = 45f; angle < 360f; angle += 90f)
+                {
+                    shootFireball(angle);
+                }
             }
             case BARRAGE_3 -> {
-                shootFireball(180);
+                for (float angle = 0; angle < 360f; angle += 45f)
+                {
+                    shootFireball(angle);
+                }
             }
             case BARRAGE_4 -> {
-                shootFireball(270);
+                shootFireballAimed(0);
             }
             case BARRAGE_ANTI_AIR -> {
-                shootFireball(90);
-                shootFireball(270);
+                //todo
+                for (float angle = 0; angle < 360f; angle += 10f)
+                {
+                    shootFireball(angle);
+                }
             }
             default -> throw new IllegalStateException("Unexpected value: " + curState);
         }
@@ -169,37 +186,109 @@ public class EntityWorldBoss extends Monster {
         float accel = getShootAccel();
         float yawInRad = (float) (Math.toRadians(yaw));
         SmallFireball fireball = new SmallFireball(level,
-                this,
+                this.getX(),
+                this.getEyeY(),
+                this.getZ(),
                 accel * Math.cos(yawInRad),
                 0,
                 accel * Math.sin(yawInRad));
+        fireball.setOwner(this);
         level.addFreshEntity(fireball);
     }
 
+    Entity mainTarget = null;
     List<Entity> targetList = new ArrayList<>();
     static float RANGE = 64f;
     void updateTarget()
     {
-        targetList = level.getEntities(this, CommonFunctions.ServerAABB(getEyePosition().add(0,RANGE,0), RANGE), LIVING_ENTITY_STILL_ALIVE);
+        if (checkTargetValid(mainTarget))
+        {
+            //ok, continue
+        }
+        else {
+            //find next target
+            List<Entity> entities = level.getEntities(this, CommonFunctions.ServerAABB(getEyePosition(), 4), LIVING_ENTITY_STILL_ALIVE);
+            for (Entity entity:
+                 entities) {
+                if (checkTargetValid(entity))
+                {
+                    mainTarget = entity;
+                    return;
+                }
+            }
+            entities = level.getEntities(this, CommonFunctions.ServerAABB(getEyePosition(), RANGE), LIVING_ENTITY_STILL_ALIVE);
+            for (Entity entity:
+                    entities) {
+                if (checkTargetValid(entity))
+                {
+                    mainTarget = entity;
+                    return;
+                }
+            }
+            mainTarget = null;
+        }
+
     }
+
+    static final float MAX_DIST = 32f * 32f;
+    boolean checkTargetValid(Entity entity)
+    {
+        //todo: handle creative & spec
+        if (entity == null)
+        {
+            return false;
+        }
+        else if (entity.isRemoved())
+        {
+            return false;
+        }
+        else if (entity == this) {
+            return false;
+        } else if (entity.distanceToSqr(this) > MAX_DIST)
+        {
+            return false;
+        } else if (entity instanceof Player)
+        {
+            Player player = (Player) entity;
+            if (player.isCreative() || player.isSpectator())
+            {
+                return false;
+            }
+            return true;
+        } else if (entity instanceof AbstractIllager)
+        {
+            return  true;
+        }
+        return false;
+    }
+
 
     void shootFireballAimed(float error) {
         if (level.getGameTime() % 7 != 0) {
+            Main.Log("time:%d", level.getGameTime());
             return;
         }
 
-        if (targetList.size() > 0)
+        if (mainTarget != null)
         {
-            Entity target = targetList.get(0);
+            Entity target = mainTarget;
             Vec3 dir = target.position().subtract(position()).normalize();
 
             float accel = getShootAccel();
 
-            LargeFireball fireball = new LargeFireball(level,
-                    this,
+            Fireball fireball = new SmallFireball(level,
+                    this.getX(),
+                    this.getEyeY(),
+                    this.getZ(),
                     accel * dir.x,
                     accel * dir.y,
-                    accel * dir.z, 2);
+                    accel * dir.z);
+//            LargeFireball fireball = new LargeFireball(level,
+//                    this,
+//                    accel * dir.x,
+//                    accel * dir.y,
+//                    accel * dir.z, 2);
+            fireball.setOwner(this);
             level.addFreshEntity(fireball);
         }
     }
@@ -241,16 +330,32 @@ public class EntityWorldBoss extends Monster {
         }
 
         Entity entity = damageSource.getEntity();
-        if (entity instanceof Player) {
-            UUID uuid1 = entity.getUUID();
-            if (uuid1 != null) {
-                if (invulnerable.containsKey(uuid1) && invulnerable.get(uuid1) > 0) {
-                    return false;
-                } else {
-                    invulnerable.put(uuid1, MIN_ATTACK_TICK);
+        if (entity instanceof LivingEntity)
+        {
+            if (entity instanceof Player) {
+                UUID uuid1 = entity.getUUID();
+                if (uuid1 != null) {
+                    if (invulnerable.containsKey(uuid1) && invulnerable.get(uuid1) > 0) {
+                        return false;
+                    } else {
+                        invulnerable.put(uuid1, MIN_ATTACK_TICK);
+                    }
+                }
+            }
+
+            if (checkTargetValid(entity))
+            {
+                if (!targetList.contains(entity))
+                {
+                    targetList.add(entity);
+                }
+                if (mainTarget == null)
+                {
+                    mainTarget = entity;
                 }
             }
         }
+
 
         boolean result = super.hurt(damageSource, convertDamage(damage));
         if (result) {
@@ -308,5 +413,13 @@ public class EntityWorldBoss extends Monster {
     public void stopSeenByPlayer(ServerPlayer p_31488_) {
         super.stopSeenByPlayer(p_31488_);
         this.bossEvent.removePlayer(p_31488_);
+    }
+
+    public void checkDespawn() {
+        if (this.level.getDifficulty() == Difficulty.PEACEFUL && this.shouldDespawnInPeaceful()) {
+            this.discard();
+        } else {
+            this.noActionTime = 0;
+        }
     }
 }

@@ -43,8 +43,10 @@ public class ModBlocks {
 //    public static final TagKey<Block> MYSTERIOUS_ORE = TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(Main.MOD_ID, "mysterious_ore"));
 //    public static final TagKey<Item> MYSTERIOUS_ORE_ITEM = TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(Main.MOD_ID, "mysterious_ore"));
 
+    static final float MAX_BLAST_RESIST = 3600000.0F;
+
     //MJDS Blocks
-    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS = BlockBehaviour.Properties.of(Material.STONE).strength(-1f).jumpFactor(JUMP_FACTOR_MJDS);
+    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS = BlockBehaviour.Properties.of(Material.STONE).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS);
 
     static final String NAME_FLAME_BG = "flame_bg";
     static int index = 0;
@@ -71,7 +73,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> FLAME_FLOOR = BLOCKS.register("flame_wall", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
     public static final RegistryObject<Item> FLAME_FLOOR_ITEM = fromBlock(FLAME_FLOOR);
 
-    public static final BlockBehaviour.Properties BLOCK_PROP_LADDER = BlockBehaviour.Properties.of(Material.DECORATION).strength(-1).sound(SoundType.LADDER).noOcclusion().jumpFactor(JUMP_FACTOR_MJDS);
+    public static final BlockBehaviour.Properties BLOCK_PROP_LADDER = BlockBehaviour.Properties.of(Material.DECORATION).strength(-1f, MAX_BLAST_RESIST).noDrops().sound(SoundType.LADDER).noOcclusion().jumpFactor(JUMP_FACTOR_MJDS);
 
     public static final RegistryObject<Block> FLAME_LADDER = BLOCKS.register("flame_ladder", () -> new LadderBlockMJDS(BLOCK_PROP_LADDER));
     public static final RegistryObject<Item> FLAME_LADDER_ITEM = fromBlock(FLAME_LADDER);
