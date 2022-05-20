@@ -128,9 +128,9 @@ public class EntityWorldBoss extends Monster {
     }
 
     void stateTick() {
-        if (!level.isClientSide) {
-            Main.Log("State = %s", curState);
-        }
+//        if (!level.isClientSide) {
+//            Main.Log("State = %s", curState);
+//        }
 
         updateTarget();
 
@@ -265,7 +265,7 @@ public class EntityWorldBoss extends Monster {
 
     void shootFireballAimed(float error) {
         if (level.getGameTime() % 7 != 0) {
-            Main.Log("time:%d", level.getGameTime());
+//            Main.Log("time:%d", level.getGameTime());
             return;
         }
 
@@ -396,7 +396,7 @@ public class EntityWorldBoss extends Monster {
     void tickBossBar() {
         this.bossEvent.setProgress(getHealth() / getMaxHealth() % (0.1f) * 10);
         this.bossEvent.setColor(BossEvent.BossBarColor.RED);
-        Main.Log("HP = %s", getHealth());
+//        Main.Log("HP = %s", getHealth());
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.deeplake.exp1182.setup;
 
-import com.deeplake.exp1182.blocks.demo.GeneratorConfig;
+import com.deeplake.exp1182.blocks.demo.WorldBossConfig;
 import com.deeplake.exp1182.blocks.demo.PowergenConfig;
 import com.deeplake.exp1182.manasystem.ManaConfig;
 import com.deeplake.exp1182.worldgen.ores.OresConfig;
@@ -26,12 +26,13 @@ public class Config {
     private static void registerCommonConfigs() {
         ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
         OresConfig.registerCommonConfig(COMMON_BUILDER);
+        WorldBossConfig.registerCommonConfig(COMMON_BUILDER);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, COMMON_BUILDER.build());
     }
 
     private static void registerServerConfigs() {
         ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
-        GeneratorConfig.registerServerConfig(SERVER_BUILDER);
+        WorldBossConfig.registerServerConfig(SERVER_BUILDER);
         PowergenConfig.registerServerConfig(SERVER_BUILDER);
         ManaConfig.registerServerConfig(SERVER_BUILDER);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, SERVER_BUILDER.build());
