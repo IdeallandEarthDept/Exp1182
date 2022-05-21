@@ -6,11 +6,15 @@ import com.deeplake.exp1182.util.IDLNBTDef;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+
+import static net.minecraft.world.entity.ai.attributes.Attributes.ATTACK_DAMAGE;
 
 public class ItemTeleport extends Item {
     public ItemTeleport(Properties p_41383_) {
@@ -51,6 +55,11 @@ public class ItemTeleport extends Item {
             itemstack.shrink(1);
         }
 
+        if (player instanceof Player)
+        {
+            player.getPersistentData().putFloat("atk",
+                    (float) player.getAttribute(ATTACK_DAMAGE).getValue());
+        }
 
         return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
     }

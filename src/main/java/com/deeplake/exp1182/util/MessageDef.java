@@ -15,6 +15,9 @@ public class MessageDef {
     public static String EGO_DOOR_CLOSER = MOD_ID + ".msg.ego.req.ego_door_closer";
 
     public static String SWAP_EGO = MOD_ID + ".msg.ego.swap.";
+
+    public static String NOTIFY_NEXT = MOD_ID + ".msg.next_spawn_time";
+
     public static String getSwapEgoMsgKey(MJDSDefine.EnumEgo resultEgo)
     {
         return SWAP_EGO.concat(String.valueOf(resultEgo.value));

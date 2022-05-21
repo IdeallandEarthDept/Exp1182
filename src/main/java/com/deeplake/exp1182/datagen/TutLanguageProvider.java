@@ -47,6 +47,7 @@ public class TutLanguageProvider extends LanguageProvider {
 //        add(KeyBindings.KEY_CATEGORIES_TUTORIAL, "Tutorial Keys");
 //        add(KeyBindings.KEY_GATHER_MANA, "Gather Mana");
 //        add(PacketGatherMana.MESSAGE_NO_MANA, "No mana on this location");
+
     }
 }
 

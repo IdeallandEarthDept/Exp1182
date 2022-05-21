@@ -35,8 +35,8 @@ public class EntityWorldBoss extends Monster {
 
     //AI StateMachine
     int curStateTick = 0;//how many ticks this state have lasted
-    int maxStateTick = CommonDef.TICK_PER_SECOND * 6;//how many ticks a state may last
-    int preWarmTicks = CommonDef.TICK_PER_SECOND * 1;
+    int maxStateTick = CommonDef.TICK_PER_SECOND * 7;//how many ticks a state may last
+    int preWarmTicks = CommonDef.TICK_PER_SECOND * 2;
 
     enum BossState {
         NONE,
@@ -164,7 +164,7 @@ public class EntityWorldBoss extends Monster {
                 //todo
                 for (float angle = 0; angle < 360f; angle += 10f)
                 {
-                    shootFireball(angle);
+                    shootFireballFloor(angle);
                 }
             }
             default -> throw new IllegalStateException("Unexpected value: " + curState);
@@ -188,6 +188,24 @@ public class EntityWorldBoss extends Monster {
         SmallFireball fireball = new SmallFireball(level,
                 this.getX(),
                 this.getEyeY(),
+                this.getZ(),
+                accel * Math.cos(yawInRad),
+                0,
+                accel * Math.sin(yawInRad));
+        fireball.setOwner(this);
+        level.addFreshEntity(fireball);
+    }
+
+    void shootFireballFloor(float yaw) {
+        if (level.getGameTime() % 20 != 0) {
+            return;
+        }
+
+        float accel = getShootAccel();
+        float yawInRad = (float) (Math.toRadians(yaw));
+        SmallFireball fireball = new SmallFireball(level,
+                this.getX(),
+                this.getY()+0.1f,
                 this.getZ(),
                 accel * Math.cos(yawInRad),
                 0,
@@ -421,5 +439,9 @@ public class EntityWorldBoss extends Monster {
         } else {
             this.noActionTime = 0;
         }
+    }
+
+    public boolean canBreatheUnderwater() {
+        return true;
     }
 }
