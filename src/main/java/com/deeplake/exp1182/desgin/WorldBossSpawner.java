@@ -67,6 +67,7 @@ public class WorldBossSpawner {
                             list) {
                         if (ItemTeleport.isSubscribed(player))
                         {
+                            Main.Log("player %s is given a teleport.", player.getName());
                             player.addItem(new ItemStack(ModItems.TP_GO.get()));
                         }
                     }

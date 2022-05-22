@@ -13,18 +13,18 @@ public class ManaOverlay {
         String toDisplay = ClientManaData.getPlayerMana() + " / " + ClientManaData.getChunkMana();
         int x = ManaConfig.MANA_HUD_X.get();
         int y = ManaConfig.MANA_HUD_Y.get();
-        //todo: dele
-        Player player = Minecraft.getInstance().player;
+
+//        Player player = Minecraft.getInstance().player;
 
 //        Attributes.ATTACK_DAMAGE.setSyncable(true);
 
         if (x >= 0 && y >= 0) {
-            gui.getFont().draw(poseStack, toDisplay, x, y, ManaConfig.MANA_HUD_COLOR.get());
-
-            gui.getFont().draw(poseStack, "Atk:" + player.getAttributeValue(Attributes.ATTACK_DAMAGE), x, y+20, ManaConfig.MANA_HUD_COLOR.get());
-            gui.getFont().draw(poseStack, "Def:" + player.getAttributeValue(Attributes.ARMOR), x, y+40, ManaConfig.MANA_HUD_COLOR.get());
-            gui.getFont().draw(poseStack, "Speed:" + player.getAttributeValue(Attributes.MOVEMENT_SPEED), x, y+60, ManaConfig.MANA_HUD_COLOR.get());
-
+//            gui.getFont().draw(poseStack, toDisplay, x, y, ManaConfig.MANA_HUD_COLOR.get());
+//
+//            gui.getFont().draw(poseStack, "Atk:" + player.getAttributeValue(Attributes.ATTACK_DAMAGE), x, y+20, ManaConfig.MANA_HUD_COLOR.get());
+//            gui.getFont().draw(poseStack, "Def:" + player.getAttributeValue(Attributes.ARMOR), x, y+40, ManaConfig.MANA_HUD_COLOR.get());
+//            gui.getFont().draw(poseStack, "Speed:" + player.getAttributeValue(Attributes.MOVEMENT_SPEED), x, y+60, ManaConfig.MANA_HUD_COLOR.get());
+//
 
         }
     };
