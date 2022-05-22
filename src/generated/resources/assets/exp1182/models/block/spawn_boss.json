@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "exp1182:block/flame_bg1"
+    "all": "exp1182:block/spawn_boss"
   }
 }

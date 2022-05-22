@@ -26,7 +26,24 @@ public class TutItemModels extends ItemModelProvider {
 //        withExistingParent(ModBlocks.FLAME_BG4_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg4"));
 //        withExistingParent(ModBlocks.FLAME_LADDER_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_ladder"));
 //        withExistingParent(ModBlocks.FLAME_FLOOR_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_wall"));
-        withExistingParent(ModItems.BOSS_EGG.get().getRegistryName().getPath(), mcLoc("item/template_spawn_egg"));
+//        withExistingParent(ModItems.BOSS_EGG.get().getRegistryName().getPath(), mcLoc("item/template_spawn_egg"));
+//        singleTexture(ModItems.ITEM_DEBUG.get().getRegistryName().getPath(), modLoc("item/template_spawn_egg"));
+//        singleTexture(ModItems.TP_BACK.get().getRegistryName().getPath(), modLoc("item/tp_back"));
+//        singleTexture(ModItems.TP_GO.get().getRegistryName().getPath(), modLoc("item/tp_go"));
+//        singleTexture(ModBlocks.SPAWN_BOSS_ITEM.get().getRegistryName().getPath(), modLoc("block/spawn_boss"));
+
+        singleTexture(ModItems.ITEM_DEBUG.get().getRegistryName().getPath(),
+                mcLoc("item/generated"),
+                "layer0", modLoc("item/item_debug"));
+        singleTexture(ModItems.TP_BACK.get().getRegistryName().getPath(),
+                mcLoc("item/generated"),
+                "layer0", modLoc("item/tp_back"));
+        singleTexture(ModItems.TP_GO.get().getRegistryName().getPath(),
+                mcLoc("item/generated"),
+                "layer0", modLoc("item/tp_go"));
+//        singleTexture(ModBlocks.SPAWN_BOSS_ITEM.get().getRegistryName().getPath(),
+//                mcLoc("item/generated"),
+//                "layer0", modLoc("item/raw_mysterious_chunk"));
 
 //        withExistingParent(ModBlocks.GENERATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/generator"));
 //        withExistingParent(ModBlocks.POWERGEN_ITEM.get().getRegistryName().getPath(), modLoc("block/powergen/main"));

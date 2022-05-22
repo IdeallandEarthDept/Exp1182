@@ -2,6 +2,7 @@ package com.deeplake.exp1182.setup;
 
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.blocks.*;
+import com.deeplake.exp1182.blocks.tileentity.TileEntitySpawnBoss;
 import com.deeplake.exp1182.worldgen.structures.PortalStructure;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -78,12 +79,15 @@ public class ModBlocks {
     public static final RegistryObject<Block> FLAME_LADDER = BLOCKS.register("flame_ladder", () -> new LadderBlockMJDS(BLOCK_PROP_LADDER));
     public static final RegistryObject<Item> FLAME_LADDER_ITEM = fromBlock(FLAME_LADDER);
 
+    public static final RegistryObject<Block> SPAWN_BOSS = BLOCKS.register("spawn_boss", () -> new BlockSpawnBoss(BLOCK_PROP_LADDER));
+    public static final RegistryObject<Item> SPAWN_BOSS_ITEM = fromBlock(SPAWN_BOSS);
+
 
 
 //    public static final RegistryObject<StructureFeature<JigsawConfiguration>> PORTAL = Registration.STRUCTURES.register("portal", PortalStructure::new);
 //
 //    public static final RegistryObject<PowergenBlock> POWERGEN = BLOCKS.register("powergen", PowergenBlock::new);
-//    public static final RegistryObject<BlockEntityType<PowergenBE>> POWERGEN_BE = BLOCK_ENTITIES.register("powergen", () -> BlockEntityType.Builder.of(PowergenBE::new, POWERGEN.get()).build(null));
+    public static final RegistryObject<BlockEntityType<TileEntitySpawnBoss>> TE_SPAWN_BOSS = BLOCK_ENTITIES.register("spawnboss", () -> BlockEntityType.Builder.of(TileEntitySpawnBoss::new, SPAWN_BOSS.get()).build(null));
 //    public static final RegistryObject<Item> POWERGEN_ITEM = fromBlock(POWERGEN);
 //    public static final RegistryObject<GeneratorBlock> GENERATOR = BLOCKS.register("generator", GeneratorBlock::new);
 //    public static final RegistryObject<BlockEntityType<GeneratorBE>> GENERATOR_BE = BLOCK_ENTITIES.register("generator", () -> BlockEntityType.Builder.of(GeneratorBE::new, GENERATOR.get()).build(null));

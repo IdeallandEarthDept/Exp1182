@@ -1,8 +1,13 @@
 package com.deeplake.exp1182.util;
 
-import static net.minecraftforge.versions.forge.ForgeVersion.MOD_ID;
+
+import com.deeplake.exp1182.Main;
+
+import static com.deeplake.exp1182.Main.MOD_ID;
+
 
 public class MessageDef {
+
     public static String DEAL_SUCCESS = MOD_ID + ".msg.deal.success";
     public static String DEAL_FAIL = MOD_ID + ".msg.deal.fail";
     public static String BOX_FAIL = MOD_ID + ".msg.box.already_get";

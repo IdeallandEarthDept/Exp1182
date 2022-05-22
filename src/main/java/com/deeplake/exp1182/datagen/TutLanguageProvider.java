@@ -20,10 +20,10 @@ public class TutLanguageProvider extends LanguageProvider {
 //        add(ModBlocks.FLAME_BG2.get(), "MJDS Flame BG 2");
 //        add(ModBlocks.FLAME_BG3.get(), "MJDS Flame BG 3");
 //        add(ModBlocks.FLAME_BG4.get(), "MJDS Flame BG 4");
-        add(ModBlocks.FLAME_LADDER.get(), "MJDS Flame Ladder");
-        add(ModBlocks.FLAME_FLOOR.get(), "MJDS Flame Floor");
-
-        add(ModItems.BOSS_EGG.get(), "Spawn World Boss");
+//        add(ModBlocks.FLAME_LADDER.get(), "MJDS Flame Ladder");
+//        add(ModBlocks.FLAME_FLOOR.get(), "MJDS Flame Floor");
+//
+//        add(ModItems.BOSS_EGG.get(), "Spawn World Boss");
 
 //        add("itemGroup." + TAB_NAME, "Tutorial");
 //        add(MESSAGE_POWERGEN, "Power generator generating %s per tick!");
@@ -42,7 +42,7 @@ public class TutLanguageProvider extends LanguageProvider {
 //        add(ModItems.MYSTERIOUS_INGOT.get(), "Mysterious Ingot");
 //        add(ModItems.THIEF_EGG.get(), "Thief Egg");
 //
-        add(ModEntities.WORLD_BOSS.get(), "World Boss");
+//        add(ModEntities.WORLD_BOSS.get(), "World Boss");
 //
 //        add(KeyBindings.KEY_CATEGORIES_TUTORIAL, "Tutorial Keys");
 //        add(KeyBindings.KEY_GATHER_MANA, "Gather Mana");

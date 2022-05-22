@@ -265,4 +265,6 @@ public class IDLNBTDef {
 
     public static final String DESC_EGO_BASE = "backtones.desc.ego.";
     public static final String HP_DESC = "backtones.desc.ego.hp";
+
+    public static final String UNSUBSCRIBE = "worldboss.unsubscribe";
 }

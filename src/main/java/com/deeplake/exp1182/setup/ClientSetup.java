@@ -6,15 +6,19 @@ import com.deeplake.exp1182.entities.client.render.BossRenderer;
 import com.deeplake.exp1182.entities.demo.ThiefModel;
 import com.deeplake.exp1182.manasystem.client.KeyBindings;
 import com.deeplake.exp1182.manasystem.client.KeyInputHandler;
+import com.deeplake.exp1182.manasystem.client.ManaOverlay;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+
+import static net.minecraftforge.client.gui.ForgeIngameGui.HOTBAR_ELEMENT;
 
 @Mod.EventBusSubscriber(modid = Main.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientSetup {

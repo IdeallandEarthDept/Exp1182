@@ -1,0 +1,26 @@
+{
+  "block.exp1182.flame_ladder": "MJDS Flame Ladder",
+  "block.exp1182.flame_wall": "MJDS Flame Floor",
+  "block.exp1182.spawn_boss": "Spawn World Boss",
+  "block.exp1182.spawn_boss.desc": "[Creative Only]World boss will respawn here at time.",
+  "entity.exp1182.world_boss": "World Boss",
+
+  "item.exp1182.spawn_worldboss": "Spawn World Boss",
+  "item.exp1182.spawn_worldboss.desc": "Spawn a World Boss, use sparingly!",
+
+  "item.exp1182.tp_go": "Go to World Boss",
+  "item.exp1182.tp_go.desc": "Right click to accept teleport, sneak+right click to switch subscription.",
+
+  "item.exp1182.tp_back": "Back to Where I were",
+  "item.exp1182.tp_back.desc": "Right click to teleport back.",
+
+  "exp1182.desc.key_subscribed": "You will receive notifications.",
+  "exp1182.desc.key_unsubscribed": "You will NOT receive notifications.",
+
+  "item.exp1182.item_debug": "(Debug Item)",
+  "block.exp1182.flame_bg1": "MJDS Flame BG 1",
+  "block.exp1182.flame_bg2": "MJDS Flame BG 2",
+  "block.exp1182.flame_bg3": "MJDS Flame BG 3",
+  "block.exp1182.flame_bg4": "MJDS Flame BG 4",
+  "exp1182.msg.next_spawn_time": "Next Spawn time : %s"
+}

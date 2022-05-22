@@ -133,8 +133,7 @@ public class EntityWorldBoss extends Monster {
 //        }
 
         updateTarget();
-
-
+//        curState = BossState.BARRAGE_ANTI_AIR;
 
         switch (curState) {
             case NONE -> {
@@ -205,7 +204,7 @@ public class EntityWorldBoss extends Monster {
         float yawInRad = (float) (Math.toRadians(yaw));
         SmallFireball fireball = new SmallFireball(level,
                 this.getX(),
-                this.getY()+0.1f,
+                this.getY()+0.03f,
                 this.getZ(),
                 accel * Math.cos(yawInRad),
                 0,

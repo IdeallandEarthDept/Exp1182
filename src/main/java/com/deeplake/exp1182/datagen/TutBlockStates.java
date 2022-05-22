@@ -32,7 +32,7 @@ public class TutBlockStates  extends BlockStateProvider {
 //        simpleBlock(ModBlocks.FLAME_BG2.get());
 //        simpleBlock(ModBlocks.FLAME_BG3.get());
 //        simpleBlock(ModBlocks.FLAME_BG4.get());
-        simpleBlock(ModBlocks.FLAME_FLOOR.get());
+        simpleBlock(ModBlocks.SPAWN_BOSS.get());
     }
 
     private void registerPortal() {

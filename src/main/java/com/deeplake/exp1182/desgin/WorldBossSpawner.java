@@ -1,16 +1,18 @@
 package com.deeplake.exp1182.desgin;
 
 import com.deeplake.exp1182.Main;
+import com.deeplake.exp1182.items.ItemTeleport;
+import com.deeplake.exp1182.setup.ModItems;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoField;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = Main.MOD_ID)
 public class WorldBossSpawner {
@@ -59,6 +61,16 @@ public class WorldBossSpawner {
                 if (Calendar.getInstance().after(nextSpawnTime))
                 {
                     shouldSpawn = true;
+                    List<? extends Player> list = level.players();
+
+                    for (Player player :
+                            list) {
+                        if (ItemTeleport.isSubscribed(player))
+                        {
+                            player.addItem(new ItemStack(ModItems.TP_GO.get()));
+                        }
+                    }
+
                     updateSpawnTime();
                 }
             }
@@ -68,6 +80,10 @@ public class WorldBossSpawner {
     static void updateSpawnTime()
     {
         Calendar cur = Calendar.getInstance();
+//        cur.set(Calendar.MINUTE, 0);
+//        cur.set(Calendar.SECOND, 0);
+//        cur.add(Calendar.HOUR, 1);
+
         cur.set(Calendar.SECOND, 0);
         cur.add(Calendar.MINUTE, 1);
 
