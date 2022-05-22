@@ -1,0 +1,11 @@
+{
+  "block.exp1182.flame_ladder": "MJDS Flame Ladder",
+  "block.exp1182.flame_wall": "MJDS Flame Floor",
+  "entity.exp1182.world_boss": "World Boss",
+  "item.exp1182.spawn_worldboss": "Spawn World Boss",
+  "block.exp1182.flame_bg1": "MJDS Flame BG 1",
+  "block.exp1182.flame_bg2": "MJDS Flame BG 2",
+  "block.exp1182.flame_bg3": "MJDS Flame BG 3",
+  "block.exp1182.flame_bg4": "MJDS Flame BG 4",
+  "exp1182.msg.next_spawn_time": "Next Spawn time : %s"
+}
