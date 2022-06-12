@@ -3,10 +3,12 @@ package com.deeplake.exp1182.setup;
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.entities.client.model.WorldBossModel;
 import com.deeplake.exp1182.entities.client.render.BossRenderer;
+import com.deeplake.exp1182.entities.client.render.VoidRenderer;
 import com.deeplake.exp1182.entities.demo.ThiefModel;
 import com.deeplake.exp1182.manasystem.client.KeyBindings;
 import com.deeplake.exp1182.manasystem.client.KeyInputHandler;
 import com.deeplake.exp1182.manasystem.client.ManaOverlay;
+import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -49,6 +51,8 @@ public class ClientSetup {
     @SubscribeEvent
     public static void onRegisterRenderer(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.WORLD_BOSS.get(), BossRenderer::new);
+        event.registerEntityRenderer(ModEntities.REVIVE_MIST.get(), VoidRenderer::new);
+        event.registerEntityRenderer(ModEntities.MJDS_SKELETON.get(), SkeletonRenderer::new);
     }
 
     @SubscribeEvent

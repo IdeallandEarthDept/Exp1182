@@ -1,7 +1,6 @@
 package com.deeplake.exp1182.util;
 
 import com.deeplake.exp1182.Main;
-import com.mojang.math.Vector3d;
 import net.minecraft.Util;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
@@ -413,7 +412,7 @@ public class CommonFunctions {
                 origin.x + range, origin.y + range, origin.z + range);
     }
 
-    public static AABB ServerAABBignoreY(Vector3d origin, float range)
+    public static AABB ServerAABBignoreY(Vec3 origin, float range)
     {
         return new AABB(origin.x - range, origin.y - MAX_BUILD_HEIGHT, origin.z - range,
                 origin.x + range, origin.y + MAX_BUILD_HEIGHT, origin.z + range);
