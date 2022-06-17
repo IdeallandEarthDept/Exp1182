@@ -1,5 +1,6 @@
 package com.deeplake.exp1182.items;
 
+import com.deeplake.exp1182.blocks.demo.WorldBossConfig;
 import com.deeplake.exp1182.desgin.WorldBossSpawner;
 import com.deeplake.exp1182.entities.EntityWorldBoss;
 import com.deeplake.exp1182.setup.ModEntities;
@@ -28,6 +29,11 @@ public class ItemDebug extends Item {
         if (entity instanceof Player player)
         {
             if (!player.isCreative())
+            {
+                return;
+            }
+
+            if (!WorldBossConfig.ENABLE_BOSS_SPAWN.get())
             {
                 return;
             }

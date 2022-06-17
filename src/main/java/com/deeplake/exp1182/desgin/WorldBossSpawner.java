@@ -1,7 +1,9 @@
 package com.deeplake.exp1182.desgin;
 
 import com.deeplake.exp1182.Main;
+import com.deeplake.exp1182.blocks.demo.WorldBossConfig;
 import com.deeplake.exp1182.items.ItemTeleport;
+import com.deeplake.exp1182.setup.ModConfig;
 import com.deeplake.exp1182.setup.ModItems;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -45,6 +47,11 @@ public class WorldBossSpawner {
     @SubscribeEvent
     public static void onWorldTick(TickEvent.WorldTickEvent event)
     {
+        if (!WorldBossConfig.ENABLE_BOSS_SPAWN.get())
+        {
+            return;
+        }
+
         if (event.side == LogicalSide.SERVER && event.type == TickEvent.Type.WORLD && event.phase == TickEvent.Phase.START)
         {
             Level level = event.world;
@@ -81,15 +88,20 @@ public class WorldBossSpawner {
     static void updateSpawnTime()
     {
         Calendar cur = Calendar.getInstance();
-//        cur.set(Calendar.MINUTE, 0);
-//        cur.set(Calendar.SECOND, 0);
-//        cur.add(Calendar.HOUR, 1);
 
-        cur.set(Calendar.SECOND, 0);
-        cur.add(Calendar.MINUTE, 1);
+        if (WorldBossConfig.FAST_BOSS_SPAWN.get())
+        {
+            cur.set(Calendar.SECOND, 0);
+            cur.add(Calendar.MINUTE, 1);
+        }
+        else {
+            cur.set(Calendar.MINUTE, 0);
+            cur.set(Calendar.SECOND, 0);
+            cur.add(Calendar.HOUR, 1);
+        }
 
         nextSpawnTime = cur;
-        Main.Log("Spawntime = %s", nextSpawnTime);
+        Main.Log("Spawntime updated to %s", nextSpawnTime);
     }
 
 }

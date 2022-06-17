@@ -2,6 +2,7 @@ package com.deeplake.exp1182.setup;
 
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.entities.EntityWorldBoss;
+import com.deeplake.exp1182.entities.mjds.EntityMJDSBlaze;
 import com.deeplake.exp1182.entities.mjds.EntityMJDSSkeleton;
 import com.deeplake.exp1182.entities.mjds.EntityRevivalMist;
 import net.minecraft.world.entity.EntityType;
@@ -37,16 +38,28 @@ public class ModEntities {
             .build(NAME_REVIVE_MIST));
 
     static final String NAME_SKELETON = "mjds_skeleton";
-    public static final RegistryObject<EntityType<EntityMJDSSkeleton>> MJDS_SKELETON = ENTITIES.register(NAME_SKELETON, () -> EntityType.Builder.of(EntityMJDSSkeleton::new, MobCategory.MISC)
-            .sized(1f, 1f)
+    public static final RegistryObject<EntityType<EntityMJDSSkeleton>> MJDS_SKELETON = ENTITIES.register(NAME_SKELETON, () -> EntityType.Builder.of(EntityMJDSSkeleton::new, MobCategory.MONSTER)
+            .sized(0.6F, 1.99F)
             .clientTrackingRange(8)
             .setShouldReceiveVelocityUpdates(false)
             .build(NAME_SKELETON));
+
+    static final String NAME_BLAZE = "mjds_blaze";
+    public static final RegistryObject<EntityType<EntityMJDSBlaze>> MJDS_BLAZE = ENTITIES.register(NAME_BLAZE, () -> EntityType.Builder.of(EntityMJDSBlaze::new, MobCategory.MONSTER)
+            .fireImmune()
+            .sized(0.6F, 1.8F)
+            .clientTrackingRange(8)
+            .setShouldReceiveVelocityUpdates(false)
+            .build(NAME_BLAZE));
+
+
+
     @SubscribeEvent
     public static void onAttributeCreate(EntityAttributeCreationEvent event) {
         event.put(ModEntities.WORLD_BOSS.get(), EntityWorldBoss.prepareAttributes().build());
 //        event.put(ModEntities.WORLD_BOSS.get(), EntityWorldBoss.prepareAttributes().build());
-        event.put(ModEntities.MJDS_SKELETON.get(), EntityWorldBoss.prepareAttributes().build());
+        event.put(ModEntities.MJDS_SKELETON.get(), EntityMJDSSkeleton.prepareAttributes().build());
+        event.put(ModEntities.MJDS_BLAZE.get(), EntityMJDSBlaze.prepareAttributes().build());
     }
 
 }

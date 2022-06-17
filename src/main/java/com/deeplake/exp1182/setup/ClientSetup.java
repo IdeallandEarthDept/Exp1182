@@ -8,6 +8,7 @@ import com.deeplake.exp1182.entities.demo.ThiefModel;
 import com.deeplake.exp1182.manasystem.client.KeyBindings;
 import com.deeplake.exp1182.manasystem.client.KeyInputHandler;
 import com.deeplake.exp1182.manasystem.client.ManaOverlay;
+import net.minecraft.client.renderer.entity.BlazeRenderer;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraftforge.api.distmarker.Dist;
@@ -53,6 +54,7 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.WORLD_BOSS.get(), BossRenderer::new);
         event.registerEntityRenderer(ModEntities.REVIVE_MIST.get(), VoidRenderer::new);
         event.registerEntityRenderer(ModEntities.MJDS_SKELETON.get(), SkeletonRenderer::new);
+        event.registerEntityRenderer(ModEntities.MJDS_BLAZE.get(), BlazeRenderer::new);
     }
 
     @SubscribeEvent

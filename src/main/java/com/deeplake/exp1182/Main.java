@@ -1,6 +1,7 @@
 package com.deeplake.exp1182;
 
 import com.deeplake.exp1182.setup.ClientSetup;
+import com.deeplake.exp1182.setup.ModConfig;
 import com.deeplake.exp1182.setup.ModSetup;
 import com.deeplake.exp1182.setup.Registration;
 import net.minecraft.world.level.block.Block;
@@ -33,7 +34,7 @@ public class Main {
         // Register the deferred registry
         ModSetup.setup();
         Registration.init();
-        com.deeplake.exp1182.setup.Config.register();
+        ModConfig.register();
 
         // Register the setup method for modloading
         IEventBus modbus = FMLJavaModLoadingContext.get().getModEventBus();

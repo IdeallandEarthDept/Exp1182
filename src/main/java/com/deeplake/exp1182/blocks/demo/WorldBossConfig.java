@@ -4,6 +4,8 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public class WorldBossConfig {
 
+    public static ForgeConfigSpec.BooleanValue ENABLE_BOSS_SPAWN;
+    public static ForgeConfigSpec.BooleanValue FAST_BOSS_SPAWN;
     public static ForgeConfigSpec.DoubleValue X;
     public static ForgeConfigSpec.DoubleValue Y;
     public static ForgeConfigSpec.DoubleValue Z;
@@ -14,16 +16,16 @@ public class WorldBossConfig {
 
     public static void registerServerConfig(ForgeConfigSpec.Builder SERVER_BUILDER) {
         SERVER_BUILDER.comment("Settings for the WorldBoss").push("world_boss");
-
-        X = SERVER_BUILDER
-                .comment("World Boss Spawn X").defineInRange("spawnX", 0, -Float.MAX_VALUE, Float.MAX_VALUE);
-
-        Y = SERVER_BUILDER
-                .comment("World Boss Spawn Y").defineInRange("spawnY", 100, -Float.MAX_VALUE, Float.MAX_VALUE);
-
-        Z = SERVER_BUILDER
-                .comment("World Boss Spawn Z").defineInRange("spawnZ", 0, -Float.MAX_VALUE, Float.MAX_VALUE);
-
+//
+//        X = SERVER_BUILDER
+//                .comment("World Boss Spawn X").defineInRange("spawnX", 0, -Float.MAX_VALUE, Float.MAX_VALUE);
+//
+//        Y = SERVER_BUILDER
+//                .comment("World Boss Spawn Y").defineInRange("spawnY", 100, -Float.MAX_VALUE, Float.MAX_VALUE);
+//
+//        Z = SERVER_BUILDER
+//                .comment("World Boss Spawn Z").defineInRange("spawnZ", 0, -Float.MAX_VALUE, Float.MAX_VALUE);
+//
 
 //        ENERGY_RECEIVE = SERVER_BUILDER
 //                .comment("How much energy the generator can receive per side")
@@ -37,6 +39,13 @@ public class WorldBossConfig {
 
     public static void registerCommonConfig(ForgeConfigSpec.Builder common_builder) {
         common_builder.comment("Settings for the WorldBoss").push("world_boss");
+
+        ENABLE_BOSS_SPAWN = common_builder.
+                comment("Enable boss spawn").define("enableSpawnBoss", false);
+
+        FAST_BOSS_SPAWN = common_builder.
+                comment("Spawn each minute instead of each hour").define("fastSpawnBoss", false);
+
 
         X = common_builder
                 .comment("World Boss Spawn X").defineInRange("spawnX", 0, -Float.MAX_VALUE, Float.MAX_VALUE);

@@ -1,5 +1,6 @@
 package com.deeplake.exp1182.blocks.tileentity;
 
+import com.deeplake.exp1182.blocks.demo.WorldBossConfig;
 import com.deeplake.exp1182.desgin.WorldBossSpawner;
 import com.deeplake.exp1182.entities.EntityWorldBoss;
 import com.deeplake.exp1182.setup.ModBlocks;
@@ -33,7 +34,7 @@ public class TileEntitySpawnBoss extends BlockEntity {
 
     //     Called by the block ticker
     public void tickServer() {
-        if (WorldBossSpawner.checkSpawn())
+        if (WorldBossConfig.ENABLE_BOSS_SPAWN.get() &&  WorldBossSpawner.checkSpawn())
         {
             Vec3 pos = new Vec3(getBlockPos().getX()+0.5f,
                     getBlockPos().getY()+2,

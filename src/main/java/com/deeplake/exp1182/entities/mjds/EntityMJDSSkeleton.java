@@ -138,6 +138,6 @@ public class EntityMJDSSkeleton extends Skeleton implements IMjdsMonster{
                 .add(Attributes.ATTACK_DAMAGE, 1.0)
                 .add(Attributes.MAX_HEALTH, 12)
                 .add(Attributes.FOLLOW_RANGE, 32.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.3);
+                .add(Attributes.MOVEMENT_SPEED, 0.2);
     }
 }
