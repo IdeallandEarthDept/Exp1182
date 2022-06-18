@@ -44,6 +44,7 @@ public class BaseBlockMJDS extends Block implements IBlockMJDS {
                 {
                     MusicManager musicManager = Minecraft.getInstance().getMusicManager();
                     if (!musicManager.isPlayingMusic(ModSounds.MUSIC_DUNGEON)) {
+                        musicManager.stopPlaying();
                         musicManager.startPlaying(ModSounds.MUSIC_DUNGEON);
                     }
                 }

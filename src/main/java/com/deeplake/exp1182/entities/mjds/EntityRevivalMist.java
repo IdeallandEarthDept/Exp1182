@@ -1,5 +1,6 @@
 package com.deeplake.exp1182.entities.mjds;
 
+import com.deeplake.exp1182.util.CommonDef;
 import com.deeplake.exp1182.util.CommonFunctions;
 import com.deeplake.exp1182.util.EntityUtil;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -41,7 +42,8 @@ public class EntityRevivalMist extends Entity {
     @Override
     public void tick() {
         super.tick();
-        if (!level.isClientSide && isAlive())
+        //has a 1 sec cooldown
+        if (!level.isClientSide && isAlive() && tickCount > CommonDef.TICK_PER_SECOND)
         {
             //It will revive if it's outside the screen...
             if (EntityUtil.getEntitiesWithinAABB(level, EntityType.PLAYER, getEyePosition(0),  16, EntityUtil.NON_SPEC).size() == 0)

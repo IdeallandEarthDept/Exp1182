@@ -5,6 +5,7 @@ import com.deeplake.exp1182.setup.ClientSetup;
 import com.deeplake.exp1182.setup.ModConfig;
 import com.deeplake.exp1182.setup.ModSetup;
 import com.deeplake.exp1182.setup.Registration;
+import com.deeplake.exp1182.util.CommonFunctions;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.RegistryEvent;
@@ -66,7 +67,7 @@ public class Main {
     {
         // some preinit code
         Log("Post init begin.");
-        ModSounds.initMusic();
+
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

@@ -6,13 +6,13 @@ import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.util.CommonDef;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -22,15 +22,22 @@ import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
+import javax.annotation.Nullable;
 import java.util.HashSet;
 
-public class EntityMJDSCloudMonster extends Monster {
+import static com.deeplake.exp1182.util.IDLNBTDef.SPAWN_POINT;
+import static net.minecraft.nbt.NbtUtils.readBlockPos;
+import static net.minecraft.nbt.NbtUtils.writeBlockPos;
 
+public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
+    public BlockPos spawnPoint;
     static float BULLET_SPEED = 3f / CommonDef.TICK_PER_SECOND;
     int counter = 0;
     static final int MAX_COUNTER = CommonDef.TICK_PER_SECOND * 5;
@@ -50,6 +57,10 @@ public class EntityMJDSCloudMonster extends Monster {
     public EntityMJDSCloudMonster(EntityType<? extends Monster> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
         setGlowingTag(true);
+        for (EquipmentSlot slotType :
+                EquipmentSlot.values()) {
+            setDropChance(slotType, 0f);
+        }
     }
 
     protected void registerGoals() {
@@ -62,38 +73,28 @@ public class EntityMJDSCloudMonster extends Monster {
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Turtle.class, 10, false, false, Turtle.BABY_ON_LAND_SELECTOR));
     }
 
-    protected void customServerAiStep() {
+    @Override
+    public void aiStep() {
         LivingEntity target = getTarget();
-        if (target != null && target.isAlive())
+        if (!level.isClientSide && target != null && target.isAlive())
         {
             if (counter < MAX_COUNTER)
             {
                 if (ATTCK_SEQUENCE.contains(counter))
                 {
                     Vec3 dir = (target.getEyePosition().subtract(getEyePosition())).normalize().scale(BULLET_SPEED);
-//                    EntityMJDSBulletPierece bulletPierece =
-//                            new EntityMJDSBulletPierece(
-//                                    level,
-//                                    this.getX(),
-//                                    this.getEyeY(),
-//                                    this.getZ(),
-//                                    dir.x,
-//                                    dir.y,
-//                                    dir.z);
+//                    Vec3 dir = (target.position().subtract(position())).normalize().scale(BULLET_SPEED);
+//                    Vec3 dir = new Vec3(1f,1f,1f);
 
-                    float accel = BULLET_SPEED;
-                    float yawInRad = (float) (Math.toRadians(45));
-                    EntityMJDSBulletPierece bulletPierece =
+                    AbstractHurtingProjectile bulletPierece =
                             new EntityMJDSBulletPierece(
-                            level,
-                            this.getX(),
-                            this.getY()+0.03f,
-                            this.getZ(),
-                            accel * Math.cos(yawInRad),
-                            0,
-                            accel * Math.sin(yawInRad));
-
-                    bulletPierece.setOwner(this);
+                                    level,
+                                    this.getX(),
+                                    this.getEyeY(),
+                                    this.getZ(),
+                                    dir.x,
+                                    dir.y,
+                                    dir.z);
                     level.addFreshEntity(bulletPierece);
                     playSound(ModSounds.MONSTER_SHOOT_1.get(), 2f, 1f);
                 }
@@ -115,7 +116,7 @@ public class EntityMJDSCloudMonster extends Monster {
             counter = 0;
         }
 
-        super.customServerAiStep();
+        super.aiStep();
     }
 
     protected boolean teleport() {
@@ -173,5 +174,29 @@ public class EntityMJDSCloudMonster extends Monster {
     @Override
     protected SoundEvent getDeathSound() {
         return ModSounds.MONSTER_DEATH.get();
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag nbt) {
+        super.readAdditionalSaveData(nbt);
+        spawnPoint = readBlockPos(nbt.getCompound(SPAWN_POINT));
+    }
+
+    @Override
+    public void addAdditionalSaveData(CompoundTag nbt) {
+        super.addAdditionalSaveData(nbt);
+        nbt.put(SPAWN_POINT, writeBlockPos(spawnPoint));
+    }
+
+    @Override
+    public BlockPos getRespawn() {
+        return spawnPoint;
+    }
+
+    @Nullable
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_32146_, DifficultyInstance p_32147_, MobSpawnType p_32148_, @Nullable SpawnGroupData p_32149_, @Nullable CompoundTag p_32150_) {
+        p_32149_ = super.finalizeSpawn(p_32146_, p_32147_, p_32148_, p_32149_, p_32150_);
+        spawnPoint = blockPosition();
+        return p_32149_;
     }
 }

@@ -1,6 +1,7 @@
 package com.deeplake.exp1182.setup;
 
 import com.deeplake.exp1182.Main;
+import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.entities.client.model.WorldBossModel;
 import com.deeplake.exp1182.entities.client.render.BossRenderer;
 import com.deeplake.exp1182.entities.client.render.HumanoidRenderer;
@@ -38,6 +39,7 @@ public class ClientSetup {
         MinecraftForge.EVENT_BUS.addListener(KeyInputHandler::onKeyInput);
         KeyBindings.init();
 
+        ModSounds.initMusic();
 //        OverlayRegistry.registerOverlayAbove(HOTBAR_ELEMENT, "name", ManaOverlay.HUD_MANA);
     }
 

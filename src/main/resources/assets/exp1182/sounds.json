@@ -39,7 +39,7 @@
     "sounds": [
       {
         "name": "exp1182:monster_shoot_1",
-        "volume": 0.5
+        "volume": 1
       }
     ],
     "subtitle": "exp1182.subtitle.monster_shoot_1"
