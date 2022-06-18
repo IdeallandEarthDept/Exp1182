@@ -126,6 +126,7 @@ public class EntityMJDSSkeleton extends Skeleton implements IMjdsMonster{
                 }
             }
         }
+
     }
 
     @Override

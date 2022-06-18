@@ -42,6 +42,12 @@ public class TutItemModels extends ItemModelProvider {
         singleTexture(ModItems.TP_GO.get().getRegistryName().getPath(),
                 mcLoc("item/generated"),
                 "layer0", modLoc("item/tp_go"));
+        singleTexture(ModItems.BULLET1.get().getRegistryName().getPath(),
+                mcLoc("item/generated"),
+                "layer0", modLoc("item/bullet1"));
+        singleTexture(ModItems.BULLET2.get().getRegistryName().getPath(),
+                mcLoc("item/generated"),
+                "layer0", modLoc("item/bullet2"));
 
 //        withExistingParent(ModBlocks.GENERATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/generator"));
 //        withExistingParent(ModBlocks.POWERGEN_ITEM.get().getRegistryName().getPath(), modLoc("block/powergen/main"));

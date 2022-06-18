@@ -9,7 +9,9 @@ import com.deeplake.exp1182.manasystem.client.KeyBindings;
 import com.deeplake.exp1182.manasystem.client.KeyInputHandler;
 import com.deeplake.exp1182.manasystem.client.ManaOverlay;
 import net.minecraft.client.renderer.entity.BlazeRenderer;
+import net.minecraft.client.renderer.entity.DragonFireballRenderer;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -55,6 +57,7 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.REVIVE_MIST.get(), VoidRenderer::new);
         event.registerEntityRenderer(ModEntities.MJDS_SKELETON.get(), SkeletonRenderer::new);
         event.registerEntityRenderer(ModEntities.MJDS_BLAZE.get(), BlazeRenderer::new);
+        event.registerEntityRenderer(ModEntities.BULLET1.get(), ThrownItemRenderer::new);
     }
 
     @SubscribeEvent

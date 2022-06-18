@@ -3,8 +3,10 @@ package com.deeplake.exp1182.setup;
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.entities.EntityWorldBoss;
 import com.deeplake.exp1182.entities.mjds.EntityMJDSBlaze;
+import com.deeplake.exp1182.entities.mjds.EntityMJDSBulletPierece;
 import com.deeplake.exp1182.entities.mjds.EntityMJDSSkeleton;
 import com.deeplake.exp1182.entities.mjds.EntityRevivalMist;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -13,44 +15,48 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 
 @Mod.EventBusSubscriber(modid = Main.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, Main.MOD_ID);
 
-    //    public static final RegistryObject<EntityType<ThiefEntity>> THIEF = ENTITIES.register("thief", () -> EntityType.Builder.of(ThiefEntity::new, MobCategory.CREATURE)
-//            .sized(0.6f, 1.95f)
-//            .clientTrackingRange(8)
-//            .setShouldReceiveVelocityUpdates(false)
-//            .build("thief"));
-
-        public static final RegistryObject<EntityType<EntityWorldBoss>> WORLD_BOSS = ENTITIES.register("world_boss", () -> EntityType.Builder.of(EntityWorldBoss::new, MobCategory.MONSTER)
-            .sized(0.6f, 1.95f)
-            .clientTrackingRange(8)
-            .setShouldReceiveVelocityUpdates(false)
-            .build("world_boss"));
+    public static final String NAME_WORLD_BOSS = "world_boss";
+    public static final RegistryObject<EntityType<EntityWorldBoss>> WORLD_BOSS =
+            getEntityTypeRegistryObject(NAME_WORLD_BOSS, EntityWorldBoss::new, 0.6f, 1.95f, MobCategory.MONSTER);
 
         static final String NAME_REVIVE_MIST = "revival_mist";
-        public static final RegistryObject<EntityType<EntityRevivalMist>> REVIVE_MIST = ENTITIES.register(NAME_REVIVE_MIST, () -> EntityType.Builder.of(EntityRevivalMist::new, MobCategory.MISC)
-            .sized(1f, 1f)
-            .clientTrackingRange(8)
-            .setShouldReceiveVelocityUpdates(false)
-            .build(NAME_REVIVE_MIST));
+        public static final RegistryObject<EntityType<EntityRevivalMist>> REVIVE_MIST =
+                getEntityTypeRegistryObject(NAME_REVIVE_MIST, EntityRevivalMist::new, 0.6f, 1.8f, MobCategory.MISC);
 
     static final String NAME_SKELETON = "mjds_skeleton";
-    public static final RegistryObject<EntityType<EntityMJDSSkeleton>> MJDS_SKELETON = ENTITIES.register(NAME_SKELETON, () -> EntityType.Builder.of(EntityMJDSSkeleton::new, MobCategory.MONSTER)
-            .sized(0.6F, 1.99F)
-            .clientTrackingRange(8)
-            .setShouldReceiveVelocityUpdates(false)
-            .build(NAME_SKELETON));
+    public static final RegistryObject<EntityType<EntityMJDSSkeleton>> MJDS_SKELETON =
+             getEntityTypeRegistryObject(NAME_SKELETON, EntityMJDSSkeleton::new, 0.6f, 1.8f, MobCategory.MONSTER);
 
     static final String NAME_BLAZE = "mjds_blaze";
-    public static final RegistryObject<EntityType<EntityMJDSBlaze>> MJDS_BLAZE = ENTITIES.register(NAME_BLAZE, () -> EntityType.Builder.of(EntityMJDSBlaze::new, MobCategory.MONSTER)
-            .fireImmune()
-            .sized(0.6F, 1.8F)
-            .clientTrackingRange(8)
-            .setShouldReceiveVelocityUpdates(false)
-            .build(NAME_BLAZE));
+    public static final RegistryObject<EntityType<EntityMJDSBlaze>> MJDS_BLAZE = getEntityTypeRegistryObjectFireImmune(NAME_BLAZE, EntityMJDSBlaze::new, 0.6f, 1.8f, MobCategory.MONSTER);
+
+    static final String NAME_BULLET1 = "bullet1";
+    public static final RegistryObject<EntityType<EntityMJDSBulletPierece>> BULLET1 = getEntityTypeRegistryObjectFireImmune(NAME_BULLET1, EntityMJDSBulletPierece::new, 0.6f, 0.6f, MobCategory.MISC);
+
+
+    private static <T extends Entity> RegistryObject<EntityType<T>> getEntityTypeRegistryObject(String name, EntityType.EntityFactory<T> factory, float sizeXZ, float sizeY, MobCategory category) {
+        return ENTITIES.register(name, () -> getBuilder(factory, sizeXZ, sizeY, category)
+                .build(name));
+    }
+
+    @NotNull
+    private static <T extends Entity> EntityType.Builder<T> getBuilder(EntityType.EntityFactory<T> factory, float sizeXZ, float sizeY, MobCategory category) {
+        return EntityType.Builder.of(factory, category)
+                .sized(sizeXZ, sizeY)
+                .clientTrackingRange(8)
+                .setShouldReceiveVelocityUpdates(false);
+    }
+
+    private static <T extends Entity> RegistryObject<EntityType<T>> getEntityTypeRegistryObjectFireImmune(String name, EntityType.EntityFactory<T> factory, float sizeXZ, float sizeY, MobCategory category) {
+        return ENTITIES.register(name, () -> getBuilder(factory, sizeXZ, sizeY, category).fireImmune()
+                .build(name));
+    }
 
 
 

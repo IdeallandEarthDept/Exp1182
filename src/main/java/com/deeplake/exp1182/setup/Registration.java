@@ -1,6 +1,7 @@
 package com.deeplake.exp1182.setup;
 
 import com.deeplake.exp1182.Main;
+import com.deeplake.exp1182.entities.mjds.EntityMJDSCloudMonster;
 import com.deeplake.exp1182.worldgen.structures.ThiefDenStructure;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
