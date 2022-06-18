@@ -1,11 +1,13 @@
 package com.deeplake.exp1182.entities;
 
 import com.deeplake.exp1182.Main;
+import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.util.CommonDef;
 import com.deeplake.exp1182.util.CommonFunctions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
@@ -442,5 +444,15 @@ public class EntityWorldBoss extends Monster {
 
     public boolean canBreatheUnderwater() {
         return true;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_33579_) {
+        return ModSounds.MONSTER_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.MONSTER_DEATH.get();
     }
 }

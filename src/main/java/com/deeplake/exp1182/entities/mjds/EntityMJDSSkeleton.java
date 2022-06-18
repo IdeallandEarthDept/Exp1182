@@ -1,12 +1,15 @@
 package com.deeplake.exp1182.entities.mjds;
 
+import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.util.DesignUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -140,5 +143,15 @@ public class EntityMJDSSkeleton extends Skeleton implements IMjdsMonster{
                 .add(Attributes.MAX_HEALTH, 12)
                 .add(Attributes.FOLLOW_RANGE, 32.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.2);
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_33579_) {
+        return ModSounds.MONSTER_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.MONSTER_DEATH.get();
     }
 }

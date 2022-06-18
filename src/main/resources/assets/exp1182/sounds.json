@@ -1,0 +1,82 @@
+{
+  "jump": {
+    "sounds": [
+      {
+        "name": "exp1182:jump",
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "exp1182.subtitle.jump"
+  },
+  "monster_hurt": {
+    "sounds": [
+      {
+        "name": "exp1182:monster_hurt",
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "exp1182.subtitle.monster_hurt"
+  },
+  "enter_room": {
+    "sounds": [
+      {
+        "name": "exp1182:enter_room",
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "exp1182.subtitle.enter_room"
+  },
+  "game_select": {
+    "sounds": [
+      {
+        "name": "exp1182:game_select",
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "exp1182.subtitle.game_select"
+  },
+  "monster_shoot_1": {
+    "sounds": [
+      {
+        "name": "exp1182:monster_shoot_1",
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "exp1182.subtitle.monster_shoot_1"
+  },
+  "monster_death": {
+    "sounds": [
+      {
+        "name": "exp1182:monster_death",
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "exp1182.subtitle.monster_death"
+  },
+  "cut": {
+    "sounds": [
+      {
+        "name": "exp1182:cut",
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "exp1182.subtitle.cut"
+  },
+  "fall": {
+    "sounds": [
+      {
+        "name": "exp1182:fall",
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "exp1182.subtitle.fall"
+  },
+  "music_dungeon": {
+    "sounds": [
+      {
+        "name": "exp1182:music/dungeon",
+        "stream": true
+      }
+    ]
+  }
+}

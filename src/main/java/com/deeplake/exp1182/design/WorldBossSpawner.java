@@ -1,9 +1,8 @@
-package com.deeplake.exp1182.desgin;
+package com.deeplake.exp1182.design;
 
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.blocks.demo.WorldBossConfig;
 import com.deeplake.exp1182.items.ItemTeleport;
-import com.deeplake.exp1182.setup.ModConfig;
 import com.deeplake.exp1182.setup.ModItems;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;

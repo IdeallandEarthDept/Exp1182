@@ -1,6 +1,9 @@
 f3873c0e6917ca13fb2a1a4db7f7a6002c942890 assets/exp1182/blockstates/spawn_boss.json
 ad8b42cb1b5700a8e61395d191a3e4047061dee6 assets/exp1182/models/block/spawn_boss.json
+d9d77aa1d95a8225244dd1870dc9a44d6b258b5e assets/exp1182/models/item/bullet1.json
+dd8f7495c8472d639e408eee408b304eb64d2cd3 assets/exp1182/models/item/bullet2.json
 df0ab144b28e4573475d1c2a54ac83cd171c7fd5 assets/exp1182/models/item/item_debug.json
+486c63ef71ae36f0b4d3591e7ec0b85261823afa assets/exp1182/models/item/spawn_boss.json
 2b5fba85f755e007c850128a7824a3595d3d29aa assets/exp1182/models/item/tp_back.json
 d07e0557c30d73600239c0a4360db9bfe2857389 assets/exp1182/models/item/tp_go.json
 caead40a3c1f65665f6199c68d5ad4a031025892 data/minecraft/tags/blocks/climbable.json

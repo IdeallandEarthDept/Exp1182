@@ -1,29 +1,18 @@
 package com.deeplake.exp1182.blocks.tileentity;
 
 import com.deeplake.exp1182.blocks.demo.WorldBossConfig;
-import com.deeplake.exp1182.desgin.WorldBossSpawner;
+import com.deeplake.exp1182.design.WorldBossSpawner;
 import com.deeplake.exp1182.entities.EntityWorldBoss;
 import com.deeplake.exp1182.setup.ModBlocks;
 import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.util.CommonFunctions;
-import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-import javax.annotation.Nullable;
-
 import java.util.List;
 
-import static com.deeplake.exp1182.util.MessageDef.NOTIFY_NEXT;
 import static net.minecraft.world.entity.EntitySelector.LIVING_ENTITY_STILL_ALIVE;
 
 public class TileEntitySpawnBoss extends BlockEntity {

@@ -1,6 +1,7 @@
 package com.deeplake.exp1182.setup;
 
 import com.deeplake.exp1182.Main;
+import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.entities.mjds.EntityMJDSCloudMonster;
 import com.deeplake.exp1182.worldgen.structures.ThiefDenStructure;
 import net.minecraft.core.Registry;
@@ -29,6 +30,8 @@ public class Registration {
         ModBlocks.BLOCK_ENTITIES.register(bus);
         CONTAINERS.register(bus);
         ModEntities.ENTITIES.register(bus);
+        ModSounds.SOUNDS.register(bus);
+        ModEffects.EFFECTS.register(bus);
         STRUCTURES.register(bus);
     }
 

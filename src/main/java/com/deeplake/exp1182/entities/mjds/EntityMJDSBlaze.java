@@ -1,15 +1,16 @@
 package com.deeplake.exp1182.entities.mjds;
 
+import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.util.DesignUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Blaze;
@@ -18,11 +19,14 @@ import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import javax.annotation.Nullable;
 
 import static com.deeplake.exp1182.events.EventsBirthHelper.makeBannerShield;
 import static com.deeplake.exp1182.util.IDLNBTDef.SPAWN_POINT;
@@ -114,5 +118,22 @@ public class EntityMJDSBlaze extends Blaze implements IMjdsMonster{
                 .add(Attributes.MAX_HEALTH, 36)
                 .add(Attributes.FOLLOW_RANGE, 32.0)
                 .add(Attributes.MOVEMENT_SPEED, 0.3);
+    }
+
+    @Nullable
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_32146_, DifficultyInstance p_32147_, MobSpawnType p_32148_, @Nullable SpawnGroupData p_32149_, @Nullable CompoundTag p_32150_) {
+        p_32149_ = super.finalizeSpawn(p_32146_, p_32147_, p_32148_, p_32149_, p_32150_);
+        spawnPoint = blockPosition();
+        return p_32149_;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_33579_) {
+        return ModSounds.MONSTER_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.MONSTER_DEATH.get();
     }
 }

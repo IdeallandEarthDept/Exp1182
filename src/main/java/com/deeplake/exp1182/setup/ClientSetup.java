@@ -3,6 +3,7 @@ package com.deeplake.exp1182.setup;
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.entities.client.model.WorldBossModel;
 import com.deeplake.exp1182.entities.client.render.BossRenderer;
+import com.deeplake.exp1182.entities.client.render.HumanoidRenderer;
 import com.deeplake.exp1182.entities.client.render.VoidRenderer;
 import com.deeplake.exp1182.entities.demo.ThiefModel;
 import com.deeplake.exp1182.manasystem.client.KeyBindings;
@@ -58,6 +59,7 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.MJDS_SKELETON.get(), SkeletonRenderer::new);
         event.registerEntityRenderer(ModEntities.MJDS_BLAZE.get(), BlazeRenderer::new);
         event.registerEntityRenderer(ModEntities.BULLET1.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.CLOUD_MONSTER.get(), HumanoidRenderer::new);
     }
 
     @SubscribeEvent

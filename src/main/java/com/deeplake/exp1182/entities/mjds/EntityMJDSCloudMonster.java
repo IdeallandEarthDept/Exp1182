@@ -1,6 +1,7 @@
 package com.deeplake.exp1182.entities.mjds;
 
 import com.deeplake.exp1182.blocks.IBlockMJDS;
+import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.util.CommonDef;
 import net.minecraft.core.BlockPos;
@@ -8,6 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,6 +22,7 @@ import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -51,40 +54,61 @@ public class EntityMJDSCloudMonster extends Monster {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-//        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0D, false));
-//        this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D, 0.0F));
-//        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Turtle.class, 10, true, false, Turtle.BABY_ON_LAND_SELECTOR));
+        //can attack wha it cant see
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, false));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, false));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Turtle.class, 10, false, false, Turtle.BABY_ON_LAND_SELECTOR));
     }
 
     protected void customServerAiStep() {
         LivingEntity target = getTarget();
-        if (target != null)
+        if (target != null && target.isAlive())
         {
             if (counter < MAX_COUNTER)
             {
                 if (ATTCK_SEQUENCE.contains(counter))
                 {
-                    Vec3 dir = target.position().subtract(position()).normalize().scale(BULLET_SPEED);
+                    Vec3 dir = (target.getEyePosition().subtract(getEyePosition())).normalize().scale(BULLET_SPEED);
+//                    EntityMJDSBulletPierece bulletPierece =
+//                            new EntityMJDSBulletPierece(
+//                                    level,
+//                                    this.getX(),
+//                                    this.getEyeY(),
+//                                    this.getZ(),
+//                                    dir.x,
+//                                    dir.y,
+//                                    dir.z);
+
+                    float accel = BULLET_SPEED;
+                    float yawInRad = (float) (Math.toRadians(45));
                     EntityMJDSBulletPierece bulletPierece =
                             new EntityMJDSBulletPierece(
-                                    level,
-                                    this,
-                                    dir.x,
-                                    dir.y,
-                                    dir.z);
+                            level,
+                            this.getX(),
+                            this.getY()+0.03f,
+                            this.getZ(),
+                            accel * Math.cos(yawInRad),
+                            0,
+                            accel * Math.sin(yawInRad));
+
+                    bulletPierece.setOwner(this);
                     level.addFreshEntity(bulletPierece);
-                    playSound(SoundEvents.WITCH_CELEBRATE, 2f, 1.2f);
+                    playSound(ModSounds.MONSTER_SHOOT_1.get(), 2f, 1f);
                 }
                 counter++;
             }
             else {
                 counter = 0;
-                teleport();
+                if (random.nextBoolean())
+                {
+                    teleportTowards(target);
+                }
+                else {
+                    teleport();
+                }
+
             }
         }
         else {
@@ -139,5 +163,15 @@ public class EntityMJDSCloudMonster extends Monster {
         } else {
             return false;
         }
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_33579_) {
+        return ModSounds.MONSTER_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.MONSTER_DEATH.get();
     }
 }
