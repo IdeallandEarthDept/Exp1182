@@ -24,6 +24,10 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> PICKUP = register("obtain_drop");
     public static final RegistryObject<SoundEvent> FALL = register("fall");
     public static final RegistryObject<SoundEvent> CUT = register("cut");
+    public static final RegistryObject<SoundEvent> PAUSE = register("pause");
+    public static final RegistryObject<SoundEvent> ERROR = register("error");
+    public static final RegistryObject<SoundEvent> DOOR_COMBINED = register("door_combined");
+
 
     public static Music MUSIC_DUNGEON;
     public static ForgeSoundType MJDS_BLOCKS =

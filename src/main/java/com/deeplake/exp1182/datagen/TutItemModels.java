@@ -20,34 +20,35 @@ public class TutItemModels extends ItemModelProvider {
 //        withExistingParent(ModBlocks.MYSTERIOUS_ORE_END_ITEM.get().getRegistryName().getPath(), modLoc("block/mysterious_ore_end"));
 //        withExistingParent(ModBlocks.MYSTERIOUS_ORE_DEEPSLATE_ITEM.get().getRegistryName().getPath(), modLoc("block/mysterious_ore_deepslate"));
 
-//        withExistingParent(ModBlocks.FLAME_BG1_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg1"));
-//        withExistingParent(ModBlocks.FLAME_BG2_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg2"));
-//        withExistingParent(ModBlocks.FLAME_BG3_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg3"));
-//        withExistingParent(ModBlocks.FLAME_BG4_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg4"));
-//        withExistingParent(ModBlocks.FLAME_LADDER_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_ladder"));
-//        withExistingParent(ModBlocks.FLAME_FLOOR_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_wall"));
-        withExistingParent(ModBlocks.SPAWN_BOSS_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"spawn_boss"));
-//        withExistingParent(ModItems.BOSS_EGG.get().getRegistryName().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModBlocks.BLOCK_MOTOR_Y.get().asItem().getRegistryName().getPath(), modLoc("block/"+"motor_y"));
+        withExistingParent(ModBlocks.BLOCK_MOTOR_X.get().asItem().getRegistryName().getPath(), modLoc("block/"+"motor_x"));
+////        withExistingParent(ModBlocks.FLAME_BG2_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg2"));
+////        withExistingParent(ModBlocks.FLAME_BG3_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg3"));
+////        withExistingParent(ModBlocks.FLAME_BG4_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg4"));
+////        withExistingParent(ModBlocks.FLAME_LADDER_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_ladder"));
+////        withExistingParent(ModBlocks.FLAME_FLOOR_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_wall"));
+////        withExistingParent(ModBlocks.SPAWN_BOSS.get().asItem().getRegistryName().getPath(), modLoc("block/"+"spawn_boss"));
+//        withExistingParent(ModItems.MONSTER_REMOVAL.get().getRegistryName().getPath(), modLoc("item/monster_removal"));
 //        singleTexture(ModItems.ITEM_DEBUG.get().getRegistryName().getPath(), modLoc("item/template_spawn_egg"));
 //        singleTexture(ModItems.TP_BACK.get().getRegistryName().getPath(), modLoc("item/tp_back"));
 //        singleTexture(ModItems.TP_GO.get().getRegistryName().getPath(), modLoc("item/tp_go"));
 //        singleTexture(ModBlocks.SPAWN_BOSS_ITEM.get().getRegistryName().getPath(), modLoc("block/spawn_boss"));
 
-        singleTexture(ModItems.ITEM_DEBUG.get().getRegistryName().getPath(),
-                mcLoc("item/generated"),
-                "layer0", modLoc("item/item_debug"));
-        singleTexture(ModItems.TP_BACK.get().getRegistryName().getPath(),
-                mcLoc("item/generated"),
-                "layer0", modLoc("item/tp_back"));
-        singleTexture(ModItems.TP_GO.get().getRegistryName().getPath(),
-                mcLoc("item/generated"),
-                "layer0", modLoc("item/tp_go"));
-        singleTexture(ModItems.BULLET1.get().getRegistryName().getPath(),
-                mcLoc("item/generated"),
-                "layer0", modLoc("item/bullet1"));
-        singleTexture(ModItems.BULLET2.get().getRegistryName().getPath(),
-                mcLoc("item/generated"),
-                "layer0", modLoc("item/bullet2"));
+//        singleTexture(ModItems.ITEM_DEBUG.get().getRegistryName().getPath(),
+//                mcLoc("item/generated"),
+//                "layer0", modLoc("item/item_debug"));
+//        singleTexture(ModItems.TP_BACK.get().getRegistryName().getPath(),
+//                mcLoc("item/generated"),
+//                "layer0", modLoc("item/tp_back"));
+//        singleTexture(ModItems.TP_GO.get().getRegistryName().getPath(),
+//                mcLoc("item/generated"),
+//                "layer0", modLoc("item/tp_go"));
+//        singleTexture(ModItems.BULLET1.get().getRegistryName().getPath(),
+//                mcLoc("item/generated"),
+//                "layer0", modLoc("item/bullet1"));
+//        singleTexture(ModItems.BULLET2.get().getRegistryName().getPath(),
+//                mcLoc("item/generated"),
+//                "layer0", modLoc("item/bullet2"));
 
 //        withExistingParent(ModBlocks.GENERATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/generator"));
 //        withExistingParent(ModBlocks.POWERGEN_ITEM.get().getRegistryName().getPath(), modLoc("block/powergen/main"));

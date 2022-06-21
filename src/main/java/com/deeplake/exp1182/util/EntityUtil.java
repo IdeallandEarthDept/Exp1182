@@ -28,6 +28,8 @@ public class EntityUtil {
 
     public static <T extends Entity> List<T> getEntitiesWithinAABB(Level world, EntityType<T> clazz, Vec3 center, double range, @Nullable Predicate <? super T > filter)
     {
+
+        //todo: will crash
         return world.getEntities(clazz, CommonFunctions.ServerAABB(center.add(new Vec3(-range, -range, -range)), center.add(new Vec3(range, range, range))) , filter);
     }
 

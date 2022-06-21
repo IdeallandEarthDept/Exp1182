@@ -1,7 +1,9 @@
 package com.deeplake.exp1182.items;
 
+import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.util.IDLNBTDef;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
@@ -22,5 +24,11 @@ public class ItemTeleportBack extends ItemTeleport{
     @Override
     boolean giveReturnTicket() {
         return false;
+    }
+
+    @Override
+    public void playsound(Player player)
+    {
+        player.playSound(ModSounds.PAUSE.get(), 1f, 1f);
     }
 }

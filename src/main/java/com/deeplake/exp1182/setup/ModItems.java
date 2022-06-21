@@ -2,6 +2,7 @@ package com.deeplake.exp1182.setup;
 
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.items.ItemDebug;
+import com.deeplake.exp1182.items.ItemMonsterRemoval;
 import com.deeplake.exp1182.items.ItemTeleport;
 import com.deeplake.exp1182.items.ItemTeleportBack;
 import net.minecraft.world.item.Item;
@@ -21,6 +22,7 @@ public class ModItems {
     public static final RegistryObject<Item> BULLET2 = ITEMS.register("bullet2", () -> new Item(ITEM_PROPERTIES));
 
     public static final RegistryObject<Item> ITEM_DEBUG = ITEMS.register("item_debug", () -> new ItemDebug(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> MONSTER_REMOVAL = ITEMS.register("monster_removal", () -> new ItemMonsterRemoval(ITEM_PROPERTIES));
 //    public static final RegistryObject<Item> MYSTERIOUS_INGOT = ITEMS.register("mysterious_ingot", () -> new Item(ITEM_PROPERTIES));
 //    public static final RegistryObject<Item> RAW_MYSTERIOUS_CHUNK = ITEMS.register("raw_mysterious_chunk", () -> new Item(ITEM_PROPERTIES));
 }

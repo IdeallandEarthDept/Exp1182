@@ -4,6 +4,7 @@ import com.deeplake.exp1182.blocks.IBlockMJDS;
 import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.util.CommonDef;
+import com.deeplake.exp1182.util.DesignUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -198,5 +199,18 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
         p_32149_ = super.finalizeSpawn(p_32146_, p_32147_, p_32148_, p_32149_, p_32150_);
         spawnPoint = blockPosition();
         return p_32149_;
+    }
+
+    @Override
+    public void onRemovedFromWorld() {
+        super.onRemovedFromWorld();
+        if (!level.isClientSide && DesignUtil.canRevive(this))
+        {
+            //IdlFramework.Log("That is not dead which can eternal lie...");
+            EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level);
+            mist.setWith(this);
+            mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
+            level.addFreshEntity(mist);
+        }
     }
 }

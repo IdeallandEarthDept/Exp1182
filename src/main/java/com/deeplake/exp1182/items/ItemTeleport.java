@@ -1,6 +1,7 @@
 package com.deeplake.exp1182.items;
 
 import com.deeplake.exp1182.blocks.demo.WorldBossConfig;
+import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.setup.ModItems;
 import com.deeplake.exp1182.util.IDLNBT;
 import com.deeplake.exp1182.util.IDLNBTDef;
@@ -84,7 +85,7 @@ public class ItemTeleport extends Item implements INeedLogNBT{
             }
 
             player.getCooldowns().addCooldown(this, 20);
-
+            playsound(player);
         }
         return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
     }
@@ -104,4 +105,10 @@ public class ItemTeleport extends Item implements INeedLogNBT{
     {
         return IDLNBTUtil.GetInt(stack, UNSUBSCRIBE) == 0;
     }
+
+    public void playsound(Player player)
+    {
+        player.playSound(ModSounds.GAME_SELECT.get(), 1f, 1f);
+    }
+
 }

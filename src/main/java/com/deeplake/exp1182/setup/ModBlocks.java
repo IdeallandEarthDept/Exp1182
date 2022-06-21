@@ -2,6 +2,10 @@ package com.deeplake.exp1182.setup;
 
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.blocks.*;
+import com.deeplake.exp1182.blocks.motor.BlockMotorX;
+import com.deeplake.exp1182.blocks.motor.BlockMotorY;
+import com.deeplake.exp1182.blocks.tileentity.MotorTileEntityHorizontal;
+import com.deeplake.exp1182.blocks.tileentity.MotorTileEntityVertical;
 import com.deeplake.exp1182.blocks.tileentity.TileEntitySpawnBoss;
 import com.deeplake.exp1182.worldgen.structures.PortalStructure;
 import net.minecraft.core.Registry;
@@ -21,6 +25,8 @@ import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Supplier;
 
 import static com.deeplake.exp1182.util.CommonDef.JUMP_FACTOR_MJDS;
 
@@ -54,39 +60,37 @@ public class ModBlocks {
     static RegistryObject<Block> getFlameBG()
     {
         index++;
-        return BLOCKS.register(NAME_FLAME_BG+index, () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
+        return registerWithItem(NAME_FLAME_BG+index, () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
     }
 
 
     public static final RegistryObject<Block> FLAME_BG1 = getFlameBG();
-    public static final RegistryObject<Item> FLAME_BG1_ITEM = fromBlock(FLAME_BG1);
 
     public static final RegistryObject<Block> FLAME_BG2 = getFlameBG();
-    public static final RegistryObject<Item> FLAME_BG2_ITEM = fromBlock(FLAME_BG2);
 
     public static final RegistryObject<Block> FLAME_BG3 = getFlameBG();
-    public static final RegistryObject<Item> FLAME_BG3_ITEM = fromBlock(FLAME_BG3);
 
     public static final RegistryObject<Block> FLAME_BG4 = getFlameBG();
-    public static final RegistryObject<Item> FLAME_BG4_ITEM = fromBlock(FLAME_BG4);
 
-    public static final RegistryObject<Block> FLAME_FLOOR = BLOCKS.register("flame_wall", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
-    public static final RegistryObject<Item> FLAME_FLOOR_ITEM = fromBlock(FLAME_FLOOR);
+    public static final RegistryObject<Block> FLAME_FLOOR = registerWithItem("flame_wall", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
 
     public static final BlockBehaviour.Properties BLOCK_PROP_LADDER = BlockBehaviour.Properties.of(Material.DECORATION).strength(-1f, MAX_BLAST_RESIST).noDrops().sound(SoundType.LADDER).noOcclusion().jumpFactor(JUMP_FACTOR_MJDS);
 
-    public static final RegistryObject<Block> FLAME_LADDER = BLOCKS.register("flame_ladder", () -> new LadderBlockMJDS(BLOCK_PROP_LADDER));
-    public static final RegistryObject<Item> FLAME_LADDER_ITEM = fromBlock(FLAME_LADDER);
+    public static final RegistryObject<Block> FLAME_LADDER = registerWithItem("flame_ladder", () -> new LadderBlockMJDS(BLOCK_PROP_LADDER));
 
-    public static final RegistryObject<Block> SPAWN_BOSS = BLOCKS.register("spawn_boss", () -> new BlockSpawnBoss(BLOCK_PROP_LADDER));
-    public static final RegistryObject<Item> SPAWN_BOSS_ITEM = fromBlock(SPAWN_BOSS);
+    public static final RegistryObject<Block> SPAWN_BOSS = registerWithItem("spawn_boss", () -> new BlockSpawnBoss(BLOCK_PROP_MJDS));
 
+    public static final RegistryObject<Block> BLOCK_MOTOR_X = registerWithItem("motor_x", () -> new BlockMotorX(BLOCK_PROP_MJDS));
+
+    public static final RegistryObject<Block> BLOCK_MOTOR_Y = registerWithItem("motor_y", () -> new BlockMotorY(BLOCK_PROP_MJDS));
 
 
 //    public static final RegistryObject<StructureFeature<JigsawConfiguration>> PORTAL = Registration.STRUCTURES.register("portal", PortalStructure::new);
 //
 //    public static final RegistryObject<PowergenBlock> POWERGEN = BLOCKS.register("powergen", PowergenBlock::new);
     public static final RegistryObject<BlockEntityType<TileEntitySpawnBoss>> TE_SPAWN_BOSS = BLOCK_ENTITIES.register("spawnboss", () -> BlockEntityType.Builder.of(TileEntitySpawnBoss::new, SPAWN_BOSS.get()).build(null));
+    public static final RegistryObject<BlockEntityType<MotorTileEntityHorizontal>> TE_MOTOR_H = BLOCK_ENTITIES.register("te_motor_h", () -> BlockEntityType.Builder.of(MotorTileEntityHorizontal::new, BLOCK_MOTOR_X.get()).build(null));
+    public static final RegistryObject<BlockEntityType<MotorTileEntityVertical>> TE_MOTOR_V = BLOCK_ENTITIES.register("te_motor_v", () -> BlockEntityType.Builder.of(MotorTileEntityVertical::new, BLOCK_MOTOR_Y.get()).build(null));
 //    public static final RegistryObject<Item> POWERGEN_ITEM = fromBlock(POWERGEN);
 //    public static final RegistryObject<GeneratorBlock> GENERATOR = BLOCKS.register("generator", GeneratorBlock::new);
 //    public static final RegistryObject<BlockEntityType<GeneratorBE>> GENERATOR_BE = BLOCK_ENTITIES.register("generator", () -> BlockEntityType.Builder.of(GeneratorBE::new, GENERATOR.get()).build(null));
@@ -97,5 +101,12 @@ public class ModBlocks {
     // Conveniance function: Take a RegistryObject<Block> and make a corresponding RegistryObject<Item> from it
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block) {
         return ModItems.ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), ModItems.ITEM_PROPERTIES));
+    }
+
+    public static RegistryObject<Block> registerWithItem(final String name, final Supplier<? extends Block> sup)
+    {
+        RegistryObject<Block> registryObject = BLOCKS.register(name, sup);
+        fromBlock(registryObject);
+        return registryObject;
     }
 }

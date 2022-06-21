@@ -20,7 +20,7 @@ public class ModSetup {
     public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(TAB_NAME) {
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(ModBlocks.FLAME_BG1_ITEM.get());
+            return new ItemStack(ModBlocks.FLAME_FLOOR.get());
         }
     };
 
