@@ -63,7 +63,7 @@ public class ItemMonsterRemoval extends Item {
         playerEntity.awardStat(Stats.ITEM_USED.get(this));
         CommonFunctions.activateCooldown(stack, playerEntity, CommonDef.TICK_PER_SECOND);
 
-        List<Entity> list = EntityUtil.getEntitiesWithinAABB(world, null, playerEntity.position(), 3f, IS_MJDS);
+        List<Entity> list = EntityUtil.getEntitiesWithinAABB(world, playerEntity.position(), 3f, IS_MJDS);
         for (Entity monster : list)
         {
             exileEntity(monster, playerEntity);

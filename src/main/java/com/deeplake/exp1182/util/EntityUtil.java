@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -21,16 +22,34 @@ public class EntityUtil {
 //        return creature.getType().is(BOSS);
 //    }
 
-    public static <T extends Entity> List<T> getEntitiesWithinAABB(Level world, EntityType<T> clazz, AABB aabb, @Nullable Predicate<? super T > filter)
+    public static List<Entity> getEntitiesWithinAABB(Level world, AABB aabb)
+    {
+        return world.getEntities(null, aabb);
+    }
+
+    public static List<Entity> getEntitiesWithinAABB(Level world, AABB aabb,@NotNull Predicate<? super Entity> filter)
+    {
+        return world.getEntities((Entity) null, aabb, filter);
+    }
+
+    public static List<Entity> getEntitiesWithinAABB(Level world, Vec3 center, double range, @NotNull Predicate<? super Entity> filter)
+    {
+        return world.getEntities((Entity) null, getServerAABB(center, range), filter);
+    }
+
+    public static <T extends Entity> List<T> getEntitiesWithinAABB(Level world, EntityType<T> clazz, AABB aabb, @NotNull Predicate<? super T > filter)
     {
         return world.getEntities(clazz, aabb, filter);
     }
 
-    public static <T extends Entity> List<T> getEntitiesWithinAABB(Level world, EntityType<T> clazz, Vec3 center, double range, @Nullable Predicate <? super T > filter)
+    public static <T extends Entity> List<T> getEntitiesWithinAABB(Level world, @NotNull EntityType<T> clazz, Vec3 center, double range, @NotNull Predicate <? super T > filter)
     {
+        return world.getEntities(clazz, getServerAABB(center, range), filter);
+    }
 
-        //todo: will crash
-        return world.getEntities(clazz, CommonFunctions.ServerAABB(center.add(new Vec3(-range, -range, -range)), center.add(new Vec3(range, range, range))) , filter);
+    @NotNull
+    public static AABB getServerAABB(Vec3 center, double range) {
+        return CommonFunctions.ServerAABB(center.add(new Vec3(-range, -range, -range)), center.add(new Vec3(range, range, range)));
     }
 
     public static <T extends Entity> List<T> getEntitiesWithinAABBignoreY(Level world, EntityType<T> clazz, Vec3 center, double range, @Nullable Predicate <? super T > filter)

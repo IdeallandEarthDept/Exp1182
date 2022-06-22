@@ -82,7 +82,6 @@ public class MotorBlockEntityBase extends BlockEntity {
                 }
                 level.setBlockAndUpdate(te.getBlockPos(), Blocks.AIR.defaultBlockState());
                 List<Entity> entityList = EntityUtil.getEntitiesWithinAABB(level,
-                        null,
                         new Vec3(te.getBlockPos().getX() + 0.5f,
                                 te.getBlockPos().getY() + 1f,
                                 te.getBlockPos().getZ() + 0.5f), 0.5f, EntityUtil.NON_SPEC);
