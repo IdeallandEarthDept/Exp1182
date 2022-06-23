@@ -2,6 +2,7 @@ package com.deeplake.exp1182.entities.mjds;
 
 import com.deeplake.exp1182.blocks.IBlockMJDS;
 import com.deeplake.exp1182.client.ModSounds;
+import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletPierece;
 import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.util.CommonDef;
 import com.deeplake.exp1182.util.DesignUtil;
@@ -24,7 +25,6 @@ import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
-import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -103,13 +103,22 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
             }
             else {
                 counter = 0;
-                if (random.nextBoolean())
+                for (int i = 0; i < 100; i++)
                 {
-                    teleportTowards(target);
+                    if (random.nextBoolean())
+                    {
+                        if (teleportTowards(target))
+                        {
+                            break;
+                        }
+                    }
+                    else {
+                        if (teleport()) {
+                            break;
+                        }
+                    }
                 }
-                else {
-                    teleport();
-                }
+
 
             }
         }

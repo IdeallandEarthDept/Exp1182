@@ -2,7 +2,12 @@ package com.deeplake.exp1182.util;
 
 import com.deeplake.exp1182.blocks.BaseBlockMJDS;
 import com.deeplake.exp1182.blocks.IBlockMJDS;
+import com.deeplake.exp1182.client.ModSounds;
+import com.deeplake.exp1182.setup.ModEffects;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Witch;
@@ -59,5 +64,29 @@ public class DesignUtil {
         //todo
 //        return false;
         return world.getBlockState(getBlockPosBelowThatAffectsMyMovement(entity).offset(pos)).getBlock() instanceof IBlockMJDS;
+    }
+
+    public static void applyMajou(Entity entity) {
+        Level level = entity.getLevel();
+        if (entity instanceof LivingEntity living)
+        {
+            if (!level.isClientSide) {
+                majouBuff(living);
+            } else {
+                if (entity == Minecraft.getInstance().player)
+                {
+                    MusicManager musicManager = Minecraft.getInstance().getMusicManager();
+                    if (!musicManager.isPlayingMusic(ModSounds.MUSIC_DUNGEON)) {
+                        musicManager.stopPlaying();
+                        musicManager.startPlaying(ModSounds.MUSIC_DUNGEON);
+                    }
+                }
+            }
+        }
+    }
+
+    public static void majouBuff(LivingEntity living) {
+        living.addEffect(new MobEffectInstance(ModEffects.INSIDE_MAJOU.get(),
+                60, 0, true, false, true, null));
     }
 }

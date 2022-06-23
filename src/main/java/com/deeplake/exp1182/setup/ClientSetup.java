@@ -61,6 +61,8 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.MJDS_SKELETON.get(), SkeletonRenderer::new);
         event.registerEntityRenderer(ModEntities.MJDS_BLAZE.get(), BlazeRenderer::new);
         event.registerEntityRenderer(ModEntities.BULLET1.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.BULLET2.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.BULLET_SHOWER.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.CLOUD_MONSTER.get(), HumanoidRenderer::new);
     }
 

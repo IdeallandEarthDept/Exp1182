@@ -1,6 +1,7 @@
 package com.deeplake.exp1182.blocks.motor;
 
 import com.deeplake.exp1182.blocks.BaseBlockMJDS;
+import com.deeplake.exp1182.blocks.IBlockMJDS;
 import com.deeplake.exp1182.blocks.tileentity.MotorBlockEntityBase;
 import com.deeplake.exp1182.blocks.tileentity.TileEntitySpawnBoss;
 import net.minecraft.core.BlockPos;
@@ -12,7 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-public class BaseBlockMotor extends BaseBlockMJDS implements EntityBlock {
+public class BaseBlockMotor extends BaseBlockMJDS implements EntityBlock, IBlockMJDS {
 
     public BaseBlockMotor(Properties p_49795_) {
         super(p_49795_);
