@@ -24,11 +24,12 @@ public class BaseBlockMJDS extends Block implements IBlockMJDS {
         DesignUtil.applyMajou(entity);
     }
 
-//    @Override
-//    public void fallOn(Level p_152426_, BlockState p_152427_, BlockPos p_152428_, Entity p_152429_, float p_152430_) {
+    @Override
+    public void fallOn(Level p_152426_, BlockState p_152427_, BlockPos p_152428_, Entity p_152429_, float p_152430_) {
 //        DesignUtil.applyMajou(p_152429_);
 //        p_152429_.playSound(ModSounds.FALL.get(), 1f, 1f);
-//    }
+        super.fallOn(p_152426_, p_152427_, p_152428_, p_152429_, p_152430_);
+    }
 
     @Override
     public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {

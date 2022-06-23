@@ -17,7 +17,7 @@ public class ModSetup {
 
     public static final String TAB_NAME = "tab1";
 
-    public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(TAB_NAME) {
+    public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(Main.MOD_ID + "." +TAB_NAME) {
         @Override
         public ItemStack makeIcon() {
             return new ItemStack(ModBlocks.FLAME_FLOOR.get());

@@ -40,6 +40,7 @@ public class EventsJumpHelper {
         LivingEntity livingEntity = event.getEntityLiving();
 
         BlockPos[] posDeltaList = {
+                BlockPos.ZERO,
                 BlockPos.ZERO.east(),
                 BlockPos.ZERO.west(),
                 BlockPos.ZERO.south(),
