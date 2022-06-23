@@ -73,6 +73,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> FLAME_BG4 = getFlameBG();
 
     public static final RegistryObject<Block> FLAME_FLOOR = registerWithItem("flame_wall", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
+    public static final RegistryObject<Block> COVERED = registerWithItem("covered", BlockCovered::new);
+    public static final RegistryObject<Block> BREAKABLE = registerWithItem("breakable", () -> new BlockBreakable(BLOCK_PROP_MJDS));
 
     public static final BlockBehaviour.Properties BLOCK_PROP_LADDER = BlockBehaviour.Properties.of(Material.DECORATION).strength(-1f, MAX_BLAST_RESIST).noDrops().sound(SoundType.LADDER).noOcclusion().jumpFactor(JUMP_FACTOR_MJDS);
 

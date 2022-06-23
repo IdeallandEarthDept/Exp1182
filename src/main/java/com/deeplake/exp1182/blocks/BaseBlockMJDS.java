@@ -4,6 +4,8 @@ import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.util.DesignUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -34,5 +36,17 @@ public class BaseBlockMJDS extends Block implements IBlockMJDS {
     @Override
     public SoundType getSoundType(BlockState state, LevelReader level, BlockPos pos, @Nullable Entity entity) {
         return MJDS_BLOCKS;
+    }
+
+    public static boolean neverDo(BlockState p_50779_, BlockGetter p_50780_, BlockPos p_50781_, EntityType<?> p_50782_) {
+        return (boolean)false;
+    }
+
+    private static boolean neverDo(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {
+        return false;
+    }
+
+    public static Boolean alwaysDo(BlockState p_50810_, BlockGetter p_50811_, BlockPos p_50812_, EntityType<?> p_50813_) {
+        return (boolean)true;
     }
 }

@@ -17,6 +17,11 @@
   "exp1182.desc.key_subscribed": "You will receive notifications.",
   "exp1182.desc.key_unsubscribed": "You will NOT receive notifications.",
 
+  "item.exp1182.bullet1": "Bullet A Sprite",
+  "item.exp1182.bullet2": "Bullet B Sprite",
+  "item.exp1182.bullet3": "Bullet C Sprite",
+  "item.exp1182.monster_removal": "Monster remove tool",
+
   "item.exp1182.item_debug": "(Debug Item)",
   "block.exp1182.flame_bg1": "MJDS Flame BG 1",
   "block.exp1182.flame_bg2": "MJDS Flame BG 2",
@@ -24,10 +29,7 @@
   "block.exp1182.flame_bg4": "MJDS Flame BG 4",
   "block.exp1182.motor_x": "Motor X",
   "block.exp1182.motor_y": "Motor Y",
-  "block.exp1182.bullet1": "Bullet A Sprite",
-  "block.exp1182.bullet2": "Bullet B Sprite",
-  "block.exp1182.bullet3": "Bullet C Sprite",
-  "block.exp1182.monster_removal": "Monster remove tool",
+
   "exp1182.msg.next_spawn_time": "Next Spawn time : %s",
   "itemGroup.exp1182.tab1": "Majou Denetsu - Flame Burns Red"
 }
