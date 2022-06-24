@@ -20,6 +20,7 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> MONSTER_HURT = register("monster_hurt");
     public static final RegistryObject<SoundEvent> MONSTER_DEATH = register("monster_death");
     public static final RegistryObject<SoundEvent> MONSTER_SHOOT_1 = register("monster_shoot_1");
+    public static final RegistryObject<SoundEvent> MONSTER_SHOOT_2 = register("monster_shoot_2");
     public static final RegistryObject<SoundEvent> GAME_SELECT = register("game_select");
     public static final RegistryObject<SoundEvent> PICKUP = register("obtain_drop");
     public static final RegistryObject<SoundEvent> FALL = register("fall");

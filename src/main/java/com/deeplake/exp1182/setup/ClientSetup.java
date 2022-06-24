@@ -2,9 +2,11 @@ package com.deeplake.exp1182.setup;
 
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.client.ModSounds;
+import com.deeplake.exp1182.entities.client.model.ModelStoneEmitter;
 import com.deeplake.exp1182.entities.client.model.WorldBossModel;
 import com.deeplake.exp1182.entities.client.render.BossRenderer;
 import com.deeplake.exp1182.entities.client.render.HumanoidRenderer;
+import com.deeplake.exp1182.entities.client.render.ShowerMonsterRenderer;
 import com.deeplake.exp1182.entities.client.render.VoidRenderer;
 import com.deeplake.exp1182.entities.demo.ThiefModel;
 import com.deeplake.exp1182.manasystem.client.KeyBindings;
@@ -52,6 +54,7 @@ public class ClientSetup {
     public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
 //        event.registerLayerDefinition(ThiefModel.THIEF_LAYER, ThiefModel::createBodyLayer);
         event.registerLayerDefinition(WorldBossModel.NORMAL_LAYER, WorldBossModel::createBodyLayer);
+        event.registerLayerDefinition(ModelStoneEmitter.LAYER_LOCATION, ModelStoneEmitter::createBodyLayer);
     }
 
     @SubscribeEvent
@@ -64,6 +67,7 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.BULLET2.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.BULLET_SHOWER.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.CLOUD_MONSTER.get(), HumanoidRenderer::new);
+        event.registerEntityRenderer(ModEntities.SHOWER_MONSTER.get(), ShowerMonsterRenderer::new);
     }
 
     @SubscribeEvent

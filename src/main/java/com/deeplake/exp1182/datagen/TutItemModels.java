@@ -20,8 +20,8 @@ public class TutItemModels extends ItemModelProvider {
 //        withExistingParent(ModBlocks.MYSTERIOUS_ORE_END_ITEM.get().getRegistryName().getPath(), modLoc("block/mysterious_ore_end"));
 //        withExistingParent(ModBlocks.MYSTERIOUS_ORE_DEEPSLATE_ITEM.get().getRegistryName().getPath(), modLoc("block/mysterious_ore_deepslate"));
 
-        withExistingParent(ModBlocks.BLOCK_MOTOR_Y.get().asItem().getRegistryName().getPath(), modLoc("block/"+"motor_y"));
-        withExistingParent(ModBlocks.BLOCK_MOTOR_X.get().asItem().getRegistryName().getPath(), modLoc("block/"+"motor_x"));
+//        withExistingParent(ModBlocks.BLOCK_MOTOR_Y.get().asItem().getRegistryName().getPath(), modLoc("block/"+"motor_y"));
+//        withExistingParent(ModBlocks.BLOCK_MOTOR_X.get().asItem().getRegistryName().getPath(), modLoc("block/"+"motor_x"));
 ////        withExistingParent(ModBlocks.FLAME_BG2_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg2"));
 ////        withExistingParent(ModBlocks.FLAME_BG3_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg3"));
 ////        withExistingParent(ModBlocks.FLAME_BG4_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg4"));
@@ -46,9 +46,9 @@ public class TutItemModels extends ItemModelProvider {
 //        singleTexture(ModItems.BULLET1.get().getRegistryName().getPath(),
 //                mcLoc("item/generated"),
 //                "layer0", modLoc("item/bullet1"));
-//        singleTexture(ModItems.BULLET2.get().getRegistryName().getPath(),
-//                mcLoc("item/generated"),
-//                "layer0", modLoc("item/bullet2"));
+        singleTexture(ModItems.BULLET3.get().getRegistryName().getPath(),
+                mcLoc("item/generated"),
+                "layer0", modLoc("item/bullet3"));
 
 //        withExistingParent(ModBlocks.GENERATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/generator"));
 //        withExistingParent(ModBlocks.POWERGEN_ITEM.get().getRegistryName().getPath(), modLoc("block/powergen/main"));

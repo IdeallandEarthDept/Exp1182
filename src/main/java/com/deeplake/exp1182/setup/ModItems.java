@@ -20,6 +20,7 @@ public class ModItems {
     public static final RegistryObject<Item> TP_BACK = ITEMS.register("tp_back", () -> new ItemTeleportBack(ITEM_PROPERTIES));
     public static final RegistryObject<Item> BULLET1 = ITEMS.register("bullet1", () -> new Item(ITEM_PROPERTIES));
     public static final RegistryObject<Item> BULLET2 = ITEMS.register("bullet2", () -> new Item(ITEM_PROPERTIES));
+    public static final RegistryObject<Item> BULLET3 = ITEMS.register("bullet3", () -> new Item(ITEM_PROPERTIES));
 
     public static final RegistryObject<Item> ITEM_DEBUG = ITEMS.register("item_debug", () -> new ItemDebug(ITEM_PROPERTIES));
     public static final RegistryObject<Item> MONSTER_REMOVAL = ITEMS.register("monster_removal", () -> new ItemMonsterRemoval(ITEM_PROPERTIES));

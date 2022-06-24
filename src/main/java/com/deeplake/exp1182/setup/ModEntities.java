@@ -5,7 +5,7 @@ import com.deeplake.exp1182.entities.EntityWorldBoss;
 import com.deeplake.exp1182.entities.mjds.*;
 import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletDeflect;
 import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletPierece;
-import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSStoneShower;
+import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletShower;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -40,9 +40,10 @@ public class ModEntities {
     static final String NAME_BULLET2 = "bullet2";
     static final String NAME_BULLET3 = "bullet3";
     public static final RegistryObject<EntityType<EntityMJDSBulletPierece>> BULLET1 = getEntityTypeRegistryObjectFireImmune(NAME_BULLET1, EntityMJDSBulletPierece::new, 1.0f, 1.0f, MobCategory.MISC);
-    public static final RegistryObject<EntityType<EntityMJDSBulletPierece>> BULLET2 = getEntityTypeRegistryObjectFireImmune(NAME_BULLET2, EntityMJDSBulletDeflect::new, 1.0f, 1.0f, MobCategory.MISC);
-    public static final RegistryObject<EntityType<EntityMJDSBulletPierece>> BULLET_SHOWER = getEntityTypeRegistryObjectFireImmune(NAME_BULLET3, EntityMJDSStoneShower::new, 1.0f, 1.0f, MobCategory.MISC);
+    public static final RegistryObject<EntityType<EntityMJDSBulletDeflect>> BULLET2 = getEntityTypeRegistryObjectFireImmune(NAME_BULLET2, EntityMJDSBulletDeflect::new, 1.0f, 1.0f, MobCategory.MISC);
+    public static final RegistryObject<EntityType<EntityMJDSBulletShower>> BULLET_SHOWER = getEntityTypeRegistryObjectFireImmune(NAME_BULLET3, EntityMJDSBulletShower::new, 1.0f, 1.0f, MobCategory.MISC);
     public static final RegistryObject<EntityType<EntityMJDSCloudMonster>> CLOUD_MONSTER = getEntityTypeRegistryObjectFireImmune("cloud_mob", EntityMJDSCloudMonster::new, 0.6f, 1.8f, MobCategory.MONSTER);
+    public static final RegistryObject<EntityType<EntityMJDSStoneEmitter>> SHOWER_MONSTER = getEntityTypeRegistryObjectFireImmune("shower_mob", EntityMJDSStoneEmitter::new, 1.0f, 1.0f, MobCategory.MONSTER);
 
 
     private static <T extends Entity> RegistryObject<EntityType<T>> getEntityTypeRegistryObject(String name, EntityType.EntityFactory<T> factory, float sizeXZ, float sizeY, MobCategory category) {
@@ -71,7 +72,8 @@ public class ModEntities {
 //        event.put(ModEntities.WORLD_BOSS.get(), EntityWorldBoss.prepareAttributes().build());
         event.put(ModEntities.MJDS_SKELETON.get(), EntityMJDSSkeleton.prepareAttributes().build());
         event.put(ModEntities.MJDS_BLAZE.get(), EntityMJDSBlaze.prepareAttributes().build());
-        event.put(ModEntities.CLOUD_MONSTER.get(), EntityMJDSBlaze.prepareAttributes().build());
+        event.put(ModEntities.CLOUD_MONSTER.get(), EntityMJDSCloudMonster.prepareAttributes().build());
+        event.put(ModEntities.SHOWER_MONSTER.get(), EntityMJDSStoneEmitter.prepareAttributes().build());
     }
 
 }

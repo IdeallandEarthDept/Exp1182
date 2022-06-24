@@ -44,6 +44,15 @@
     ],
     "subtitle": "exp1182.subtitle.monster_shoot_1"
   },
+  "monster_shoot_2": {
+    "sounds": [
+      {
+        "name": "exp1182:monster_shoot_2",
+        "volume": 2.0
+      }
+    ],
+    "subtitle": "exp1182.subtitle.monster_shoot_2"
+  },
   "monster_death": {
     "sounds": [
       {

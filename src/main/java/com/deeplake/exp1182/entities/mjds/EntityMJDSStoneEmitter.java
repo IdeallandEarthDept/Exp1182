@@ -1,23 +1,20 @@
 package com.deeplake.exp1182.entities.mjds;
 
-import com.deeplake.exp1182.blocks.IBlockMJDS;
 import com.deeplake.exp1182.client.ModSounds;
-import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletPierece;
+import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletShower;
 import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.util.CommonDef;
 import com.deeplake.exp1182.util.DesignUtil;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
@@ -27,41 +24,39 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
 
 import static com.deeplake.exp1182.util.IDLNBTDef.SPAWN_POINT;
 import static net.minecraft.nbt.NbtUtils.readBlockPos;
 import static net.minecraft.nbt.NbtUtils.writeBlockPos;
 
-public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
+public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
     public BlockPos spawnPoint;
     static float BULLET_SPEED = 3f / CommonDef.TICK_PER_SECOND;
     int counter = 0;
     static final int MAX_COUNTER = CommonDef.TICK_PER_SECOND * 5;
-    static final HashSet<Integer> ATTCK_SEQUENCE = new HashSet<>();
-
-    static
-    {
-        ATTCK_SEQUENCE.add(CommonDef.TICK_PER_SECOND * 2);
-        ATTCK_SEQUENCE.add(CommonDef.TICK_PER_SECOND * 3);
-        ATTCK_SEQUENCE.add(CommonDef.TICK_PER_SECOND * 4);
-    }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 40.0D).add(Attributes.MOVEMENT_SPEED, (double)0.01F).add(Attributes.ATTACK_DAMAGE, 7.0D).add(Attributes.FOLLOW_RANGE, 48.0D);
     }
 
-    public EntityMJDSCloudMonster(EntityType<? extends Monster> p_33002_, Level p_33003_) {
+    public EntityMJDSStoneEmitter(EntityType<? extends Monster> p_33002_, Level p_33003_) {
         super(p_33002_, p_33003_);
         setGlowingTag(true);
         for (EquipmentSlot slotType :
                 EquipmentSlot.values()) {
             setDropChance(slotType, 0f);
         }
+    }
+
+    public static AttributeSupplier.Builder prepareAttributes() {
+        return createLivingAttributes()
+                .add(Attributes.ATTACK_DAMAGE, 6.0)
+                .add(Attributes.MAX_HEALTH, 56)
+                .add(Attributes.FOLLOW_RANGE, 32.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.3);
     }
 
     protected void registerGoals() {
@@ -81,14 +76,21 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
         {
             if (counter < MAX_COUNTER)
             {
-                if (ATTCK_SEQUENCE.contains(counter))
+                if (counter < 20)
                 {
-                    Vec3 dir = (target.getEyePosition().subtract(getEyePosition())).normalize().scale(BULLET_SPEED);
+                    double theta = Math.PI * 2 * random.nextDouble();
+                    double alpha = Math.PI / 2 * random.nextDouble();
+//                    Vec3 dir = (target.getEyePosition().subtract(getEyePosition())).normalize().scale(BULLET_SPEED);
+                    Vec3 dir = new Vec3(
+                            (Math.cos(theta)) * Math.cos(alpha),
+                             Math.sin(alpha),
+                            (Math.sin(theta))* Math.cos(alpha)
+                    ).scale(BULLET_SPEED) ;
 //                    Vec3 dir = (target.position().subtract(position())).normalize().scale(BULLET_SPEED);
 //                    Vec3 dir = new Vec3(1f,1f,1f);
 
                     AbstractHurtingProjectile bulletPierece =
-                            new EntityMJDSBulletPierece(
+                            new EntityMJDSBulletShower(
                                     level,
                                     this.getX(),
                                     this.getEyeY(),
@@ -97,29 +99,12 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
                                     dir.y,
                                     dir.z);
                     level.addFreshEntity(bulletPierece);
-                    playSound(ModSounds.MONSTER_SHOOT_1.get(), 2f, 1f);
+                    playSound(ModSounds.MONSTER_SHOOT_2.get(), 2f, 1f);
                 }
                 counter++;
             }
             else {
                 counter = 0;
-                for (int i = 0; i < 100; i++)
-                {
-                    if (random.nextBoolean())
-                    {
-                        if (teleportTowards(target))
-                        {
-                            break;
-                        }
-                    }
-                    else {
-                        if (teleport()) {
-                            break;
-                        }
-                    }
-                }
-
-
             }
         }
         else {
@@ -127,53 +112,6 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
         }
 
         super.aiStep();
-    }
-
-    protected boolean teleport() {
-        if (!this.level.isClientSide() && this.isAlive()) {
-            double d0 = this.getX() + (this.random.nextDouble() - 0.5D) * 64.0D;
-            double d1 = this.getY() + (double)(this.random.nextInt(64) - 32);
-            double d2 = this.getZ() + (this.random.nextDouble() - 0.5D) * 64.0D;
-            return this.teleport(d0, d1, d2);
-        } else {
-            return false;
-        }
-    }
-
-    boolean teleportTowards(Entity p_32501_) {
-        Vec3 vec3 = new Vec3(this.getX() - p_32501_.getX(), this.getY(0.5D) - p_32501_.getEyeY(), this.getZ() - p_32501_.getZ());
-        vec3 = vec3.normalize();
-        double d0 = 16.0D;
-        double d1 = this.getX() + (this.random.nextDouble() - 0.5D) * 8.0D - vec3.x * 16.0D;
-        double d2 = this.getY() + (double)(this.random.nextInt(16) - 8) - vec3.y * 16.0D;
-        double d3 = this.getZ() + (this.random.nextDouble() - 0.5D) * 8.0D - vec3.z * 16.0D;
-        return this.teleport(d1, d2, d3);
-    }
-
-    //just like enderman, except that it only lands on MJDS blocks.
-    private boolean teleport(double p_32544_, double p_32545_, double p_32546_) {
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(p_32544_, p_32545_, p_32546_);
-
-        while(blockpos$mutableblockpos.getY() > this.level.getMinBuildHeight() && !this.level.getBlockState(blockpos$mutableblockpos).getMaterial().blocksMotion()) {
-            blockpos$mutableblockpos.move(Direction.DOWN);
-        }
-
-        BlockState blockstate = this.level.getBlockState(blockpos$mutableblockpos);
-        boolean flag = blockstate.getMaterial().blocksMotion() && blockstate.getBlock() instanceof IBlockMJDS;
-        boolean flag1 = blockstate.getFluidState().is(FluidTags.WATER);
-        if (flag && !flag1) {
-            net.minecraftforge.event.entity.EntityTeleportEvent.EnderEntity event = net.minecraftforge.event.ForgeEventFactory.onEnderTeleport(this, p_32544_, p_32545_, p_32546_);
-            if (event.isCanceled()) return false;
-            boolean flag2 = this.randomTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);
-            if (flag2 && !this.isSilent()) {
-                this.level.playSound((Player)null, this.xo, this.yo, this.zo, SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 1.0F, 1.0F);
-                this.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
-            }
-
-            return flag2;
-        } else {
-            return false;
-        }
     }
 
     @Override
@@ -221,13 +159,5 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
             mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
             level.addFreshEntity(mist);
         }
-    }
-
-    public static AttributeSupplier.Builder prepareAttributes() {
-        return Monster.createLivingAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 6.0)
-                .add(Attributes.MAX_HEALTH, 36)
-                .add(Attributes.FOLLOW_RANGE, 32.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.3);
     }
 }
