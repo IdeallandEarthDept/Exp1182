@@ -89,7 +89,12 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
         this.noPhysics = false;
         this.setNoGravity(true);
 
-
+        LivingEntity target = getTarget();
+        boolean hasTarget = target != null && target.isAlive();
+        if (!hasTarget)
+        {
+            setNoAi(false);
+        }
     }
 
     @Override
@@ -106,13 +111,13 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
                     if (counter % 2 == 0) {
                         for (int i = 0; i <= 3; i++) {
                             double theta = Math.PI * 2 * random.nextDouble();
-                            double alpha = Math.PI / 4 * random.nextDouble() + Math.PI / 4;
+                            double alpha = Math.PI / 2 * random.nextDouble();
 //                    Vec3 dir = (target.getEyePosition().subtract(getEyePosition())).normalize().scale(BULLET_SPEED);
                             Vec3 dir = new Vec3(
                                     (Math.cos(theta)) * Math.cos(alpha),
                                     Math.sin(alpha),
                                     (Math.sin(theta)) * Math.cos(alpha)/2
-                            ).scale(BULLET_SPEED * 5);
+                            ).scale(BULLET_SPEED * 2.5 * (random.nextDouble() + 1));
 //                    Vec3 dir = (target.position().subtract(position())).normalize().scale(BULLET_SPEED);
 //                    Vec3 dir = new Vec3(1f,1f,1f);
 
@@ -142,6 +147,8 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
         else {
             counter = 0;
         }
+
+
 
         super.aiStep();
     }

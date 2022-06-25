@@ -42,7 +42,7 @@ public class EntityMJDSBulletShower extends EntityMJDSBulletBase{
 //        super.tick();
         normalTick();
 //        arrowTick();
-        Main.Log("UUID=%s,speed=%s,pos=%s",stringUUID.substring(0,4), getDeltaMovement(), position());
+//        Main.Log("UUID=%s,speed=%s,pos=%s",stringUUID.substring(0,4), getDeltaMovement(), position());
     }
 
     private void normalTick() {
@@ -163,6 +163,6 @@ public class EntityMJDSBulletShower extends EntityMJDSBulletBase{
     }
 
     protected ParticleOptions getTrailParticle() {
-        return ParticleTypes.ASH;
+        return ParticleTypes.WHITE_ASH;
     }
 }
