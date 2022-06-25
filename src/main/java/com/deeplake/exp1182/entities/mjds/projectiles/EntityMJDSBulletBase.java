@@ -26,13 +26,28 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
 
     public EntityMJDSBulletBase(EntityType<? extends EntityMJDSBulletBase> type, Level p_36824_, double x, double y, double z, double vx, double vy, double vz) {
         super(type, x, y, z, vx, vy, vz, p_36824_);
-        setGlowingTag(true);
+        double d0 = vx * vx + vy * vy + vz * vz;
+        if (d0 != 0.0D) {
+            this.xPower = vx;
+            this.yPower = vy;
+            this.zPower = vz;
+        }
+        if (!level.isClientSide)
+        {
+            setGlowingTag(true);
+            setDeltaMovement(vx, vy, vz);
+
+        }else {
+            setDeltaMovement(vx, vy, vz);
+        }
+
         stack = new ItemStack(ModItems.BULLET1.get());
     }
 
-    public EntityMJDSBulletBase(EntityType<? extends EntityMJDSBulletBase> type, Level p_36831_, LivingEntity p_36827_, double p_36829_, double p_36830_, double p_36828_) {
-        super(type, p_36827_, p_36828_, p_36829_, p_36830_, p_36831_);
+    public EntityMJDSBulletBase(EntityType<? extends EntityMJDSBulletBase> type, Level p_36831_, LivingEntity p_36827_, double x, double y, double z) {
+        super(type, p_36827_, z, x, y, p_36831_);
         setGlowingTag(true);
+//        setDeltaMovement(x,y,z);
     }
 
     static final float VISIBLE_DIST = 64*64;
@@ -86,10 +101,14 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
         if (!this.level.isClientSide) {
             Entity entity = p_37386_.getEntity();
             Entity entity1 = this.getOwner();
-            boolean flag = entity.hurt(DamageSource.indirectMagic(this, entity1), 5.0F);
-            if (flag && entity1 instanceof LivingEntity) {
-                this.doEnchantDamageEffects((LivingEntity)entity1, entity);
+            if (entity1 == null || entity1 instanceof LivingEntity)
+            {
+                boolean flag = entity.hurt(DamageSource.indirectMobAttack(this, (LivingEntity) entity1), 5.0F);
+                if (flag) {
+                    this.doEnchantDamageEffects((LivingEntity) entity1, entity);
+                }
             }
+
         }
     }
 

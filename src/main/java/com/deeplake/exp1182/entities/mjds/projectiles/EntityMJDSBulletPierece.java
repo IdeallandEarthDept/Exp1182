@@ -3,6 +3,7 @@ package com.deeplake.exp1182.entities.mjds.projectiles;
 import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.setup.ModItems;
 import com.deeplake.exp1182.util.CommonDef;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
-public class EntityMJDSBulletPierece extends AbstractHurtingProjectile implements ItemSupplier {
+public class EntityMJDSBulletPierece extends EntityMJDSBulletBase implements ItemSupplier {
     int maxTicks = CommonDef.TICK_PER_SECOND * 2;
     public EntityMJDSBulletPierece(EntityType<? extends EntityMJDSBulletPierece> p_36833_, Level p_36834_) {
         super(p_36833_, p_36834_);
@@ -24,13 +25,13 @@ public class EntityMJDSBulletPierece extends AbstractHurtingProjectile implement
     }
 
     public EntityMJDSBulletPierece(Level p_36824_, double x, double y, double z, double vx, double vy, double vz) {
-        super(ModEntities.BULLET1.get(), x, y, z, vx, vy, vz, p_36824_);
+        super(ModEntities.BULLET1.get(), p_36824_, x, y, z, vx, vy, vz);
         setGlowingTag(true);
         stack = new ItemStack(ModItems.BULLET1.get());
     }
 
     public EntityMJDSBulletPierece(Level p_36831_, LivingEntity p_36827_, double p_36829_, double p_36830_, double p_36828_) {
-        super(ModEntities.BULLET1.get(), p_36827_, p_36828_, p_36829_, p_36830_, p_36831_);
+        super(ModEntities.BULLET1.get(), p_36831_, p_36827_, p_36828_, p_36829_, p_36830_);
         setGlowingTag(true);
     }
 
@@ -101,5 +102,9 @@ public class EntityMJDSBulletPierece extends AbstractHurtingProjectile implement
         }
         discard();
         return true;
+    }
+
+    protected ParticleOptions getTrailParticle() {
+        return ParticleTypes.WHITE_ASH;
     }
 }

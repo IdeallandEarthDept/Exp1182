@@ -77,52 +77,45 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
     @Override
     public void aiStep() {
         LivingEntity target = getTarget();
-        if (!level.isClientSide && target != null && target.isAlive())
-        {
-            if (counter < MAX_COUNTER)
-            {
-                if (ATTCK_SEQUENCE.contains(counter))
-                {
-                    Vec3 dir = (target.getEyePosition().subtract(getEyePosition())).normalize().scale(BULLET_SPEED);
-//                    Vec3 dir = (target.position().subtract(position())).normalize().scale(BULLET_SPEED);
-//                    Vec3 dir = new Vec3(1f,1f,1f);
+        if (!level.isClientSide) {
+            boolean hasTarget = target != null && target.isAlive();
+            setGlowingTag(hasTarget);
+            if (hasTarget) {
+                if (counter < MAX_COUNTER) {
+                    if (ATTCK_SEQUENCE.contains(counter)) {
+                        Vec3 dir = (target.getEyePosition().subtract(getEyePosition())).normalize().scale(BULLET_SPEED);
 
-                    AbstractHurtingProjectile bulletPierece =
-                            new EntityMJDSBulletPierece(
-                                    level,
-                                    this.getX(),
-                                    this.getEyeY(),
-                                    this.getZ(),
-                                    dir.x,
-                                    dir.y,
-                                    dir.z);
-                    level.addFreshEntity(bulletPierece);
-                    playSound(ModSounds.MONSTER_SHOOT_1.get(), 2f, 1f);
+                        AbstractHurtingProjectile bulletPierece =
+                                new EntityMJDSBulletPierece(
+                                        level,
+                                        this.getX(),
+                                        this.getEyeY(),
+                                        this.getZ(),
+                                        dir.x,
+                                        dir.y,
+                                        dir.z);
+                        level.addFreshEntity(bulletPierece);
+                        playSound(ModSounds.MONSTER_SHOOT_1.get(), 2f, 1f);
+                    }
+                    counter++;
+                } else {
+                    counter = 0;
+                    for (int i = 0; i < 100; i++) {
+                        if (random.nextBoolean()) {
+                            if (teleportTowards(target)) {
+                                break;
+                            }
+                        } else {
+                            if (teleport()) {
+                                break;
+                            }
+                        }
+                    }
                 }
-                counter++;
-            }
-            else {
+            } else {
                 counter = 0;
-                for (int i = 0; i < 100; i++)
-                {
-                    if (random.nextBoolean())
-                    {
-                        if (teleportTowards(target))
-                        {
-                            break;
-                        }
-                    }
-                    else {
-                        if (teleport()) {
-                            break;
-                        }
-                    }
-                }
-
-
             }
-        }
-        else {
+        } else {
             counter = 0;
         }
 

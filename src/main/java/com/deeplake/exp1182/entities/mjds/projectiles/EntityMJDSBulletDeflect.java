@@ -2,6 +2,8 @@ package com.deeplake.exp1182.entities.mjds.projectiles;
 
 import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.setup.ModItems;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -33,5 +35,9 @@ public class EntityMJDSBulletDeflect extends EntityMJDSBulletBase {
     public ItemStack getItem() {
 //       return new ItemStack(Items.FIRE_CHARGE);
         return stack;
+    }
+
+    protected ParticleOptions getTrailParticle() {
+        return ParticleTypes.WHITE_ASH;
     }
 }
