@@ -42,11 +42,11 @@ public class EntityRevivalMist extends Entity {
     @Override
     public void tick() {
         super.tick();
-        //has a 1 sec cooldown
-        if (!level.isClientSide && isAlive() && tickCount > CommonDef.TICK_PER_SECOND)
+        //has a 3 sec cooldown
+        if (!level.isClientSide && isAlive() && tickCount > CommonDef.TICK_PER_SECOND * 3)
         {
             //It will revive if it's outside the screen...
-            if (EntityUtil.getEntitiesWithinAABB(level, EntityType.PLAYER, getEyePosition(0),  16, EntityUtil.NON_SPEC).size() == 0)
+            if (EntityUtil.getEntitiesWithinAABB(level, EntityType.PLAYER, getEyePosition(0),  32, EntityUtil.NON_SPEC).size() == 0)
             {
                 //But will not revive when it's too far from players. Minecraft will despawn it, and thus keep cycling.
                 if (EntityUtil.getEntitiesWithinAABB(level, EntityType.PLAYER, getEyePosition(0),  64, EntityUtil.NON_SPEC).size() != 0)
