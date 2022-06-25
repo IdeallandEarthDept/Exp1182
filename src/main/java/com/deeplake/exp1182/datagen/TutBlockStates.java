@@ -34,7 +34,8 @@ public class TutBlockStates  extends BlockStateProvider {
 //        simpleBlock(ModBlocks.FLAME_BG4.get());
 //        simpleBlock(ModBlocks.SPAWN_BOSS.get());
 //        simpleBlock(ModBlocks.BLOCK_MOTOR_X.get());
-        simpleBlock(ModBlocks.BLACK_OUT.get());
+        simpleBlock(ModBlocks.BREAKABLE.get());
+        simpleBlock(ModBlocks.COVERED.get());
     }
 
     private void registerPortal() {

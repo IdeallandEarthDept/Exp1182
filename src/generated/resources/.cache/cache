@@ -1,4 +1,6 @@
-46363bdd6ca9d9741c07354d7c4797c95692557b assets/exp1182/blockstates/black_out.json
-1420176610d0b4524f2708478feaa4a26a86f6f6 assets/exp1182/models/block/black_out.json
-256c42d4e0eba444ea9f7a18e8a7dd268d0c5a19 assets/exp1182/models/item/black_out.json
+3283e39a0d3800f7a83c2291d6c5268ece6cf17d assets/exp1182/blockstates/breakable.json
+7dd0d8d1d91b9f1721ce9491d3b32c979a6f61c0 assets/exp1182/blockstates/covered.json
+c9453f29f518dea04404e501fc2a5e5726455c04 assets/exp1182/models/block/breakable.json
+ae0dcdf7a9c4b5e8c54245bebf28c1b343444465 assets/exp1182/models/block/covered.json
+73465133dd49d4836d360bd02ce6036e5684bd34 assets/exp1182/models/item/breakable.json
 caead40a3c1f65665f6199c68d5ad4a031025892 data/minecraft/tags/blocks/climbable.json
