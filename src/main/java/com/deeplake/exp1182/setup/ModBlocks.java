@@ -53,6 +53,7 @@ public class ModBlocks {
 
     //MJDS Blocks
     public static final BlockBehaviour.Properties BLOCK_PROP_MJDS = BlockBehaviour.Properties.of(Material.STONE).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS);
+    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS_AIR = BlockBehaviour.Properties.of(Material.STONE).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS).noCollission();
 
     static final String NAME_FLAME_BG = "flame_bg";
     static int index = 0;
@@ -71,10 +72,11 @@ public class ModBlocks {
     public static final RegistryObject<Block> FLAME_BG3 = getFlameBG();
 
     public static final RegistryObject<Block> FLAME_BG4 = getFlameBG();
+    public static final RegistryObject<Block> BLACK_OUT = registerWithItem("black_out", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS_AIR));
 
     public static final RegistryObject<Block> FLAME_FLOOR = registerWithItem("flame_wall", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
     public static final RegistryObject<Block> COVERED = registerWithItem("covered", BlockCovered::new);
-    public static final RegistryObject<Block> BREAKABLE = registerWithItem("breakable", () -> new BlockBreakable(BLOCK_PROP_MJDS));
+    public static final RegistryObject<Block> BREAKABLE = registerWithItem("breakable", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
 
     public static final BlockBehaviour.Properties BLOCK_PROP_LADDER = BlockBehaviour.Properties.of(Material.DECORATION).strength(-1f, MAX_BLAST_RESIST).noDrops().sound(SoundType.LADDER).noOcclusion().jumpFactor(JUMP_FACTOR_MJDS);
 
