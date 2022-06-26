@@ -8,6 +8,7 @@
 
   "block.exp1182.breakable": "Breakable Wall",
   "block.exp1182.covered": "Breakable Wall",
+  "block.exp1182.covered.desc": "Conceals Wall inside",
 
   "block.exp1182.black_out": "Black Out",
 
@@ -16,9 +17,9 @@
   "block.exp1182.mjds_gate2": "MJDS Gate",
   "block.exp1182.mjds_gate2.desc": "Right-Up",
   "block.exp1182.mjds_gate3": "MJDS Gate",
-  "block.exp1182.mjds_gate3.desc": "Left-Down",
+  "block.exp1182.mjds_gate3.desc": "Right-Down",
   "block.exp1182.mjds_gate4": "MJDS Gate",
-  "block.exp1182.mjds_gate4.desc": "Right-Down",
+  "block.exp1182.mjds_gate4.desc": "Left-Down",
 
   "entity.exp1182.world_boss": "World Boss",
 
