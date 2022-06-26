@@ -28,6 +28,8 @@ public class TutItemModels extends ItemModelProvider {
 //        withExistingParent(ModBlocks.MJDS_GATE2.get().asItem().getRegistryName().getPath(), modLoc("block/"+"mjds_gate2"));
 //        withExistingParent(ModBlocks.MJDS_GATE3.get().asItem().getRegistryName().getPath(), modLoc("block/"+"mjds_gate3"));
 //        withExistingParent(ModBlocks.MJDS_GATE4.get().asItem().getRegistryName().getPath(), modLoc("block/"+"mjds_gate4"));
+//        withExistingParent(ModBlocks.SP_GLASS.get().asItem().getRegistryName().getPath(), modLoc("block/"+"mjds_gate4"));
+        withExistingParent(ModBlocks.FLAME_FLOOR_NO_MUSIC.get().asItem().getRegistryName().getPath(), modLoc("block/"+"flame_wall"));
 ////        withExistingParent(ModBlocks.FLAME_BG2_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg2"));
 ////        withExistingParent(ModBlocks.FLAME_BG3_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg3"));
 ////        withExistingParent(ModBlocks.FLAME_BG4_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg4"));

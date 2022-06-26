@@ -42,7 +42,7 @@ public class BaseBlockMJDS extends Block implements IBlockMJDS {
         return (boolean)false;
     }
 
-    private static boolean neverDo(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {
+    public static boolean neverDo(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {
         return false;
     }
 

@@ -1,6 +1,8 @@
 {
   "block.exp1182.flame_ladder": "MJDS Flame Ladder",
   "block.exp1182.flame_wall": "MJDS Flame Floor",
+  "block.exp1182.flame_wall_quiet": "MJDS Flame Floor",
+  "block.exp1182.flame_wall_quiet.desc": "Walking on it triggers no music.",
   "block.exp1182.spawn_boss": "Spawn World Boss",
   "block.exp1182.spawn_boss.desc": "[Creative Only]World boss will respawn here at time.",
 

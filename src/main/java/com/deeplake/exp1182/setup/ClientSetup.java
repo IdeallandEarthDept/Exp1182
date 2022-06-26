@@ -12,6 +12,8 @@ import com.deeplake.exp1182.entities.demo.ThiefModel;
 import com.deeplake.exp1182.manasystem.client.KeyBindings;
 import com.deeplake.exp1182.manasystem.client.KeyInputHandler;
 import com.deeplake.exp1182.manasystem.client.ManaOverlay;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.BlazeRenderer;
 import net.minecraft.client.renderer.entity.DragonFireballRenderer;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
@@ -35,8 +37,9 @@ public class ClientSetup {
     public static void init(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
 //            MenuScreens.register(ModBlocks.POWERGEN_CONTAINER.get(), PowergenScreen::new);
-//            ItemBlockRenderTypes.setRenderLayer(ModBlocks.POWERGEN.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.SP_GLASS.get(), RenderType.translucent());
 //            PowergenRenderer.register();
+
         });
         MinecraftForge.EVENT_BUS.addListener(KeyInputHandler::onKeyInput);
         KeyBindings.init();

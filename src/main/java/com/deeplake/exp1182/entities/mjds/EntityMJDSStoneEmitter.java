@@ -60,6 +60,7 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
                 EquipmentSlot.values()) {
             setDropChance(slotType, 0f);
         }
+        setPersistenceRequired();
     }
 
     public static AttributeSupplier.Builder prepareAttributes() {
@@ -187,18 +188,18 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
         return p_32149_;
     }
 
-    @Override
-    public void onRemovedFromWorld() {
-        super.onRemovedFromWorld();
-        if (!level.isClientSide && DesignUtil.canRevive(this))
-        {
-            //IdlFramework.Log("That is not dead which can eternal lie...");
-            EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level);
-            mist.setWith(this);
-            mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
-            level.addFreshEntity(mist);
-        }
-    }
+//    @Override
+//    public void onRemovedFromWorld() {
+//        super.onRemovedFromWorld();
+//        if (!level.isClientSide && DesignUtil.canRevive(this))
+//        {
+//            //IdlFramework.Log("That is not dead which can eternal lie...");
+//            EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level);
+//            mist.setWith(this);
+//            mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
+//            level.addFreshEntity(mist);
+//        }
+//    }
 
     class FloatMoveControl extends MoveControl {
         public FloatMoveControl(EntityMJDSStoneEmitter p_34062_) {
@@ -264,5 +265,19 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
         }
     }
 
-
+    @Override
+    public void remove(RemovalReason p_146834_) {
+        super.remove(p_146834_);
+        if (p_146834_ == RemovalReason.KILLED || p_146834_ == RemovalReason.DISCARDED)
+        {
+            if (!level.isClientSide && DesignUtil.canRevive(this))
+            {
+                //IdlFramework.Log("That is not dead which can eternal lie...");
+                EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level);
+                mist.setWith(this);
+                mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
+                level.addFreshEntity(mist);
+            }
+        }
+    }
 }
