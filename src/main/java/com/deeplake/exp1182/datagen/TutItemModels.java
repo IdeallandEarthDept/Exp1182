@@ -20,11 +20,14 @@ public class TutItemModels extends ItemModelProvider {
 //        withExistingParent(ModBlocks.MYSTERIOUS_ORE_END_ITEM.get().getRegistryName().getPath(), modLoc("block/mysterious_ore_end"));
 //        withExistingParent(ModBlocks.MYSTERIOUS_ORE_DEEPSLATE_ITEM.get().getRegistryName().getPath(), modLoc("block/mysterious_ore_deepslate"));
 
-        withExistingParent(ModBlocks.BREAKABLE.get().asItem().getRegistryName().getPath(), modLoc("block/"+"breakable"));
-        withExistingParent(ModBlocks.BREAKABLE.get().asItem().getRegistryName().getPath(), modLoc("block/"+"covered"));
+//        withExistingParent(ModBlocks.BREAKABLE.get().asItem().getRegistryName().getPath(), modLoc("block/"+"breakable"));
+//        withExistingParent(ModBlocks.BREAKABLE.get().asItem().getRegistryName().getPath(), modLoc("block/"+"covered"));
 //        withExistingParent(ModBlocks.BLACK_OUT.get().asItem().getRegistryName().getPath(), modLoc("block/"+"black_out"));
 //        withExistingParent(ModBlocks.BLOCK_MOTOR_Y.get().asItem().getRegistryName().getPath(), modLoc("block/"+"motor_y"));
-//        withExistingParent(ModBlocks.BLOCK_MOTOR_X.get().asItem().getRegistryName().getPath(), modLoc("block/"+"motor_x"));
+//        withExistingParent(ModBlocks.MJDS_GATE1.get().asItem().getRegistryName().getPath(), modLoc("block/"+"mjds_gate1"));
+//        withExistingParent(ModBlocks.MJDS_GATE2.get().asItem().getRegistryName().getPath(), modLoc("block/"+"mjds_gate2"));
+//        withExistingParent(ModBlocks.MJDS_GATE3.get().asItem().getRegistryName().getPath(), modLoc("block/"+"mjds_gate3"));
+//        withExistingParent(ModBlocks.MJDS_GATE4.get().asItem().getRegistryName().getPath(), modLoc("block/"+"mjds_gate4"));
 ////        withExistingParent(ModBlocks.FLAME_BG2_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg2"));
 ////        withExistingParent(ModBlocks.FLAME_BG3_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg3"));
 ////        withExistingParent(ModBlocks.FLAME_BG4_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg4"));
@@ -35,7 +38,6 @@ public class TutItemModels extends ItemModelProvider {
 //        singleTexture(ModItems.ITEM_DEBUG.get().getRegistryName().getPath(), modLoc("item/template_spawn_egg"));
 //        singleTexture(ModItems.TP_BACK.get().getRegistryName().getPath(), modLoc("item/tp_back"));
 //        singleTexture(ModItems.TP_GO.get().getRegistryName().getPath(), modLoc("item/tp_go"));
-//        singleTexture(ModBlocks.SPAWN_BOSS_ITEM.get().getRegistryName().getPath(), modLoc("block/spawn_boss"));
 
 //        singleTexture(ModItems.ITEM_DEBUG.get().getRegistryName().getPath(),
 //                mcLoc("item/generated"),

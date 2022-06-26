@@ -23,14 +23,17 @@ import net.minecraft.world.phys.Vec3;
 public class EntityMJDSBulletShower extends EntityMJDSBulletBase{
     public EntityMJDSBulletShower(EntityType<? extends EntityMJDSBulletBase> p_36833_, Level p_36834_) {
         super(p_36833_, p_36834_);
-        maxTicks = CommonDef.TICK_PER_SECOND * 3;
-        setGlowingTag(false);
+        init();
     }
 
     public EntityMJDSBulletShower(Level p_36824_, double x, double y, double z, double vx, double vy, double vz) {
         super(ModEntities.BULLET_SHOWER.get(), p_36824_, x, y, z, vx, vy, vz);
+        init();
+    }
+
+    private void init() {
         maxTicks = CommonDef.TICK_PER_SECOND * 3;
-        setGlowingTag(false);
+        setGlowingTag(true);
     }
 
     public EntityMJDSBulletShower(Level p_36831_, LivingEntity p_36827_, double p_36829_, double p_36830_, double p_36828_) {

@@ -3,6 +3,21 @@
   "block.exp1182.flame_wall": "MJDS Flame Floor",
   "block.exp1182.spawn_boss": "Spawn World Boss",
   "block.exp1182.spawn_boss.desc": "[Creative Only]World boss will respawn here at time.",
+
+  "block.exp1182.breakable": "Breakable Wall",
+  "block.exp1182.covered": "Breakable Wall",
+
+  "block.exp1182.black_out": "Black Out",
+
+  "block.exp1182.mjds_gate1": "MJDS Gate",
+  "block.exp1182.mjds_gate1.desc": "Left-Up",
+  "block.exp1182.mjds_gate2": "MJDS Gate",
+  "block.exp1182.mjds_gate2.desc": "Right-Up",
+  "block.exp1182.mjds_gate3": "MJDS Gate",
+  "block.exp1182.mjds_gate3.desc": "Left-Down",
+  "block.exp1182.mjds_gate4": "MJDS Gate",
+  "block.exp1182.mjds_gate4.desc": "Right-Down",
+
   "entity.exp1182.world_boss": "World Boss",
 
   "item.exp1182.spawn_worldboss": "Spawn World Boss",

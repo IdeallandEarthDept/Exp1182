@@ -4,6 +4,7 @@ import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.items.INeedLogNBT;
 import com.deeplake.exp1182.items.ItemTeleport;
 import com.deeplake.exp1182.setup.ModItems;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -20,6 +21,7 @@ import net.minecraftforge.fml.common.Mod;
 public class ToolTipHandler {
     public static final String KEY_SUBSCRIBED = Main.MOD_ID + ".desc.key_subscribed";
     public static final String KEY_UNSUBSCRIBED = Main.MOD_ID + ".desc.key_unsubscribed";
+    public static final String DESC = ".desc";
 
     @SubscribeEvent
     public static void onDesc(ItemTooltipEvent event)
@@ -36,13 +38,16 @@ public class ToolTipHandler {
         if (registryName != null
                 && registryName.getNamespace().equals(Main.MOD_ID))
         {
-            event.getToolTip().add(new TranslatableComponent(itemType.getDescriptionId() + ".desc"));
+            String key = itemType.getDescriptionId() + DESC;
+            if (I18n.exists(key)) {
+                event.getToolTip().add(new TranslatableComponent(key));
+            }
 
             if (itemType instanceof ItemTeleport)
             {
                 boolean state = ItemTeleport.isSubscribed(stack);
-                String key = state ? KEY_SUBSCRIBED : KEY_UNSUBSCRIBED;
-                event.getToolTip().add(new TranslatableComponent(key));
+                String key2 = state ? KEY_SUBSCRIBED : KEY_UNSUBSCRIBED;
+                event.getToolTip().add(new TranslatableComponent(key2));
             }
         }
     }
