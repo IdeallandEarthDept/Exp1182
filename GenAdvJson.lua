@@ -35,12 +35,13 @@ end
 -- GenAdvItem("backtones:great_key_1", "dungeon_5", "root", true, true, false);
 -- GenAdvItem("exp1182:feather", "feather", "root", false, false, false);
 -- GenAdvItem("exp1182:shoes", "shoes", "root", false, false, false);
+GenAdvItem("exp1182:balloon", "balloon", "food", false, false, false);
 -- GenAdvItem("exp1182:food", "food", "root", false, false, false);
 -- GenAdvItem("exp1182:shield_bronze", "shield_bronze", "root", false, false, false);
 -- GenAdvItem("exp1182:great_key", "great_key", "root", false, false, false);
 -- GenAdvItem("exp1182:candle", "candle", "root", false, false, false);
 -- GenAdvItem("exp1182:holy_water", "holy_water", "root", false, false, false);
-GenAdvItem("exp1182:breakable", "food", "root", false, false, false);
+-- GenAdvItem("exp1182:breakable", "food", "root", false, false, false);
 -- GenAdvItem("exp1182:triangle", "triangle", "root", false, false, false);
 
 

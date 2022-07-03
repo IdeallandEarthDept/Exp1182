@@ -108,15 +108,16 @@ end
 
 
 --GenBlock("cleanse_sword");
-GenItemNake("feather");
-GenItemNake("shoes");
-GenItemNake("food");
-GenItemNake("shield_bronze");
-GenItemNake("great_key");
-GenItemNake("candle");
-GenItemNake("holy_water");
-GenItemNake("breakable");
-GenItemNake("triangle");
+-- GenItemNake("balloon");
+-- GenItemNake("feather");
+-- GenItemNake("shoes");
+-- GenItemNake("food");
+-- GenItemNake("shield_bronze");
+-- GenItemNake("great_key");
+-- GenItemNake("candle");
+-- GenItemNake("holy_water");
+-- GenItemNake("breakable");
+-- GenItemNake("triangle");
 
 --GenItem("misc", "boots");
 --GenItem("misc", "devil_wing");

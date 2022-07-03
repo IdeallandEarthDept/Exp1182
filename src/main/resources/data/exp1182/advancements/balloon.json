@@ -1,0 +1,23 @@
+{
+		"display": {
+				"icon": {
+						"item": "exp1182:balloon"
+				},
+				"title": {
+						"translate": "exp1182.advancements.balloon.title"
+				},
+				"description": {
+						"translate": "exp1182.advancements.balloon.description"
+				},
+				"hidden": false,
+				"show_toast": true,
+				"announce_to_chat": true,
+				"frame": "task"
+		},
+		"parent": "exp1182:food",
+		"criteria": {
+				"impossible": {
+						"trigger": "minecraft:impossible"
+				}
+		}
+}
