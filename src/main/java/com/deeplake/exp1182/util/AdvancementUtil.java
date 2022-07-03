@@ -1,8 +1,12 @@
 package com.deeplake.exp1182.util;
 
 import com.deeplake.exp1182.Main;
+import com.deeplake.exp1182.setup.ModEffects;
 import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementList;
 import net.minecraft.advancements.AdvancementProgress;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientAdvancements;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,14 +17,20 @@ public class AdvancementUtil {
     public static final String ACHV_WATCH_YOUR_STEP = "watch_your_step";
 
 
-    public static final String ACHV_ALTEREGO_APHRODITE = "alterego_aphrodite";
-//    public static final String ACHV_ALTEREGO_APHRODITE = "alterego_aphrodite";
-//    public static final String ACHV_ALTEREGO_APHRODITE = "alterego_aphrodite";
-//    public static final String ACHV_ALTEREGO_APHRODITE = "alterego_aphrodite";
-//    public static final String ACHV_ALTEREGO_APHRODITE = "alterego_aphrodite";
-//    public static final String ACHV_ALTEREGO_APHRODITE = "alterego_aphrodite";
-//    public static final String ACHV_ALTEREGO_APHRODITE = "alterego_aphrodite";
-//    public static final String ACHV_ALTEREGO_APHRODITE = "alterego_aphrodite";
+    public static final String FEATHER = "feather";
+    public static final String SHOES = "shoes";
+    public static final String FOOD = "food";
+    public static final String SHIELD_BRONZE = "shield_bronze";
+    public static final String GREAT_KEY = "great_key";
+    public static final String CANDLE = "candle";
+    public static final String HOLY_WATER = "holy_water";
+    public static final String BALLOON = "balloon";
+    public static final String BREAKABLE = "breakable";
+    public static final String TRIANGLE = "triangle";
+
+    public static final int FEATHER_BIT = 1;
+    public static final int SHOES_BIT = 2;
+    public static final int TRIANGLE_BIT = 4;
 
 
     public static final String ACHV_ROOT = "root";
@@ -68,6 +78,15 @@ public class AdvancementUtil {
         }
     }
 
+    public static boolean hasAdvancement(Player player, String id)
+    {
+        if (!player.level.isClientSide)
+        {
+            return hasAdvancement((ServerPlayer)player, id);
+        }
+        return false;
+    }
+
     public static boolean hasAdvancement(ServerPlayer p_192552_2_, String id)
     {
         Advancement adv = findAdvancement(p_192552_2_.server, id);
@@ -83,6 +102,32 @@ public class AdvancementUtil {
     {
         AdvancementProgress advancementprogress = p_192552_2_.getAdvancements().getOrStartProgress(p_192552_3_);
         return advancementprogress.isDone();
+    }
+
+    public static boolean hasAdvancementClient(String name)
+    {
+//        try
+        {
+            ClientAdvancements advancements = null;
+            if (Minecraft.getInstance().player != null) {
+                advancements = Minecraft.getInstance().player.connection.getAdvancements();
+
+                AdvancementList list = advancements.getAdvancements();
+                if (list != null)
+                {
+                    Advancement advancement = list.get(new ResourceLocation(Main.MOD_ID, name));
+                    Main.Log("checking");
+//                    AdvancementProgress advancementprogress = advancement.getValue();
+//                    AdvancementProgress advancementprogress = list.get(new ResourceLocation(Main.MOD_ID, name));
+                }
+            }
+            return true;
+        }
+//        catch (ClassNotFoundException e)
+//        {
+//            Main.Log("called client function hasAdvancementClient from server side");
+//            return false;
+//        }
     }
 
     public static Advancement findAdvancement(MinecraftServer server, String id)
@@ -101,6 +146,18 @@ public class AdvancementUtil {
         else
         {
             return advancement;
+        }
+    }
+
+    public static boolean checkAdvClient(Player player, int bit)
+    {
+        int level = EntityUtil.getBuffLevel(player, ModEffects.INSIDE_MAJOU.get());
+        if (level > 0)
+        {
+            return (level & bit) > 0;
+        }
+        else {
+            return false;
         }
     }
 }

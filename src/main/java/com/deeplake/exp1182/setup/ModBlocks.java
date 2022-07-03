@@ -7,28 +7,20 @@ import com.deeplake.exp1182.blocks.motor.BlockMotorY;
 import com.deeplake.exp1182.blocks.tileentity.MotorTileEntityHorizontal;
 import com.deeplake.exp1182.blocks.tileentity.MotorTileEntityVertical;
 import com.deeplake.exp1182.blocks.tileentity.TileEntitySpawnBoss;
-import com.deeplake.exp1182.worldgen.structures.PortalStructure;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 import net.minecraft.world.level.material.Material;
-import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
-import static com.deeplake.exp1182.util.CommonDef.JUMP_FACTOR_MJDS;
+import static com.deeplake.exp1182.util.CommonDef.JUMP_FACTOR_MJDS_BLOCK;
 
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Main.MOD_ID);
@@ -52,9 +44,9 @@ public class ModBlocks {
     static final float MAX_BLAST_RESIST = 3600000.0F;
 
     //MJDS Blocks
-    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS = BlockBehaviour.Properties.of(Material.STONE).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS);
-    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS_AIR = BlockBehaviour.Properties.of(Material.STONE).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS).noCollission();
-    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS_GLASS = BlockBehaviour.Properties.of(Material.GLASS).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS).noOcclusion();
+    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS = BlockBehaviour.Properties.of(Material.STONE).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS_BLOCK);
+    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS_AIR = BlockBehaviour.Properties.of(Material.STONE).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS_BLOCK).noCollission();
+    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS_GLASS = BlockBehaviour.Properties.of(Material.GLASS).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS_BLOCK).noOcclusion();
 
     static final String NAME_FLAME_BG = "flame_bg";
     static int index = 0;
@@ -79,13 +71,13 @@ public class ModBlocks {
     public static final RegistryObject<Block> FLAME_FLOOR_NO_MUSIC = registerWithItem("flame_wall_quiet", () -> new BaseBlockNoMusic(BLOCK_PROP_MJDS));
     public static final RegistryObject<Block> SP_GLASS = registerWithItem("sp_glass", BlockWallGlass::new);
     public static final RegistryObject<Block> COVERED = registerWithItem("covered", BlockCovered::new);
-    public static final RegistryObject<Block> BREAKABLE = registerWithItem("breakable", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
+    public static final RegistryObject<Block> BREAKABLE = registerWithItem("breakable", () -> new BlockBreakable(BLOCK_PROP_MJDS));
     public static final RegistryObject<Block> MJDS_GATE1 = registerWithItem("mjds_gate1", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
     public static final RegistryObject<Block> MJDS_GATE2 = registerWithItem("mjds_gate2", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
     public static final RegistryObject<Block> MJDS_GATE3 = registerWithItem("mjds_gate3", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
     public static final RegistryObject<Block> MJDS_GATE4 = registerWithItem("mjds_gate4", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
 
-    public static final BlockBehaviour.Properties BLOCK_PROP_LADDER = BlockBehaviour.Properties.of(Material.DECORATION).strength(-1f, MAX_BLAST_RESIST).noDrops().sound(SoundType.LADDER).noOcclusion().jumpFactor(JUMP_FACTOR_MJDS);
+    public static final BlockBehaviour.Properties BLOCK_PROP_LADDER = BlockBehaviour.Properties.of(Material.DECORATION).strength(-1f, MAX_BLAST_RESIST).noDrops().sound(SoundType.LADDER).noOcclusion().jumpFactor(JUMP_FACTOR_MJDS_BLOCK);
 
     public static final RegistryObject<Block> FLAME_LADDER = registerWithItem("flame_ladder", () -> new LadderBlockMJDS(BLOCK_PROP_LADDER));
 

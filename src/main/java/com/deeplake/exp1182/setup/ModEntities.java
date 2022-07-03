@@ -25,9 +25,13 @@ public class ModEntities {
     public static final RegistryObject<EntityType<EntityWorldBoss>> WORLD_BOSS =
             getEntityTypeRegistryObject(NAME_WORLD_BOSS, EntityWorldBoss::new, 0.6f, 1.95f, MobCategory.MONSTER);
 
-        static final String NAME_REVIVE_MIST = "revival_mist";
-        public static final RegistryObject<EntityType<EntityRevivalMist>> REVIVE_MIST =
+    static final String NAME_REVIVE_MIST = "revival_mist";
+    public static final RegistryObject<EntityType<EntityRevivalMist>> REVIVE_MIST =
                 getEntityTypeRegistryObject(NAME_REVIVE_MIST, EntityRevivalMist::new, 0.6f, 1.8f, MobCategory.MISC);
+
+    static final String NAME_DAMP_SPHERE = "damping_sphere";
+    public static final RegistryObject<EntityType<EntityDampingSphere>> DAMP_SPHERE =
+                getEntityTypeRegistryObject(NAME_DAMP_SPHERE, EntityDampingSphere::new, 1f, 1f, MobCategory.MISC);
 
     static final String NAME_SKELETON = "mjds_skeleton";
     public static final RegistryObject<EntityType<EntityMJDSSkeleton>> MJDS_SKELETON =

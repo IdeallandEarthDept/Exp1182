@@ -1,10 +1,20 @@
 package com.deeplake.exp1182.blocks;
 
+import com.deeplake.exp1182.util.AdvancementUtil;
+import com.deeplake.exp1182.util.CommonDef;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.NotNull;
 
 public class BlockBreakable extends BaseBlockMJDS implements IBlockMJDS{
     public BlockBreakable(Properties p_49795_) {
@@ -17,5 +27,42 @@ public class BlockBreakable extends BaseBlockMJDS implements IBlockMJDS{
         levelAccessor.addParticle(ParticleTypes.EXPLOSION,
                 blockPos.getX(),blockPos.getY(),blockPos.getZ(),
                 0,0,0);
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand p_60507_, @NotNull BlockHitResult result) {
+        Direction direction = result.getDirection();
+        switch (direction)
+        {
+            case DOWN:
+                if (AdvancementUtil.hasAdvancement(player, AdvancementUtil.BALLOON))
+                {
+                    playerBreak(state, level, pos, player);
+                }
+            break;
+            case UP: break;
+            case NORTH: case SOUTH:
+            case WEST: case EAST:
+                if (AdvancementUtil.hasAdvancement(player, AdvancementUtil.FOOD))
+                {
+                    playerBreak(state, level, pos, player);
+                }
+            break;
+            default :
+                throw new IllegalStateException("Unexpected value: " + direction);
+
+        }
+//        level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+
+        return InteractionResult.SUCCESS;
+    }
+
+    public static void playerBreak(BlockState state, Level level, BlockPos pos, Player player)
+    {
+        if (!level.isClientSide)
+        {
+            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+            state.getBlock().destroy(level, pos, state);
+        }
     }
 }

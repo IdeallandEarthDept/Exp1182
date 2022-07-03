@@ -3,8 +3,12 @@ package com.deeplake.exp1182.util;
 import com.deeplake.exp1182.entities.mjds.IMjdsMonster;
 import com.google.common.base.Predicate;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -163,4 +167,18 @@ public class EntityUtil {
 //            return false;
 //        }
 //    };
+
+    //Note: this returns -1 if no buff.
+    public static int getBuffLevel(LivingEntity livingBase, MobEffect potion) {
+        if (livingBase == null || potion == null) {
+//            Idealland.LogWarning(TRYING_TO_APPLY_ILLEGAL_POTION);
+            return -1;
+        }
+        MobEffectInstance effect = livingBase.getEffect(potion);
+        if (effect == null) {
+            return -1;
+        } else {
+            return effect.getAmplifier();
+        }
+    }
 }

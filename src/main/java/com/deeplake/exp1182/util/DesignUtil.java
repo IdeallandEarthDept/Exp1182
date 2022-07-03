@@ -7,6 +7,7 @@ import com.deeplake.exp1182.setup.ModEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -75,10 +76,17 @@ public class DesignUtil {
             } else {
                 if (entity == Minecraft.getInstance().player)
                 {
-                    MusicManager musicManager = Minecraft.getInstance().getMusicManager();
-                    if (!musicManager.isPlayingMusic(ModSounds.MUSIC_DUNGEON)) {
-                        musicManager.stopPlaying();
-                        musicManager.startPlaying(ModSounds.MUSIC_DUNGEON);
+                    boolean music = true;
+                    Player player = (Player) entity;
+                    music = AdvancementUtil.checkAdvClient(player, AdvancementUtil.TRIANGLE_BIT);
+
+                    if (music)
+                    {
+                        MusicManager musicManager = Minecraft.getInstance().getMusicManager();
+                        if (!musicManager.isPlayingMusic(ModSounds.MUSIC_DUNGEON)) {
+                            musicManager.stopPlaying();
+                            musicManager.startPlaying(ModSounds.MUSIC_DUNGEON);
+                        }
                     }
                 }
             }
@@ -86,7 +94,33 @@ public class DesignUtil {
     }
 
     public static void majouBuff(LivingEntity living) {
-        living.addEffect(new MobEffectInstance(ModEffects.INSIDE_MAJOU.get(),
-                60, 0, true, false, true, null));
+        if (living instanceof ServerPlayer serverPlayer)
+        {
+            int level = 0;
+            if (AdvancementUtil.hasAdvancement(serverPlayer, AdvancementUtil.FEATHER))
+            {
+                level |= AdvancementUtil.FEATHER_BIT;
+            }
+
+            if (AdvancementUtil.hasAdvancement(serverPlayer, AdvancementUtil.SHOES))
+            {
+                level |= AdvancementUtil.SHOES_BIT;
+            }
+
+            if (AdvancementUtil.hasAdvancement(serverPlayer, AdvancementUtil.TRIANGLE))
+            {
+                level |= AdvancementUtil.TRIANGLE_BIT;
+            }
+
+            if (level != 0)
+            {
+                serverPlayer.addEffect(new MobEffectInstance(ModEffects.INSIDE_MAJOU.get(),
+                        100, level, true, false, true, null));
+            }
+        }
+        else {
+            living.addEffect(new MobEffectInstance(ModEffects.INSIDE_MAJOU.get(),
+                    100, 0, true, false, true, null));
+        }
     }
 }

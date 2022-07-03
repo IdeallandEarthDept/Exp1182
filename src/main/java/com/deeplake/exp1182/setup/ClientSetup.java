@@ -64,6 +64,7 @@ public class ClientSetup {
     public static void onRegisterRenderer(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.WORLD_BOSS.get(), BossRenderer::new);
         event.registerEntityRenderer(ModEntities.REVIVE_MIST.get(), VoidRenderer::new);
+        event.registerEntityRenderer(ModEntities.DAMP_SPHERE.get(), VoidRenderer::new);
         event.registerEntityRenderer(ModEntities.MJDS_SKELETON.get(), SkeletonRenderer::new);
         event.registerEntityRenderer(ModEntities.MJDS_BLAZE.get(), BlazeRenderer::new);
         event.registerEntityRenderer(ModEntities.BULLET1.get(), ThrownItemRenderer::new);

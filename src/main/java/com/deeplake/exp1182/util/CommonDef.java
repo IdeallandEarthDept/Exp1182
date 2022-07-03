@@ -12,7 +12,8 @@ public class CommonDef {
     public static final String MINECRAFT = "minecraft";
 
     public static final int INT_AS_FLOAT = 10000;
-    public static final float JUMP_FACTOR_MJDS = (float) Math.sqrt(6);
+    public static final float JUMP_FACTOR_MJDS_RATIO = (float) Math.sqrt(6);
+    public static final float JUMP_FACTOR_MJDS_BLOCK = 1f;
 
     public static final int TICK_PER_SECOND = 20;
     public static final int TICK_PER_DAY = 24000;
