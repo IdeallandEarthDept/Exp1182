@@ -29,7 +29,7 @@ public class TutItemModels extends ItemModelProvider {
 //        withExistingParent(ModBlocks.MJDS_GATE3.get().asItem().getRegistryName().getPath(), modLoc("block/"+"mjds_gate3"));
 //        withExistingParent(ModBlocks.MJDS_GATE4.get().asItem().getRegistryName().getPath(), modLoc("block/"+"mjds_gate4"));
 //        withExistingParent(ModBlocks.SP_GLASS.get().asItem().getRegistryName().getPath(), modLoc("block/"+"mjds_gate4"));
-        withExistingParent(ModBlocks.FLAME_FLOOR_NO_MUSIC.get().asItem().getRegistryName().getPath(), modLoc("block/"+"flame_wall"));
+//        withExistingParent(ModBlocks.FLAME_FLOOR_NO_MUSIC.get().asItem().getRegistryName().getPath(), modLoc("block/"+"flame_wall"));
 ////        withExistingParent(ModBlocks.FLAME_BG2_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg2"));
 ////        withExistingParent(ModBlocks.FLAME_BG3_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg3"));
 ////        withExistingParent(ModBlocks.FLAME_BG4_ITEM.get().getRegistryName().getPath(), modLoc("block/"+"flame_bg4"));
@@ -56,6 +56,7 @@ public class TutItemModels extends ItemModelProvider {
 //        singleTexture(ModItems.BULLET3.get().getRegistryName().getPath(),
 //                mcLoc("item/generated"),
 //                "layer0", modLoc("item/bullet3"));
+
 
 //        withExistingParent(ModBlocks.GENERATOR_ITEM.get().getRegistryName().getPath(), modLoc("block/generator"));
 //        withExistingParent(ModBlocks.POWERGEN_ITEM.get().getRegistryName().getPath(), modLoc("block/powergen/main"));

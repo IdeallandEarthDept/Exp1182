@@ -1,0 +1,21 @@
+{
+    "display": {
+        "icon": {
+            "item": "exp1182:flame_wall"
+        },
+        "title": {
+            "translate": "exp1182.advancements.root.title"
+        },
+        "description": {
+            "translate": "exp1182.advancements.root.description"
+        },
+        "background": "exp1182:textures/other/bg_flame_full.png",
+        "show_toast": true,
+        "announce_to_chat": true
+    },
+    "criteria": {
+        "impossible": {
+            "trigger": "minecraft:impossible"
+        }
+    }
+}

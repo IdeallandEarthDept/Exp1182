@@ -1,0 +1,23 @@
+{
+		"display": {
+				"icon": {
+						"item": "exp1182:triangle"
+				},
+				"title": {
+						"translate": "exp1182.advancements.triangle.title"
+				},
+				"description": {
+						"translate": "exp1182.advancements.triangle.description"
+				},
+				"hidden": false,
+				"show_toast": true,
+				"announce_to_chat": true,
+				"frame": "task"
+		},
+		"parent": "exp1182:root",
+		"criteria": {
+				"impossible": {
+						"trigger": "minecraft:impossible"
+				}
+		}
+}

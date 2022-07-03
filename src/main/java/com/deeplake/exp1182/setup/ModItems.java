@@ -22,6 +22,17 @@ public class ModItems {
     public static final RegistryObject<Item> BULLET2 = ITEMS.register("bullet2", () -> new Item(ITEM_PROPERTIES_HIDDEN));
     public static final RegistryObject<Item> BULLET3 = ITEMS.register("bullet3", () -> new Item(ITEM_PROPERTIES_HIDDEN));
 
+    //Advancements
+    public static final RegistryObject<Item> feather = ITEMS.register("feather", () -> new Item(ITEM_PROPERTIES_HIDDEN));
+    public static final RegistryObject<Item> shoes = ITEMS.register("shoes", () -> new Item(ITEM_PROPERTIES_HIDDEN));
+    public static final RegistryObject<Item> food = ITEMS.register("food", () -> new Item(ITEM_PROPERTIES_HIDDEN));
+    public static final RegistryObject<Item> shield_bronze = ITEMS.register("shield_bronze", () -> new Item(ITEM_PROPERTIES_HIDDEN));
+    public static final RegistryObject<Item> great_key = ITEMS.register("great_key", () -> new Item(ITEM_PROPERTIES_HIDDEN));
+    public static final RegistryObject<Item> candle = ITEMS.register("candle", () -> new Item(ITEM_PROPERTIES_HIDDEN));
+    public static final RegistryObject<Item> holy_water = ITEMS.register("holy_water", () -> new Item(ITEM_PROPERTIES_HIDDEN));
+//    public static final RegistryObject<Item> breakable = ITEMS.register("breakable", () -> new Item(ITEM_PROPERTIES_HIDDEN));
+    public static final RegistryObject<Item> triangle = ITEMS.register("triangle", () -> new Item(ITEM_PROPERTIES_HIDDEN));
+
     public static final RegistryObject<Item> ITEM_DEBUG = ITEMS.register("item_debug", () -> new ItemDebug(ITEM_PROPERTIES_HIDDEN));
     public static final RegistryObject<Item> MONSTER_REMOVAL = ITEMS.register("monster_removal", () -> new ItemMonsterRemoval(ITEM_PROPERTIES));
 //    public static final RegistryObject<Item> MYSTERIOUS_INGOT = ITEMS.register("mysterious_ingot", () -> new Item(ITEM_PROPERTIES));

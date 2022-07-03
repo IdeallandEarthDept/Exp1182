@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:ender_dragon",
+    "minecraft:wither",
+    "minecraft:evoker",
+    "minecraft:fishing_bobber"
+  ]
+}

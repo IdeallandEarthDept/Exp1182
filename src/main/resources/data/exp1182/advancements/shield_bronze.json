@@ -1,0 +1,23 @@
+{
+		"display": {
+				"icon": {
+						"item": "exp1182:shield_bronze"
+				},
+				"title": {
+						"translate": "exp1182.advancements.shield_bronze.title"
+				},
+				"description": {
+						"translate": "exp1182.advancements.shield_bronze.description"
+				},
+				"hidden": false,
+				"show_toast": true,
+				"announce_to_chat": true,
+				"frame": "task"
+		},
+		"parent": "exp1182:root",
+		"criteria": {
+				"impossible": {
+						"trigger": "minecraft:impossible"
+				}
+		}
+}

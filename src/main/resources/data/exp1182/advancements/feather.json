@@ -1,0 +1,23 @@
+{
+		"display": {
+				"icon": {
+						"item": "exp1182:feather"
+				},
+				"title": {
+						"translate": "exp1182.advancements.feather.title"
+				},
+				"description": {
+						"translate": "exp1182.advancements.feather.description"
+				},
+				"hidden": false,
+				"show_toast": true,
+				"announce_to_chat": true,
+				"frame": "task"
+		},
+		"parent": "exp1182:root",
+		"criteria": {
+				"impossible": {
+						"trigger": "minecraft:impossible"
+				}
+		}
+}
