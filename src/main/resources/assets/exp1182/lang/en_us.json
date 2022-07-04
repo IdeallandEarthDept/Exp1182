@@ -12,6 +12,8 @@
 
   "block.exp1182.black_out": "Black Out",
 
+  "block.exp1182.sp_glass": "MJDS Glass",
+  "block.exp1182.sp_glass.desc": "Indestructible. Used to screen players.",
   "block.exp1182.mjds_gate1": "MJDS Gate",
   "block.exp1182.mjds_gate1.desc": "Left-Up",
   "block.exp1182.mjds_gate2": "MJDS Gate",
@@ -32,8 +34,9 @@
   "entity.exp1182.cloud_mob": "Cloud Monster",
   "entity.exp1182.shower_mob": "Volcanic Geyser",
 
-  "exp1182.msg.req_balloon": "World Boss",
-  "exp1182.msg.req_food": "World Boss",
+  "exp1182.msg.req_balloon": "You need Balloon Bomb to destroy it from under.",
+  "exp1182.msg.req_food": "You need magical meal to destroy it from side.",
+  "exp1182.msg.req_mine": "You need landmine to destroy it from above.[Impossible until next mod]",
 
   "item.exp1182.spawn_worldboss": "Spawn World Boss",
   "item.exp1182.spawn_worldboss.desc": "Spawn a World Boss, use sparingly!",

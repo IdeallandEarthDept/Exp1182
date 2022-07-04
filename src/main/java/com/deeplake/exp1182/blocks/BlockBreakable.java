@@ -46,7 +46,9 @@ public class BlockBreakable extends BaseBlockMJDS implements IBlockMJDS{
                     CommonFunctions.SafeSendMsgToPlayer(player, "exp1182.msg.req_balloon");
                 }
             break;
-            case UP: break;
+            case UP:
+                CommonFunctions.SafeSendMsgToPlayer(player, "exp1182.msg.req_mine");
+                break;
             case NORTH: case SOUTH:
             case WEST: case EAST:
                 if (AdvancementUtil.hasAdvancement(player, AdvancementUtil.FOOD))
