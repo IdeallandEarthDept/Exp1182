@@ -2,6 +2,7 @@ package com.deeplake.exp1182.blocks;
 
 import com.deeplake.exp1182.util.AdvancementUtil;
 import com.deeplake.exp1182.util.CommonDef;
+import com.deeplake.exp1182.util.CommonFunctions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -14,6 +15,8 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.BlockEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class BlockBreakable extends BaseBlockMJDS implements IBlockMJDS{
@@ -39,6 +42,9 @@ public class BlockBreakable extends BaseBlockMJDS implements IBlockMJDS{
                 {
                     playerBreak(state, level, pos, player);
                 }
+                else {
+                    CommonFunctions.SafeSendMsgToPlayer(player, "exp1182.msg.req_balloon");
+                }
             break;
             case UP: break;
             case NORTH: case SOUTH:
@@ -46,6 +52,9 @@ public class BlockBreakable extends BaseBlockMJDS implements IBlockMJDS{
                 if (AdvancementUtil.hasAdvancement(player, AdvancementUtil.FOOD))
                 {
                     playerBreak(state, level, pos, player);
+                }
+                else {
+                    CommonFunctions.SafeSendMsgToPlayer(player, "exp1182.msg.req_food");
                 }
             break;
             default :
@@ -61,8 +70,13 @@ public class BlockBreakable extends BaseBlockMJDS implements IBlockMJDS{
     {
         if (!level.isClientSide)
         {
-            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-            state.getBlock().destroy(level, pos, state);
+            BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(level, pos, state, player);
+            MinecraftForge.EVENT_BUS.post(event);
+            if (!event.isCanceled())
+            {
+                level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+                state.getBlock().destroy(level, pos, state);
+            }
         }
     }
 }

@@ -22,6 +22,18 @@
   "block.exp1182.mjds_gate4.desc": "Left-Down",
 
   "entity.exp1182.world_boss": "World Boss",
+  "entity.exp1182.revival_mist": "Revival Mist",
+  "entity.exp1182.damping_sphere": "Damping Sphere",
+  "entity.exp1182.mjds_skeleton": "Skeleton",
+  "entity.exp1182.mjds_blaze": "Blaze",
+  "entity.exp1182.bullet1": "Bullet1",
+  "entity.exp1182.bullet2": "Bullet2",
+  "entity.exp1182.bullet3": "Bullet3",
+  "entity.exp1182.cloud_mob": "Cloud Monster",
+  "entity.exp1182.shower_mob": "Volcanic Geyser",
+
+  "exp1182.msg.req_balloon": "World Boss",
+  "exp1182.msg.req_food": "World Boss",
 
   "item.exp1182.spawn_worldboss": "Spawn World Boss",
   "item.exp1182.spawn_worldboss.desc": "Spawn a World Boss, use sparingly!",
