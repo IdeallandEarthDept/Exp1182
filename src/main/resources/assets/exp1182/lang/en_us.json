@@ -47,6 +47,7 @@
   "block.exp1182.mjds_gate3.desc": "Right-Down",
   "block.exp1182.mjds_gate4": "MJDS Gate",
   "block.exp1182.mjds_gate4.desc": "Left-Down",
+  "block.exp1182.mjds_gate_fire": "Flame Portal",
   "block.exp1182.mjds_gate_fire.desc": "Flame Portal",
 
   "entity.exp1182.world_boss": "World Boss",

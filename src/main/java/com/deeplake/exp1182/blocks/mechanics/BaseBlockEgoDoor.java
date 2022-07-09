@@ -12,6 +12,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import static com.deeplake.exp1182.util.MJDSDefine.EnumEgo.POPLON;
@@ -50,28 +52,47 @@ public class BaseBlockEgoDoor extends BaseBlockMJDS {
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player playerEntity, InteractionHand hand, BlockHitResult blockRayTraceResult) {
 
+//        if (!world.isClientSide) {
+//            world.playSound(null, pos, ModSounds.ERROR.get(), SoundSource.BLOCKS, 1f, 1f);
+//        }
+
         if (checkEgo(playerEntity))
         {
             if (!world.isClientSide) {
-                if (failCheckDist(world, pos, playerEntity))
+//                if (failCheckDist(world, pos, playerEntity))
+//                {
+////                    world.playSound(null, pos, ModSounds.ERROR.get(), SoundSource.BLOCKS, 1f, 1f);
+//                    return InteractionResult.FAIL;
+//                }
+                Vec3 thisPos = new Vec3(pos.getX()+0.5f, pos.getY(), pos.getZ()+0.5f);
+
+                Vec3 delta = playerEntity.getPosition(0f).subtract(thisPos).scale(-1);
+                if (Math.abs(delta.x) < 0.4f)
                 {
-                    return InteractionResult.FAIL;
+                    delta = new Vec3(0, delta.y, delta.z);
                 }
-                Vector3d thisPos = new Vector3d(pos.getX()+0.5f, pos.getY(), pos.getZ()+0.5f);
-                playerEntity.teleportTo(symmteric(playerEntity.getX(), thisPos.x),
+
+                if (Math.abs(delta.z) < 0.4f)
+                {
+                    delta = new Vec3(delta.x, delta.y, 0);
+                }
+
+                playerEntity.teleportTo(thisPos.x + Math.signum(delta.x),
                         playerEntity.getY()+disturbanceY,
-                        symmteric(playerEntity.getZ(), thisPos.z));
+                        thisPos.z + Math.signum(delta.z))
+                        ;
                 playerEntity.level.levelEvent(playerEntity, 1013, pos, 0);
+                world.playSound(null, pos, ModSounds.DOOR_COMBINED.get(), SoundSource.BLOCKS, 1f, 1f);
             }
-            playerEntity.playSound(ModSounds.DOOR_COMBINED.get(), 1f, 1f);
+
             return InteractionResult.SUCCESS;
         }
         else {
             if (!world.isClientSide)
             {
                 errorMessage(playerEntity);
+                world.playSound(null, pos, ModSounds.ERROR.get(), SoundSource.BLOCKS, 1f, 1f);
             }
-            playerEntity.playSound(ModSounds.ERROR.get(), 1f, 1f);
             return InteractionResult.FAIL;
         }
     }
