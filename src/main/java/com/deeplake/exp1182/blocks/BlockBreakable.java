@@ -1,5 +1,6 @@
 package com.deeplake.exp1182.blocks;
 
+import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.util.AdvancementUtil;
 import com.deeplake.exp1182.util.CommonDef;
 import com.deeplake.exp1182.util.CommonFunctions;
@@ -7,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -78,6 +80,8 @@ public class BlockBreakable extends BaseBlockMJDS implements IBlockMJDS{
             {
                 level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
                 state.getBlock().destroy(level, pos, state);
+                AdvancementUtil.giveAdvancement(player, AdvancementUtil.BREAKABLE);
+                level.playSound(player, pos, ModSounds.MONSTER_DEATH.get(), SoundSource.BLOCKS, 1f, 1f);
             }
         }
     }

@@ -14,7 +14,7 @@
 				"announce_to_chat": true,
 				"frame": "task"
 		},
-		"parent": "exp1182:root",
+		"parent": "exp1182:food",
 		"criteria": {
 				"impossible": {
 						"trigger": "minecraft:impossible"

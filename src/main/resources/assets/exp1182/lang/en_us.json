@@ -11,6 +11,31 @@
   "block.exp1182.covered.desc": "Conceals Wall inside",
 
   "block.exp1182.black_out": "Black Out",
+  "block.exp1182.darkness": "Darkness",
+
+  "exp1182.advancements.root.title": "Majou Denetsu II - Volcano",
+  "exp1182.advancements.root.description": "Be sure to check here often to find your next goal.",
+  "exp1182.advancements.feather.title": "Aegis Feather",
+  "exp1182.advancements.feather.description": "Immune to fall damage in Majou area.",
+  "exp1182.advancements.shoes.title": "Lifting Shoes",
+  "exp1182.advancements.shoes.description": "Jump higher in Majou area",
+  "exp1182.advancements.food.title": "Enchanted Food",
+  "exp1182.advancements.food.description": "Destroy breakable blocks by right clicking them on the SIDE.",
+  "exp1182.advancements.shield_bronze.title": "Bronze Shield",
+  "exp1182.advancements.shield_bronze.description": "Deflect some specific bullets in Majou area.",
+  "exp1182.advancements.great_key.title": "Great Key",
+  "exp1182.advancements.great_key.description": "Allows you to enter some doors.",
+  "exp1182.advancements.holy_water.title": "Holy Water",
+  "exp1182.advancements.holy_water.description": "Allows you to enter the flame portal.",
+  "exp1182.advancements.candle.title": "Blessed Candle",
+  "exp1182.advancements.candle.description": "Immune to the blindess effect by the Darkness area",
+  "exp1182.advancements.balloon.title": "Ballon Bomb",
+  "exp1182.advancements.balloon.description": "Destroy breakable blocks by right clicking them on the BOTTOM.",
+  "exp1182.advancements.triangle.title": "Musical Triangle",
+  "exp1182.advancements.triangle.description": "Now music plays in the Majou area for you.",
+  "exp1182.advancements.breakable.title": "Break a block",
+  "exp1182.advancements.breakable.description": "...by right clicking on them.",
+
 
   "block.exp1182.sp_glass": "MJDS Glass",
   "block.exp1182.sp_glass.desc": "Indestructible. Used to screen players.",
@@ -22,6 +47,7 @@
   "block.exp1182.mjds_gate3.desc": "Right-Down",
   "block.exp1182.mjds_gate4": "MJDS Gate",
   "block.exp1182.mjds_gate4.desc": "Left-Down",
+  "block.exp1182.mjds_gate_fire.desc": "Flame Portal",
 
   "entity.exp1182.world_boss": "World Boss",
   "entity.exp1182.revival_mist": "Revival Mist",
@@ -37,6 +63,9 @@
   "exp1182.msg.req_balloon": "You need Balloon Bomb to destroy it from under.",
   "exp1182.msg.req_food": "You need magical meal to destroy it from side.",
   "exp1182.msg.req_mine": "You need landmine to destroy it from above.[Impossible until next mod]",
+
+  "exp1182.msg.ego.req.achv": "You need [%s] to pass.",
+  "exp1182.msg.ego.req.ego_door_closer": "Come closer to use the door.",
 
   "item.exp1182.spawn_worldboss": "Spawn World Boss",
   "item.exp1182.spawn_worldboss.desc": "Spawn a World Boss, use sparingly!",

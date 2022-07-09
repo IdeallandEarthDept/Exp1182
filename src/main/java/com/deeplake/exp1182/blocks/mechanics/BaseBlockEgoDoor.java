@@ -19,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.Nullable;
 
 import static com.deeplake.exp1182.util.MJDSDefine.EnumEgo.POPLON;
 
@@ -48,20 +49,14 @@ public class BaseBlockEgoDoor extends BaseBlockMJDS {
 
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player playerEntity, InteractionHand hand, BlockHitResult blockRayTraceResult) {
-        if (playerEntity.distanceToSqr(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f) >= maxDistSqr)
-        {
-            if (!world.isClientSide) {
-                CommonFunctions.SafeSendMsgToPlayer(
-                        RED,
-                        playerEntity,
-                        MessageDef.EGO_DOOR_CLOSER);
-            }
-            return InteractionResult.FAIL;
-        }
 
         if (checkEgo(playerEntity))
         {
             if (!world.isClientSide) {
+                if (failCheckDist(world, pos, playerEntity))
+                {
+                    return InteractionResult.FAIL;
+                }
                 Vector3d thisPos = new Vector3d(pos.getX()+0.5f, pos.getY(), pos.getZ()+0.5f);
                 playerEntity.teleportTo(symmteric(playerEntity.getX(), thisPos.x),
                         playerEntity.getY()+disturbanceY,
@@ -74,16 +69,35 @@ public class BaseBlockEgoDoor extends BaseBlockMJDS {
         else {
             if (!world.isClientSide)
             {
-                if (egoReq == MJDSDefine.EnumEgo.POPLON)
-                {
-                    CommonFunctions.SafeSendMsgToPlayer(RED, playerEntity, MessageDef.REQ_POPOLON);
-                }
-                else {
-                    CommonFunctions.SafeSendMsgToPlayer(RED, playerEntity, MessageDef.REQ_APHRODITE);
-                }
+                errorMessage(playerEntity);
             }
             playerEntity.playSound(ModSounds.ERROR.get(), 1f, 1f);
             return InteractionResult.FAIL;
+        }
+    }
+
+    @Nullable
+    private boolean failCheckDist(Level world, BlockPos pos, Player playerEntity) {
+        if (playerEntity.distanceToSqr(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f) >= maxDistSqr)
+        {
+            if (!world.isClientSide) {
+                CommonFunctions.SafeSendMsgToPlayer(
+                        RED,
+                        playerEntity,
+                        MessageDef.EGO_DOOR_CLOSER);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    protected void errorMessage(Player playerEntity) {
+        if (egoReq == MJDSDefine.EnumEgo.POPLON)
+        {
+            CommonFunctions.SafeSendMsgToPlayer(RED, playerEntity, MessageDef.REQ_POPOLON);
+        }
+        else {
+            CommonFunctions.SafeSendMsgToPlayer(RED, playerEntity, MessageDef.REQ_APHRODITE);
         }
     }
 }

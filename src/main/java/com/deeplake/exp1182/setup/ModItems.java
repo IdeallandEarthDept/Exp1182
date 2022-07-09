@@ -32,6 +32,7 @@ public class ModItems {
     public static final RegistryObject<Item> holy_water = ITEMS.register("holy_water", () -> new Item(ITEM_PROPERTIES_HIDDEN));
 //    public static final RegistryObject<Item> breakable = ITEMS.register("breakable", () -> new Item(ITEM_PROPERTIES_HIDDEN));
     public static final RegistryObject<Item> triangle = ITEMS.register("triangle", () -> new Item(ITEM_PROPERTIES_HIDDEN));
+    public static final RegistryObject<Item> balloon = ITEMS.register("balloon", () -> new Item(ITEM_PROPERTIES_HIDDEN));
 
     public static final RegistryObject<Item> ITEM_DEBUG = ITEMS.register("item_debug", () -> new ItemDebug(ITEM_PROPERTIES_HIDDEN));
     public static final RegistryObject<Item> MONSTER_REMOVAL = ITEMS.register("monster_removal", () -> new ItemMonsterRemoval(ITEM_PROPERTIES));

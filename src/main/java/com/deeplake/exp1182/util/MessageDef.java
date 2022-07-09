@@ -17,6 +17,8 @@ public class MessageDef {
     public static String REQ_POPOLON = MOD_ID + ".msg.ego.req.popolon";
     public static String REQ_APHRODITE = MOD_ID + ".msg.ego.req.aphrodite";
 
+    public static String REQ_ACHV = MOD_ID + ".msg.ego.req.achv";
+
     public static String EGO_DOOR_CLOSER = MOD_ID + ".msg.ego.req.ego_door_closer";
 
     public static String SWAP_EGO = MOD_ID + ".msg.ego.swap.";

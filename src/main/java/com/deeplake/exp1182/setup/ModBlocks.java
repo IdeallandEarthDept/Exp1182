@@ -2,11 +2,13 @@ package com.deeplake.exp1182.setup;
 
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.blocks.*;
+import com.deeplake.exp1182.blocks.mechanics.BlockAchvDoor;
 import com.deeplake.exp1182.blocks.motor.BlockMotorX;
 import com.deeplake.exp1182.blocks.motor.BlockMotorY;
 import com.deeplake.exp1182.blocks.tileentity.MotorTileEntityHorizontal;
 import com.deeplake.exp1182.blocks.tileentity.MotorTileEntityVertical;
 import com.deeplake.exp1182.blocks.tileentity.TileEntitySpawnBoss;
+import com.deeplake.exp1182.util.AdvancementUtil;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -46,6 +48,11 @@ public class ModBlocks {
     //MJDS Blocks
     public static final BlockBehaviour.Properties BLOCK_PROP_MJDS = BlockBehaviour.Properties.of(Material.STONE).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS_BLOCK);
     public static final BlockBehaviour.Properties BLOCK_PROP_MJDS_AIR = BlockBehaviour.Properties.of(Material.STONE).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS_BLOCK).noCollission();
+    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS_DARKNESS = BlockBehaviour.Properties.of(Material.STONE).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS_BLOCK).noCollission().noOcclusion()
+            .isViewBlocking(BaseBlockMJDS::neverDo)
+            .isValidSpawn(BaseBlockMJDS::neverDo)
+            .isRedstoneConductor(BaseBlockMJDS::neverDo)
+            .isSuffocating(BaseBlockMJDS::neverDo);
     public static final BlockBehaviour.Properties BLOCK_PROP_MJDS_GLASS = BlockBehaviour.Properties.of(Material.GLASS).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS_BLOCK).noOcclusion();
 
     static final String NAME_FLAME_BG = "flame_bg";
@@ -66,16 +73,18 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> FLAME_BG4 = getFlameBG();
     public static final RegistryObject<Block> BLACK_OUT = registerWithItem("black_out", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS_AIR));
+    public static final RegistryObject<Block> DARKNESS = registerWithItem("darkness", () -> new BlockDarkness(BLOCK_PROP_MJDS_DARKNESS));
 
     public static final RegistryObject<Block> FLAME_FLOOR = registerWithItem("flame_wall", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
     public static final RegistryObject<Block> FLAME_FLOOR_NO_MUSIC = registerWithItem("flame_wall_quiet", () -> new BaseBlockNoMusic(BLOCK_PROP_MJDS));
     public static final RegistryObject<Block> SP_GLASS = registerWithItem("sp_glass", BlockWallGlass::new);
     public static final RegistryObject<Block> COVERED = registerWithItem("covered", BlockCovered::new);
     public static final RegistryObject<Block> BREAKABLE = registerWithItem("breakable", () -> new BlockBreakable(BLOCK_PROP_MJDS));
-    public static final RegistryObject<Block> MJDS_GATE1 = registerWithItem("mjds_gate1", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
-    public static final RegistryObject<Block> MJDS_GATE2 = registerWithItem("mjds_gate2", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
-    public static final RegistryObject<Block> MJDS_GATE3 = registerWithItem("mjds_gate3", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
-    public static final RegistryObject<Block> MJDS_GATE4 = registerWithItem("mjds_gate4", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
+    public static final RegistryObject<Block> MJDS_GATE1 = registerWithItem("mjds_gate1", () -> new BlockAchvDoor(AdvancementUtil.GREAT_KEY));
+    public static final RegistryObject<Block> MJDS_GATE2 = registerWithItem("mjds_gate2", () -> new BlockAchvDoor(AdvancementUtil.GREAT_KEY));
+    public static final RegistryObject<Block> MJDS_GATE3 = registerWithItem("mjds_gate3", () -> new BlockAchvDoor(AdvancementUtil.GREAT_KEY));
+    public static final RegistryObject<Block> MJDS_GATE4 = registerWithItem("mjds_gate4", () -> new BlockAchvDoor(AdvancementUtil.GREAT_KEY));
+    public static final RegistryObject<Block> MJDS_GATE_FIRE = registerWithItem("mjds_gate_fire", () -> new BlockAchvDoor(AdvancementUtil.HOLY_WATER));
 
     public static final BlockBehaviour.Properties BLOCK_PROP_LADDER = BlockBehaviour.Properties.of(Material.DECORATION).strength(-1f, MAX_BLAST_RESIST).noDrops().sound(SoundType.LADDER).noOcclusion().jumpFactor(JUMP_FACTOR_MJDS_BLOCK);
 

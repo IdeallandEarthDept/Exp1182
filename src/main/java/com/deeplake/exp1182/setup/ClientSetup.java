@@ -38,6 +38,7 @@ public class ClientSetup {
         event.enqueueWork(() -> {
 //            MenuScreens.register(ModBlocks.POWERGEN_CONTAINER.get(), PowergenScreen::new);
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.SP_GLASS.get(), RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.DARKNESS.get(), RenderType.translucent());
 //            PowergenRenderer.register();
 
         });

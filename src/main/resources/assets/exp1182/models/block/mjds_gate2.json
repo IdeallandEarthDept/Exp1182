@@ -1,6 +1,13 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "all": "exp1182:block/mjds_gate2"
+    "all": "exp1182:block/mjds_gate2",
+    "north": "exp1182:block/mjds_gate1",
+    "east": "exp1182:block/mjds_gate1",
+    "up": "exp1182:block/mjds_gate1",
+
+    "down": "exp1182:block/mjds_gate2",
+    "south": "exp1182:block/mjds_gate2",
+    "west": "exp1182:block/mjds_gate2"
   }
 }
