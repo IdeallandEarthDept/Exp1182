@@ -96,6 +96,17 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> BLOCK_MOTOR_Y = registerWithItem("motor_y", () -> new BlockMotorY(BLOCK_PROP_MJDS));
 
+    public static final RegistryObject<Block> BOX_FEATHER = registerWithItem("box_1", () -> new BlockAchvBox(null, AdvancementUtil.FEATHER));
+    public static final RegistryObject<Block> BOX_SHOES = registerWithItem("box_2", () -> new BlockAchvBox(null, AdvancementUtil.SHOES));
+    public static final RegistryObject<Block> BOX_FOOD = registerWithItem("box_3", () -> new BlockAchvBox(null, AdvancementUtil.FOOD));
+    public static final RegistryObject<Block> BOX_SHIELD_BRONZE = registerWithItem("box_4", () -> new BlockAchvBox(null, AdvancementUtil.SHIELD_BRONZE));
+    public static final RegistryObject<Block> BOX_GREAT_KEY = registerWithItem("box_5", () -> new BlockAchvBox(null, AdvancementUtil.GREAT_KEY));
+    public static final RegistryObject<Block> BOX_CANDLE = registerWithItem("box_6", () -> new BlockAchvBox(null, AdvancementUtil.CANDLE));
+    public static final RegistryObject<Block> BOX_HOLY_WATER = registerWithItem("box_7", () -> new BlockAchvBox(null, AdvancementUtil.HOLY_WATER));
+    public static final RegistryObject<Block> BOX_BALLOON = registerWithItem("box_8", () -> new BlockAchvBox(null, AdvancementUtil.BALLOON));
+    public static final RegistryObject<Block> BOX_TRIANGLE = registerWithItem("box_9", () -> new BlockAchvBox(null, AdvancementUtil.TRIANGLE));
+
+
 
 //    public static final RegistryObject<StructureFeature<JigsawConfiguration>> PORTAL = Registration.STRUCTURES.register("portal", PortalStructure::new);
 //

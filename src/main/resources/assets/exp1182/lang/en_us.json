@@ -48,7 +48,17 @@
   "block.exp1182.mjds_gate4": "MJDS Gate",
   "block.exp1182.mjds_gate4.desc": "Left-Down",
   "block.exp1182.mjds_gate_fire": "Flame Portal",
-  "block.exp1182.mjds_gate_fire.desc": "Flame Portal",
+  "block.exp1182.mjds_gate_fire.desc": "Need holy water to pass",
+
+  "block.exp1182.box_1": "Treasure Chest",
+  "block.exp1182.box_2": "Treasure Chest",
+  "block.exp1182.box_3": "Treasure Chest",
+  "block.exp1182.box_4": "Treasure Chest",
+  "block.exp1182.box_5": "Treasure Chest",
+  "block.exp1182.box_6": "Treasure Chest",
+  "block.exp1182.box_7": "Treasure Chest",
+  "block.exp1182.box_8": "Treasure Chest",
+  "block.exp1182.box_9": "Treasure Chest",
 
   "entity.exp1182.world_boss": "World Boss",
   "entity.exp1182.revival_mist": "Revival Mist",
@@ -64,6 +74,9 @@
   "exp1182.msg.req_balloon": "You need Balloon Bomb to destroy it from under.",
   "exp1182.msg.req_food": "You need magical meal to destroy it from side.",
   "exp1182.msg.req_mine": "You need landmine to destroy it from above.[Impossible until next mod]",
+
+  "exp1182.msg.box.already_get": "You've already got [%s].",
+  "exp1182.msg.box.already_get": "You've already got [%s].",
 
   "exp1182.msg.ego.req.achv": "You need [%s] to pass.",
   "exp1182.msg.ego.req.ego_door_closer": "Come closer to use the door.",

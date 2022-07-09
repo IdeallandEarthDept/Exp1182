@@ -102,6 +102,9 @@ local function GenSP(index)
 	outFile:close();
 end
 
+for i = 1, 30 do
+    GenSP(i)
+end
 -- GenBlock("mjds_gate_fire");
 -- GenItemNake("balloon");
 -- GenItemNake("feather");

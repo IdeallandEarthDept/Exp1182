@@ -17,7 +17,7 @@ public class EventsSoundAssist {
     public static void onPickup(PlayerEvent.ItemPickupEvent event) {
         Level world = event.getEntity().level;
         Player player = event.getPlayer();
-        if (!world.isClientSide) {
+        if (world.isClientSide) {
             boolean samePerson = event.getOriginalEntity().getOwner() == player.getUUID();
 
             if (player.hasEffect(ModEffects.INSIDE_MAJOU.get()) && !samePerson)

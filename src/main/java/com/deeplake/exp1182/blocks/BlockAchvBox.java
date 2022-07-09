@@ -1,6 +1,7 @@
 package com.deeplake.exp1182.blocks;
 
 import com.deeplake.exp1182.Main;
+import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.util.AdvancementUtil;
 import com.deeplake.exp1182.util.CommonDef;
 import com.deeplake.exp1182.util.CommonFunctions;
@@ -10,6 +11,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -78,6 +81,7 @@ public class BlockAchvBox extends BaseBlockMJDS {
     //(onBlockActivated)
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player Player, InteractionHand hand, BlockHitResult blockRayTraceResult) {
+        world.playSound(null, pos, ModSounds.PICKUP.get(), SoundSource.BLOCKS, 1f, 1f);
         if (world.isClientSide)
         {
             return InteractionResult.SUCCESS;
@@ -85,12 +89,15 @@ public class BlockAchvBox extends BaseBlockMJDS {
         else {
             if (AdvancementUtil.hasAdvancement(Player, achvName))
             {
-                CommonFunctions.SafeSendMsgToPlayer(YELLOW, Player, MessageDef.BOX_FAIL);
+                CommonFunctions.SafeSendMsgToPlayer(YELLOW, Player, MessageDef.BOX_FAIL,
+                        new TranslatableComponent(getAchvName()));
+                world.playSound(null, pos, ModSounds.PICKUP.get(), SoundSource.BLOCKS, 1f, 1f);
                 return InteractionResult.FAIL;
             }
             else {
                 AdvancementUtil.giveAdvancement(Player, achvName);
                 Player.addItem(getAwardStack(state, world, pos, Player, hand, blockRayTraceResult));
+                world.playSound(null, pos, ModSounds.PICKUP.get(), SoundSource.BLOCKS, 1f, 1f);
                 return InteractionResult.SUCCESS;
             }
         }
