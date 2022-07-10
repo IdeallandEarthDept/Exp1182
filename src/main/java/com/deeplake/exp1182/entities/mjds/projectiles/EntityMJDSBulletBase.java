@@ -1,9 +1,7 @@
 package com.deeplake.exp1182.entities.mjds.projectiles;
 
-import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.setup.ModItems;
 import com.deeplake.exp1182.util.CommonDef;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -13,15 +11,17 @@ import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile implements ItemSupplier {
     int maxTicks = CommonDef.TICK_PER_SECOND * 2;
+    boolean skipBlock = true;
     public EntityMJDSBulletBase(EntityType<? extends EntityMJDSBulletBase> p_36833_, Level p_36834_) {
         super(p_36833_, p_36834_);
-        setGlowingTag(true);
+        setGlowingTag(skipBlock);
     }
 
     public EntityMJDSBulletBase(EntityType<? extends EntityMJDSBulletBase> type, Level p_36824_, double x, double y, double z, double vx, double vy, double vz) {
@@ -34,7 +34,7 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
         }
         if (!level.isClientSide)
         {
-            setGlowingTag(true);
+            setGlowingTag(skipBlock);
             setDeltaMovement(vx, vy, vz);
 
         }else {
@@ -46,7 +46,7 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
 
     public EntityMJDSBulletBase(EntityType<? extends EntityMJDSBulletBase> type, Level p_36831_, LivingEntity p_36827_, double x, double y, double z) {
         super(type, p_36827_, z, x, y, p_36831_);
-        setGlowingTag(true);
+        setGlowingTag(skipBlock);
 //        setDeltaMovement(x,y,z);
     }
 
@@ -67,7 +67,10 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
         if (hitresult$type == HitResult.Type.ENTITY) {
             this.onHitEntity((EntityHitResult)p_37406_);
         } else if (hitresult$type == HitResult.Type.BLOCK) {
-//            this.onHitBlock((BlockHitResult)p_37406_);
+            if (!skipBlock)
+            {
+                this.onHitBlock((BlockHitResult)p_37406_);
+            }
         }
 
         if (hitresult$type != HitResult.Type.MISS) {
@@ -103,13 +106,20 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
             Entity entity1 = this.getOwner();
             if (entity1 == null || entity1 instanceof LivingEntity)
             {
-                boolean flag = entity.hurt(DamageSource.indirectMobAttack(this, (LivingEntity) entity1), 5.0F);
+                boolean flag = isSuccessfulHit(entity, (LivingEntity) entity1);
                 if (flag) {
                     this.doEnchantDamageEffects((LivingEntity) entity1, entity);
+                    onHitEntityExtra(entity);
                 }
             }
-
         }
+    }
+
+    boolean isSuccessfulHit(Entity entity, LivingEntity entity1) {
+        return entity.hurt(DamageSource.indirectMobAttack(this, entity1), 5.0F);
+    }
+
+    public void onHitEntityExtra(Entity entity) {
     }
 
     public boolean hurt(DamageSource p_36839_, float p_36840_) {

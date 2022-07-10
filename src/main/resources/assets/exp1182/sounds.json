@@ -8,6 +8,15 @@
     ],
     "subtitle": "exp1182.subtitle.jump"
   },
+  "obtain_drop": {
+    "sounds": [
+      {
+        "name": "exp1182:obtain_drop",
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "exp1182.subtitle.obtain_drop"
+  },
   "monster_hurt": {
     "sounds": [
       {

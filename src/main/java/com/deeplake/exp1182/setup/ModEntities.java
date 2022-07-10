@@ -4,6 +4,7 @@ import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.entities.EntityWorldBoss;
 import com.deeplake.exp1182.entities.mjds.*;
 import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletDeflect;
+import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletKB;
 import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletPierece;
 import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletShower;
 import net.minecraft.world.entity.Entity;
@@ -43,8 +44,10 @@ public class ModEntities {
     static final String NAME_BULLET1 = "bullet1";
     static final String NAME_BULLET2 = "bullet2";
     static final String NAME_BULLET3 = "bullet3";
+    static final String NAME_BULLET4 = "bullet_kb";
     public static final RegistryObject<EntityType<EntityMJDSBulletPierece>> BULLET1 = getEntityTypeRegistryObjectFireImmune(NAME_BULLET1, EntityMJDSBulletPierece::new, 1.0f, 1.0f, MobCategory.MISC);
     public static final RegistryObject<EntityType<EntityMJDSBulletDeflect>> BULLET2 = getEntityTypeRegistryObjectFireImmune(NAME_BULLET2, EntityMJDSBulletDeflect::new, 1.0f, 1.0f, MobCategory.MISC);
+    public static final RegistryObject<EntityType<EntityMJDSBulletKB>> BULLET_KB = getEntityTypeRegistryObjectFireImmune(NAME_BULLET4, EntityMJDSBulletKB::new, 1.0f, 1.0f, MobCategory.MISC);
     public static final RegistryObject<EntityType<EntityMJDSBulletShower>> BULLET_SHOWER = getEntityTypeRegistryObjectFireImmune(NAME_BULLET3, EntityMJDSBulletShower::new, 1.0f, 1.0f, MobCategory.MISC);
     public static final RegistryObject<EntityType<EntityMJDSCloudMonster>> CLOUD_MONSTER = getEntityTypeRegistryObjectFireImmune("cloud_mob", EntityMJDSCloudMonster::new, 0.6f, 1.8f, MobCategory.MONSTER);
     public static final RegistryObject<EntityType<EntityMJDSStoneEmitter>> SHOWER_MONSTER = getEntityTypeRegistryObjectFireImmune("shower_mob", EntityMJDSStoneEmitter::new, 1.0f, 1.0f, MobCategory.MONSTER);

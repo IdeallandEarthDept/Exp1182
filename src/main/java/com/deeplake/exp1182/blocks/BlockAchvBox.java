@@ -81,7 +81,7 @@ public class BlockAchvBox extends BaseBlockMJDS {
     //(onBlockActivated)
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player Player, InteractionHand hand, BlockHitResult blockRayTraceResult) {
-        world.playSound(null, pos, ModSounds.PICKUP.get(), SoundSource.BLOCKS, 1f, 1f);
+
         if (world.isClientSide)
         {
             return InteractionResult.SUCCESS;
@@ -91,7 +91,7 @@ public class BlockAchvBox extends BaseBlockMJDS {
             {
                 CommonFunctions.SafeSendMsgToPlayer(YELLOW, Player, MessageDef.BOX_FAIL,
                         new TranslatableComponent(getAchvName()));
-                world.playSound(null, pos, ModSounds.PICKUP.get(), SoundSource.BLOCKS, 1f, 1f);
+//                world.playSound(null, pos, ModSounds.PICKUP.get(), SoundSource.BLOCKS, 1f, 1f);
                 return InteractionResult.FAIL;
             }
             else {

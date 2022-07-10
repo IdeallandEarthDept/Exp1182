@@ -8,14 +8,11 @@ import com.deeplake.exp1182.entities.client.render.BossRenderer;
 import com.deeplake.exp1182.entities.client.render.HumanoidRenderer;
 import com.deeplake.exp1182.entities.client.render.ShowerMonsterRenderer;
 import com.deeplake.exp1182.entities.client.render.VoidRenderer;
-import com.deeplake.exp1182.entities.demo.ThiefModel;
 import com.deeplake.exp1182.manasystem.client.KeyBindings;
 import com.deeplake.exp1182.manasystem.client.KeyInputHandler;
-import com.deeplake.exp1182.manasystem.client.ManaOverlay;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.BlazeRenderer;
-import net.minecraft.client.renderer.entity.DragonFireballRenderer;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlas;
@@ -23,13 +20,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-
-import static net.minecraftforge.client.gui.ForgeIngameGui.HOTBAR_ELEMENT;
 
 @Mod.EventBusSubscriber(modid = Main.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientSetup {
@@ -71,6 +65,7 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.BULLET1.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.BULLET2.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.BULLET_SHOWER.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModEntities.BULLET_KB.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.CLOUD_MONSTER.get(), HumanoidRenderer::new);
         event.registerEntityRenderer(ModEntities.SHOWER_MONSTER.get(), ShowerMonsterRenderer::new);
     }

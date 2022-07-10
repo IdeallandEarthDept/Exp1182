@@ -181,4 +181,14 @@ public class EntityUtil {
             return effect.getAmplifier();
         }
     }
+
+    public static void simpleKnockBack(float power, Entity source, LivingEntity target)
+    {
+        if ((source.getX() - target.getX()) == 0 && (source.getZ() - target.getZ()) == 0) {
+            //prevent div 0
+            target.knockback(power, 1, 0);
+        } else {
+            target.knockback(power, (source.getX() - target.getX()), (source.getZ() - target.getZ()));
+        }
+    }
 }
