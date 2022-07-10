@@ -1,4 +1,50 @@
 {
+  "immune1": {
+    "sounds": [
+      {
+        "name": "exp1182:immune1"
+      }
+    ],
+    "subtitle": "exp1182.subtitle.immune1"
+  },"deflect": {
+    "sounds": [
+      {
+        "name": "exp1182:deflect"
+      }
+    ],
+    "subtitle": "exp1182.subtitle.deflect"
+  },
+  "player_death": {
+    "sounds": [
+      {
+        "name": "exp1182:player_death"
+      }
+    ],
+    "subtitle": "exp1182.subtitle.player_death"
+  },"enter_door": {
+    "sounds": [
+      {
+        "name": "exp1182:enter_door"
+      }
+    ],
+    "subtitle": "exp1182.subtitle.enter_door"
+  },
+  "low_health": {
+    "sounds": [
+      {
+        "name": "exp1182:low_health"
+      }
+    ],
+    "subtitle": "exp1182.subtitle.low_health"
+  },
+  "player_hurt": {
+    "sounds": [
+      {
+        "name": "exp1182:player_hurt"
+      }
+    ],
+    "subtitle": "exp1182.subtitle.player_hurt"
+  },
   "jump": {
     "sounds": [
       {

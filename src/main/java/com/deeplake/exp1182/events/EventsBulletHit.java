@@ -4,6 +4,7 @@ import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletBase;
 import com.deeplake.exp1182.setup.ModEffects;
 import com.deeplake.exp1182.util.AdvancementUtil;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
@@ -12,6 +13,8 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import static com.deeplake.exp1182.client.ModSounds.DEFLECT;
 
 @Mod.EventBusSubscriber(modid = Main.MOD_ID)
 public class EventsBulletHit {
@@ -36,6 +39,7 @@ public class EventsBulletHit {
                     {
                         projectile.setDeltaMovement(projectile.getDeltaMovement().scale(-1f));
                         event.setCanceled(true);
+                        player.level.playSound(null, player.getOnPos(), DEFLECT.get(), SoundSource.PLAYERS, 1f, 1f);
                     }
                 }
             }

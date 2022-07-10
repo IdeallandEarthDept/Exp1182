@@ -28,6 +28,12 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> PAUSE = register("pause");
     public static final RegistryObject<SoundEvent> ERROR = register("error");
     public static final RegistryObject<SoundEvent> DOOR_COMBINED = register("door_combined");
+    public static final RegistryObject<SoundEvent> LOW_HEALTH = register("low_health");
+    public static final RegistryObject<SoundEvent> PLAYER_HURT = register("player_hurt");
+    public static final RegistryObject<SoundEvent> ENTER_DOOR = register("enter_door");
+    public static final RegistryObject<SoundEvent> PLAYER_DEATH = register("player_death");
+    public static final RegistryObject<SoundEvent> IMMUNE_1 = register("immune1");
+    public static final RegistryObject<SoundEvent> DEFLECT = register("deflect");
 
 
     public static Music MUSIC_DUNGEON;

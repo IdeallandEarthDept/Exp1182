@@ -149,8 +149,6 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
             counter = 0;
         }
 
-
-
         super.aiStep();
     }
 
@@ -251,8 +249,9 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
 //                blockpos = EntityMJDSStoneEmitter.this.blockPosition();
 //            }
 
+            //only in X dir
             for(int i = 0; i < 3; ++i) {
-                BlockPos blockpos1 = blockpos.offset(EntityMJDSStoneEmitter.this.random.nextInt(15) - 7, EntityMJDSStoneEmitter.this.random.nextInt(11) - 5, EntityMJDSStoneEmitter.this.random.nextInt(15) - 7);
+                BlockPos blockpos1 = blockpos.offset(EntityMJDSStoneEmitter.this.random.nextInt(15) - 7, EntityMJDSStoneEmitter.this.random.nextInt(11) - 5, 0);
                 if (EntityMJDSStoneEmitter.this.level.isEmptyBlock(blockpos1)) {
                     EntityMJDSStoneEmitter.this.moveControl.setWantedPosition((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 0.25D);
                     if (EntityMJDSStoneEmitter.this.getTarget() == null) {

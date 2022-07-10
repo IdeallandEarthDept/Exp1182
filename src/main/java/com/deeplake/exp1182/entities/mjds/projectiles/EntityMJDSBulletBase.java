@@ -21,7 +21,7 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
     boolean skipBlock = true;
     public EntityMJDSBulletBase(EntityType<? extends EntityMJDSBulletBase> p_36833_, Level p_36834_) {
         super(p_36833_, p_36834_);
-        setGlowingTag(skipBlock);
+        init();
     }
 
     public EntityMJDSBulletBase(EntityType<? extends EntityMJDSBulletBase> type, Level p_36824_, double x, double y, double z, double vx, double vy, double vz) {
@@ -34,7 +34,7 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
         }
         if (!level.isClientSide)
         {
-            setGlowingTag(skipBlock);
+            init();
             setDeltaMovement(vx, vy, vz);
 
         }else {
@@ -46,8 +46,12 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
 
     public EntityMJDSBulletBase(EntityType<? extends EntityMJDSBulletBase> type, Level p_36831_, LivingEntity p_36827_, double x, double y, double z) {
         super(type, p_36827_, z, x, y, p_36831_);
-        setGlowingTag(skipBlock);
+        init();
 //        setDeltaMovement(x,y,z);
+    }
+
+    public void init() {
+        setGlowingTag(skipBlock);
     }
 
     static final float VISIBLE_DIST = 64*64;
@@ -70,6 +74,9 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
             if (!skipBlock)
             {
                 this.onHitBlock((BlockHitResult)p_37406_);
+                if (!this.level.isClientSide) {
+                    this.discard();
+                }
             }
         }
 

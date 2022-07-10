@@ -5,6 +5,8 @@
   "block.exp1182.flame_wall_quiet.desc": "Walking on it triggers no music.",
   "block.exp1182.spawn_boss": "Spawn World Boss",
   "block.exp1182.spawn_boss.desc": "[Creative Only]World boss will respawn here at time.",
+  "block.exp1182.spawn_bullet": "Menacing Launcher",
+  "block.exp1182.spawn_bullet.desc": "Launchers Strong knockback bullets. Used to enforce the Bronze Shield advancement",
 
   "block.exp1182.breakable": "Breakable Wall",
   "block.exp1182.covered": "Breakable Wall",
@@ -68,6 +70,7 @@
   "entity.exp1182.bullet1": "Bullet1",
   "entity.exp1182.bullet2": "Bullet2",
   "entity.exp1182.bullet3": "Bullet3",
+  "entity.exp1182.bullet_kb": "Bullet Knockback",
   "entity.exp1182.cloud_mob": "Cloud Monster",
   "entity.exp1182.shower_mob": "Volcanic Geyser",
 
@@ -75,7 +78,6 @@
   "exp1182.msg.req_food": "You need magical meal to destroy it from side.",
   "exp1182.msg.req_mine": "You need landmine to destroy it from above.[Impossible until next mod]",
 
-  "exp1182.msg.box.already_get": "You've already got [%s].",
   "exp1182.msg.box.already_get": "You've already got [%s].",
 
   "exp1182.msg.ego.req.achv": "You need [%s] to pass.",

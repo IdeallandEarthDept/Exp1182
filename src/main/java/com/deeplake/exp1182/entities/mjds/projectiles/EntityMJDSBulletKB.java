@@ -30,6 +30,12 @@ public class EntityMJDSBulletKB extends EntityMJDSBulletBase{
     }
 
     @Override
+    public void init() {
+        skipBlock = false;
+        super.init();
+    }
+
+    @Override
     public void onHitEntityExtra(Entity entity) {
         super.onHitEntityExtra(entity);
         if (entity instanceof LivingEntity living)

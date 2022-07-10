@@ -3,28 +3,68 @@ package com.deeplake.exp1182.events;
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.setup.ModEffects;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Main.MOD_ID)
 public class EventsSoundAssist {
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onDeath(LivingDeathEvent event)
+    {
+        Level world = event.getEntity().level;
+        if (!event.isCanceled())
+        {
+            if (event.getEntity() instanceof Player player)
+            {
+                if (player.hasEffect(ModEffects.INSIDE_MAJOU.get()))
+                {
+                    SoundEvent soundEvent = ModSounds.PLAYER_DEATH.get();
+                    world.playSound(null, player.getOnPos(), soundEvent, SoundSource.PLAYERS,1f, 1f);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onHurt(LivingHurtEvent event)
+    {
+        Level world = event.getEntity().level;
+        if (!event.isCanceled())
+        {
+            if (event.getEntity() instanceof Player player)
+            {
+                if (player.hasEffect(ModEffects.INSIDE_MAJOU.get()) && player.getHealth() > event.getAmount())
+                {
+                    SoundEvent soundEvent = player.getHealth() / player.getMaxHealth() > 0.33f ?
+                            ModSounds.PLAYER_HURT.get() :
+                            ModSounds.LOW_HEALTH.get();
+                    world.playSound(null, player.getOnPos(), soundEvent, SoundSource.PLAYERS,1f, 1f);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onPickup(PlayerEvent.ItemPickupEvent event) {
         Level world = event.getEntity().level;
         Player player = event.getPlayer();
-        if (world.isClientSide) {
+        if (!event.isCanceled()) {
             boolean samePerson = event.getOriginalEntity().getOwner() == player.getUUID();
 
             if (player.hasEffect(ModEffects.INSIDE_MAJOU.get()) && !samePerson)
             {
-                player.playSound(ModSounds.PICKUP.get(), 1f, 1f);
+                world.playSound(null, player.getOnPos(), ModSounds.PICKUP.get(), SoundSource.PLAYERS,1f, 1f);
             }
-
         }
     }
 }

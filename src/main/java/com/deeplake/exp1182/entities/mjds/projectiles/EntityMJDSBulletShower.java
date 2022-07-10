@@ -31,9 +31,9 @@ public class EntityMJDSBulletShower extends EntityMJDSBulletBase{
         init();
     }
 
-    private void init() {
+    public void init() {
         maxTicks = CommonDef.TICK_PER_SECOND * 3;
-        setGlowingTag(true);
+        super.init();
     }
 
     public EntityMJDSBulletShower(Level p_36831_, LivingEntity p_36827_, double p_36829_, double p_36830_, double p_36828_) {
