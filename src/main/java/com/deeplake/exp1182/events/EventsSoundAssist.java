@@ -3,6 +3,8 @@ package com.deeplake.exp1182.events;
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.setup.ModEffects;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
@@ -31,6 +33,15 @@ public class EventsSoundAssist {
                     SoundEvent soundEvent = ModSounds.PLAYER_DEATH.get();
                     world.playSound(null, player.getOnPos(), soundEvent, SoundSource.PLAYERS,1f, 1f);
                 }
+            }
+        }
+
+        //this even won't fire on client side.
+        if (world.isClientSide)
+        {
+            MusicManager musicManager = Minecraft.getInstance().getMusicManager();
+            if (musicManager.isPlayingMusic(ModSounds.MUSIC_DUNGEON)) {
+                musicManager.stopPlaying();
             }
         }
     }

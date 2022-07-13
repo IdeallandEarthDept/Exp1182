@@ -81,7 +81,7 @@ public class BlockBreakable extends BaseBlockMJDS implements IBlockMJDS{
                 level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
                 state.getBlock().destroy(level, pos, state);
                 AdvancementUtil.giveAdvancement(player, AdvancementUtil.BREAKABLE);
-                level.playSound(player, pos, ModSounds.MONSTER_DEATH.get(), SoundSource.BLOCKS, 1f, 1f);
+                level.playSound(null, pos, ModSounds.MONSTER_DEATH.get(), SoundSource.BLOCKS, 1f, 1f);
             }
         }
     }
