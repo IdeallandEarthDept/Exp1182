@@ -8,12 +8,12 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Main.MOD_ID)
 public class EventForcedKneel {
-    @SubscribeEvent
-    public static void onTick(LivingEvent.LivingUpdateEvent event)
-    {
-//        if (event.getEntity())
-        {
-           event.getEntityLiving().setPose(Pose.CROUCHING);
-        }
-    }
+//     @SubscribeEvent
+//     public static void onTick(LivingEvent.LivingUpdateEvent event)
+//     {
+// //        if (event.getEntity())
+//         {
+//            event.getEntityLiving().setPose(Pose.CROUCHING);
+//         }
+//     }
 }
