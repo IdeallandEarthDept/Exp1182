@@ -51,6 +51,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<EntityMJDSBulletShower>> BULLET_SHOWER = getEntityTypeRegistryObjectFireImmune(NAME_BULLET3, EntityMJDSBulletShower::new, 1.0f, 1.0f, MobCategory.MISC);
     public static final RegistryObject<EntityType<EntityMJDSCloudMonster>> CLOUD_MONSTER = getEntityTypeRegistryObjectFireImmune("cloud_mob", EntityMJDSCloudMonster::new, 0.6f, 1.8f, MobCategory.MONSTER);
     public static final RegistryObject<EntityType<EntityMJDSStoneEmitter>> SHOWER_MONSTER = getEntityTypeRegistryObjectFireImmune("shower_mob", EntityMJDSStoneEmitter::new, 1.0f, 1.0f, MobCategory.MONSTER);
+    public static final RegistryObject<EntityType<EntityMJDSBat>> BAT = getEntityTypeRegistryObjectFireImmune("bat", EntityMJDSBat::new, 1.0f, 1.0f, MobCategory.MONSTER);
 
 
     private static <T extends Entity> RegistryObject<EntityType<T>> getEntityTypeRegistryObject(String name, EntityType.EntityFactory<T> factory, float sizeXZ, float sizeY, MobCategory category) {
@@ -81,6 +82,7 @@ public class ModEntities {
         event.put(ModEntities.MJDS_BLAZE.get(), EntityMJDSBlaze.prepareAttributes().build());
         event.put(ModEntities.CLOUD_MONSTER.get(), EntityMJDSCloudMonster.prepareAttributes().build());
         event.put(ModEntities.SHOWER_MONSTER.get(), EntityMJDSStoneEmitter.prepareAttributes().build());
+        event.put(ModEntities.BAT.get(), EntityMJDSBat.prepareAttributes().build());
     }
 
 }

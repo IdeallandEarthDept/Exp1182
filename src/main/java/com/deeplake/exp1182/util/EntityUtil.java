@@ -8,6 +8,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -190,5 +192,23 @@ public class EntityUtil {
         } else {
             target.knockback(power, (source.getX() - target.getX()), (source.getZ() - target.getZ()));
         }
+    }
+
+    @NotNull
+    public static AttributeSupplier.Builder getAttrBuilder(double atk, double hpMax, double sight, double speed, double kb, double kb_r) {
+        return LivingEntity.createLivingAttributes()
+                .add(Attributes.ATTACK_DAMAGE, atk)
+                .add(Attributes.MAX_HEALTH, hpMax)
+                .add(Attributes.FOLLOW_RANGE, sight)
+                .add(Attributes.MOVEMENT_SPEED, speed)
+                .add(Attributes.ATTACK_KNOCKBACK, kb)
+                .add(Attributes.KNOCKBACK_RESISTANCE, kb_r);
+    }
+
+    static final float STANDARD_ATK = 4.0f;
+
+    @NotNull
+    public static AttributeSupplier.Builder getAttrBuilder(double atk, double hits, double kb_r) {
+        return getAttrBuilder(atk, hits * STANDARD_ATK, 32, 0.3, 0.3, kb_r);
     }
 }

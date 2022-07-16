@@ -12,6 +12,7 @@ import com.deeplake.exp1182.manasystem.client.KeyBindings;
 import com.deeplake.exp1182.manasystem.client.KeyInputHandler;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.BatRenderer;
 import net.minecraft.client.renderer.entity.BlazeRenderer;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -68,6 +69,7 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.BULLET_KB.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModEntities.CLOUD_MONSTER.get(), HumanoidRenderer::new);
         event.registerEntityRenderer(ModEntities.SHOWER_MONSTER.get(), ShowerMonsterRenderer::new);
+        event.registerEntityRenderer(ModEntities.BAT.get(), BatRenderer::new);
     }
 
     @SubscribeEvent

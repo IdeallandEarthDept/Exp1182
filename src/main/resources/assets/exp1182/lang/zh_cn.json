@@ -92,9 +92,9 @@
   "item.exp1182.tp_back": "Back to Where I were",
   "item.exp1182.tp_back.desc": "Right click to teleport back.",
 
-  "item.exp1182.fire_memento": "Flames of the Past Tense",
-  "item.exp1182.fire_memento.tooltip": "You have overcome the Metroidvania dungeon. Congratulations.",
-  "item.exp1182.fire_memento.clue": "Find this in Majou.",
+  "item.exp1182.fire_memento": "鹊桥仙·往事成焰",
+  "item.exp1182.fire_memento.tooltip": "魔城起处，熔岩墙壁，火种隐藏其隙。寻得圣水一穿过，却道是，英豪天地。\n几多艰险，深湖巧计，考验皆成过去。恶魔岔路尽通关，能力锁，又回原地。",
+  "item.exp1182.fire_memento.clue": "魔城起处，熔岩墙壁，火种隐藏其隙。寻得圣水一穿过，却道是，英豪天地……",
 
   "exp1182.desc.key_subscribed": "You will receive notifications.",
   "exp1182.desc.key_unsubscribed": "You will NOT receive notifications.",

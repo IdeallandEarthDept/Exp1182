@@ -3,6 +3,7 @@ package com.deeplake.exp1182.entities.mjds;
 import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.util.DesignUtil;
+import com.deeplake.exp1182.util.EntityUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
@@ -128,11 +129,7 @@ public class EntityMJDSBlaze extends Blaze implements IMjdsMonster{
     }
 
     public static AttributeSupplier.Builder prepareAttributes() {
-        return Monster.createLivingAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 6.0)
-                .add(Attributes.MAX_HEALTH, 36)
-                .add(Attributes.FOLLOW_RANGE, 32.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.3);
+        return EntityUtil.getAttrBuilder(6, 4, 1f);
     }
 
     @Nullable

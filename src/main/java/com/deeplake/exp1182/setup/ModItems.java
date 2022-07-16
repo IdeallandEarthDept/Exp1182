@@ -21,6 +21,7 @@ public class ModItems {
     public static final RegistryObject<Item> BULLET1 = ITEMS.register("bullet1", () -> new Item(ITEM_PROPERTIES_HIDDEN));
     public static final RegistryObject<Item> BULLET2 = ITEMS.register("bullet2", () -> new Item(ITEM_PROPERTIES_HIDDEN));
     public static final RegistryObject<Item> BULLET3 = ITEMS.register("bullet3", () -> new Item(ITEM_PROPERTIES_HIDDEN));
+    public static final RegistryObject<Item> MEMENTO = ITEMS.register("fire_memento", () -> new Item(ITEM_PROPERTIES_HIDDEN));
 
     //Advancements
     public static final RegistryObject<Item> feather = ITEMS.register("feather", () -> new Item(ITEM_PROPERTIES_HIDDEN));

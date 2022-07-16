@@ -5,6 +5,7 @@ import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletShower;
 import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.util.CommonDef;
 import com.deeplake.exp1182.util.DesignUtil;
+import com.deeplake.exp1182.util.EntityUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -64,12 +65,7 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
     }
 
     public static AttributeSupplier.Builder prepareAttributes() {
-        return createLivingAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 6.0)
-                .add(Attributes.MAX_HEALTH, 56)
-                .add(Attributes.FOLLOW_RANGE, 32.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.3)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 2.0f);
+        return EntityUtil.getAttrBuilder(1, 8, 1f);
     }
 
     protected void registerGoals() {

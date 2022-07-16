@@ -4,6 +4,7 @@ import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.util.CommonDef;
 import com.deeplake.exp1182.util.CommonFunctions;
+import com.deeplake.exp1182.util.EntityUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
@@ -58,13 +59,11 @@ public class EntityWorldBoss extends Monster {
         super(entityType, worldIn);
     }
 
+
     public static AttributeSupplier.Builder prepareAttributes() {
-        return Monster.createLivingAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 1.0)
-                .add(Attributes.MAX_HEALTH, MAX_HP)
-                .add(Attributes.FOLLOW_RANGE, 32.0)
-                .add(Attributes.MOVEMENT_SPEED, 0.3);
+        return EntityUtil.getAttrBuilder(1, MAX_HP, 32, 0.2,1,1);
     }
+
 
     final int MIN_ATTACK_TICK = 3;
 
