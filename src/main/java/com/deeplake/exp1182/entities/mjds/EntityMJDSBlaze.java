@@ -36,7 +36,6 @@ import static net.minecraft.nbt.NbtUtils.writeBlockPos;
 
 public class EntityMJDSBlaze extends Blaze implements IMjdsMonster{
     public BlockPos spawnPoint;
-
     public EntityMJDSBlaze(EntityType<? extends Blaze> p_33570_, Level p_33571_) {
         super(p_33570_, p_33571_);
         for (EquipmentSlot slotType :
@@ -51,23 +50,14 @@ public class EntityMJDSBlaze extends Blaze implements IMjdsMonster{
     protected boolean isSunBurnTick() {
         return false;
     }
-
     protected void populateDefaultEquipmentSlots(DifficultyInstance p_180481_1_) {
         super.populateDefaultEquipmentSlots(p_180481_1_);
         spawnPoint = blockPosition();
     }
-
-//    @Override
-//    public void onRemovedFromWorld() {
-//        super.onRemovedFromWorld();
-//
-//    }
-
     @Override
     public void checkDespawn() {
         super.checkDespawn();
     }
-
     @Override
     public void remove(RemovalReason p_146834_) {
         super.remove(p_146834_);
@@ -83,13 +73,6 @@ public class EntityMJDSBlaze extends Blaze implements IMjdsMonster{
             }
         }
     }
-
-    //    @Override
-//    public void die(DamageSource p_70645_1_) {
-//        super.die(p_70645_1_);
-//    }
-
-
     @Override
     public InteractionResult interactAt(Player playerEntity, Vec3 p_19981_, InteractionHand hand) {
         if (!playerEntity.level.isClientSide && playerEntity.isCreative())
@@ -129,7 +112,7 @@ public class EntityMJDSBlaze extends Blaze implements IMjdsMonster{
     }
 
     public static AttributeSupplier.Builder prepareAttributes() {
-        return EntityUtil.getAttrBuilder(6, 4, 1f);
+        return EntityUtil.getAttrBuilder(6, 3, 0.8f);
     }
 
     @Nullable
