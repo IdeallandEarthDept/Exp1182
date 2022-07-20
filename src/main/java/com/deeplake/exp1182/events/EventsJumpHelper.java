@@ -3,6 +3,7 @@ package com.deeplake.exp1182.events;
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.blocks.IBlockMJDS;
 import com.deeplake.exp1182.client.ModSounds;
+import com.deeplake.exp1182.setup.ModEffects;
 import com.deeplake.exp1182.util.AdvancementUtil;
 import com.deeplake.exp1182.util.CommonDef;
 import com.deeplake.exp1182.util.DesignUtil;
@@ -51,7 +52,8 @@ public class EventsJumpHelper {
                     boolean nullify = true;
                     if (livingEntity instanceof Player player)
                     {
-                        nullify = AdvancementUtil.hasAdvancement(player, AdvancementUtil.FEATHER);
+                        nullify = AdvancementUtil.hasAdvancement(player, AdvancementUtil.FEATHER) ||
+                                ((player.getEffect(ModEffects.INSIDE_MAJOU.get()).getAmplifier() & AdvancementUtil.FEATHER_BIT) > 0);
                     }
 
                     if (nullify)

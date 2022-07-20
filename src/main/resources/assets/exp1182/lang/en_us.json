@@ -38,6 +38,7 @@
   "exp1182.advancements.breakable.title": "Break a block",
   "exp1182.advancements.breakable.description": "...by right clicking on them.",
 
+  "effect.exp1182.inside_majou": "Inside Majou",
 
   "block.exp1182.sp_glass": "MJDS Glass",
   "block.exp1182.sp_glass.desc": "Indestructible. Used to screen players.",
@@ -51,6 +52,8 @@
   "block.exp1182.mjds_gate4.desc": "Left-Down",
   "block.exp1182.mjds_gate_fire": "Flame Portal",
   "block.exp1182.mjds_gate_fire.desc": "Need holy water to pass",
+  "block.exp1182.flame_wall_no_adv": "MJDS Flame Floor",
+  "block.exp1182.flame_wall_no_adv.desc": "Regardless of advancements, no music.",
 
   "block.exp1182.box_1": "Treasure Chest",
   "block.exp1182.box_2": "Treasure Chest",

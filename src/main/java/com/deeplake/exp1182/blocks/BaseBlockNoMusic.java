@@ -21,6 +21,7 @@ public class BaseBlockNoMusic extends BaseBlockMJDS implements IBlockMJDS {
 
     @Override
     public void stepOn(Level level, BlockPos p_152432_, BlockState p_152433_, Entity entity) {
-        //no music
+//        super.stepOn(level, p_152432_, p_152433_, entity);
+        DesignUtil.applyMajouNoMusic(entity);
     }
 }

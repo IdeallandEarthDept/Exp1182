@@ -74,40 +74,73 @@ public class DesignUtil {
             if (!level.isClientSide) {
                 majouBuff(living);
             } else {
-                if (entity == Minecraft.getInstance().player)
-                {
-                    boolean music = true;
-                    Player player = (Player) entity;
-                    music = AdvancementUtil.checkAdvClient(player, AdvancementUtil.TRIANGLE_BIT);
+                playMusic(entity);
+            }
+        }
+    }
 
-                    if (music)
-                    {
-                        MusicManager musicManager = Minecraft.getInstance().getMusicManager();
-                        if (!musicManager.isPlayingMusic(ModSounds.MUSIC_DUNGEON)) {
-                            musicManager.stopPlaying();
-                            musicManager.startPlaying(ModSounds.MUSIC_DUNGEON);
-                        }
-                    }
+    public static void applyMajouNoMusic(Entity entity) {
+        Level level = entity.getLevel();
+        if (entity instanceof LivingEntity living)
+        {
+            if (!level.isClientSide) {
+                majouBuff(living);
+            } else {
+//                playMusic(entity);
+            }
+        }
+    }
+
+    public static void applyMajouNoAdv(Entity entity) {
+        Level level = entity.getLevel();
+        if (entity instanceof LivingEntity living)
+        {
+            if (!level.isClientSide) {
+                majouBuff(living, true);
+            } else {
+
+            }
+        }
+    }
+
+    private static void playMusic(Entity entity) {
+        if (entity == Minecraft.getInstance().player)
+        {
+            boolean music = true;
+            Player player = (Player) entity;
+            music = AdvancementUtil.checkAdvClient(player, AdvancementUtil.TRIANGLE_BIT);
+
+            if (music)
+            {
+                MusicManager musicManager = Minecraft.getInstance().getMusicManager();
+                if (!musicManager.isPlayingMusic(ModSounds.MUSIC_DUNGEON)) {
+                    musicManager.stopPlaying();
+                    musicManager.startPlaying(ModSounds.MUSIC_DUNGEON);
                 }
             }
         }
     }
 
     public static void majouBuff(LivingEntity living) {
+        majouBuff(living, false);
+    }
+
+    public static void majouBuff(LivingEntity living, boolean ignoreAdv) {
         if (living instanceof ServerPlayer serverPlayer)
         {
             int level = 0;
-            if (AdvancementUtil.hasAdvancement(serverPlayer, AdvancementUtil.FEATHER))
+            if (ignoreAdv || AdvancementUtil.hasAdvancement(serverPlayer, AdvancementUtil.FEATHER))
             {
                 level |= AdvancementUtil.FEATHER_BIT;
             }
 
-            if (AdvancementUtil.hasAdvancement(serverPlayer, AdvancementUtil.SHOES))
+            if (ignoreAdv || AdvancementUtil.hasAdvancement(serverPlayer, AdvancementUtil.SHOES))
             {
                 level |= AdvancementUtil.SHOES_BIT;
             }
 
-            if (AdvancementUtil.hasAdvancement(serverPlayer, AdvancementUtil.TRIANGLE))
+            //no adv version also has no music
+            if (!ignoreAdv && AdvancementUtil.hasAdvancement(serverPlayer, AdvancementUtil.TRIANGLE))
             {
                 level |= AdvancementUtil.TRIANGLE_BIT;
             }

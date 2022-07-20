@@ -105,12 +105,12 @@ end
 -- for i = 1, 30 do
 --     GenSP(i)
 -- end
--- GenBlock("spawn_bullet");
+GenBlock("flame_wall_no_adv");
 -- GenItemNake("balloon");
 -- GenItemNake("feather");
 -- GenItemNake("shoes");
 -- GenItemNake("food");
-GenItemNake("fire_memento");
+-- GenItemNake("flame_wall_no_adv");
 --GenBlock("test_block");
 --GenBlock("popolon_door");
 --GenBlock("aphrodite_door");

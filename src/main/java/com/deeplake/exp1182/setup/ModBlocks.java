@@ -78,6 +78,7 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> FLAME_FLOOR = registerWithItem("flame_wall", () -> new BaseBlockMJDS(BLOCK_PROP_MJDS));
     public static final RegistryObject<Block> FLAME_FLOOR_NO_MUSIC = registerWithItem("flame_wall_quiet", () -> new BaseBlockNoMusic(BLOCK_PROP_MJDS));
+    public static final RegistryObject<Block> FLAME_FLOOR_NO_ADV = registerWithItem("flame_wall_no_adv", () -> new BaseBlockNoAdv(BLOCK_PROP_MJDS));
     public static final RegistryObject<Block> SP_GLASS = registerWithItem("sp_glass", BlockWallGlass::new);
     public static final RegistryObject<Block> COVERED = registerWithItem("covered", BlockCovered::new);
     public static final RegistryObject<Block> BREAKABLE = registerWithItem("breakable", () -> new BlockBreakable(BLOCK_PROP_MJDS));
