@@ -19,6 +19,10 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.EntityHitResult;
@@ -130,5 +134,46 @@ public class EntityMJDSBlaze extends Blaze implements IMjdsMonster{
     @Override
     protected SoundEvent getDeathSound() {
         return ModSounds.MONSTER_DEATH.get();
+    }
+
+    @Override
+    protected void dropCustomDeathLoot(DamageSource p_21385_, int p_21386_, boolean p_21387_) {
+        super.dropCustomDeathLoot(p_21385_, p_21386_, p_21387_);
+
+        ItemStack itemStack;
+        switch (random.nextInt(4))
+        {
+            case 0:
+                itemStack = new ItemStack(Items.ARROW, 5);
+                break;
+            case 1:
+                itemStack = new ItemStack(Items.BLAZE_ROD, 1);
+                break;
+            case 2:
+                itemStack = new ItemStack(Items.POTION, 1);
+                PotionUtils.setPotion(itemStack, Potions.HEALING);
+                break;
+            case 3:
+                itemStack = new ItemStack(Items.BOW, 1);
+                itemStack.enchant(Enchantments.FLAMING_ARROWS, 1);
+                if (random.nextInt(100) == 0)
+                {
+                    itemStack.enchant(Enchantments.INFINITY_ARROWS, 1);
+                }
+                if (random.nextInt(10) == 0)
+                {
+                    itemStack.enchant(Enchantments.POWER_ARROWS, 2);
+                }
+
+
+                break;
+            default:
+                itemStack = null;
+                break;
+        }
+        if (itemStack != null)
+        {
+            this.spawnAtLocation(itemStack);
+        }
     }
 }

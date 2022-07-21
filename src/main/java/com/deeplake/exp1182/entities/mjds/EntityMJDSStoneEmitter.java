@@ -30,6 +30,11 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Vex;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
@@ -273,6 +278,32 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
                 mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
                 level.addFreshEntity(mist);
             }
+        }
+    }
+
+    @Override
+    protected void dropCustomDeathLoot(DamageSource p_21385_, int p_21386_, boolean p_21387_) {
+        super.dropCustomDeathLoot(p_21385_, p_21386_, p_21387_);
+
+        ItemStack itemStack;
+        switch (random.nextInt(3))
+        {
+            case 0:
+                itemStack = new ItemStack(Items.ARROW, 50);
+                break;
+            case 1:
+                itemStack = new ItemStack(Items.DIAMOND, 3);
+                break;
+            case 2:
+                itemStack = new ItemStack(Items.CHAINMAIL_CHESTPLATE);
+                break;
+            default:
+                itemStack = null;
+                break;
+        }
+        if (itemStack != null)
+        {
+            this.spawnAtLocation(itemStack);
         }
     }
 }

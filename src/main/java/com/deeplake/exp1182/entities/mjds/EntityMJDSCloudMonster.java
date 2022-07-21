@@ -15,6 +15,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -26,6 +27,10 @@ import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -33,6 +38,7 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.HashSet;
+import java.util.List;
 
 import static com.deeplake.exp1182.util.IDLNBTDef.SPAWN_POINT;
 import static net.minecraft.nbt.NbtUtils.readBlockPos;
@@ -236,5 +242,39 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
 
     public static AttributeSupplier.Builder prepareAttributes() {
         return EntityUtil.getAttrBuilder(6, 4, 1f);
+    }
+
+    @Override
+    protected void dropCustomDeathLoot(DamageSource p_21385_, int p_21386_, boolean p_21387_) {
+        super.dropCustomDeathLoot(p_21385_, p_21386_, p_21387_);
+
+        ItemStack itemStack;
+        switch (random.nextInt(4))
+        {
+            case 0:
+                itemStack = new ItemStack(Items.ARROW, 5);
+                break;
+            case 1:
+                itemStack = new ItemStack(Items.BREAD, 2);
+                break;
+            case 2:
+                itemStack = new ItemStack(Items.POTION, 1);
+                if (random.nextBoolean())
+                {
+                    PotionUtils.setPotion(itemStack, Potions.MUNDANE);
+                }
+                else {
+                    PotionUtils.setPotion(itemStack, Potions.SWIFTNESS);
+                }
+
+                break;
+            default:
+                itemStack = null;
+                break;
+        }
+        if (itemStack != null)
+        {
+            this.spawnAtLocation(itemStack);
+        }
     }
 }

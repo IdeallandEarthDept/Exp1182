@@ -24,6 +24,8 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ambient.Bat;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 import static com.deeplake.exp1182.util.IDLNBTDef.SPAWN_POINT;
@@ -153,4 +155,29 @@ public class EntityMJDSBat extends Bat implements IMjdsMonster  {
         return EntityUtil.getAttrBuilder(5, 1, 0.5f);
     }
 
+    @Override
+    protected void dropCustomDeathLoot(DamageSource p_21385_, int p_21386_, boolean p_21387_) {
+        super.dropCustomDeathLoot(p_21385_, p_21386_, p_21387_);
+
+        ItemStack itemStack;
+        switch (random.nextInt(4))
+        {
+            case 0:
+                itemStack = new ItemStack(Items.ARROW, 2+random.nextInt(4));
+                break;
+            case 1:
+                itemStack = new ItemStack(Items.BREAD, 1+random.nextInt(2));
+                break;
+            case 2:
+                itemStack = new ItemStack(Items.IRON_INGOT, 1);
+                break;
+            default:
+                itemStack = null;
+                break;
+        }
+        if (itemStack != null)
+        {
+            this.spawnAtLocation(itemStack);
+        }
+    }
 }
