@@ -11,11 +11,9 @@ import net.minecraft.nbt.NbtUtils;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -27,8 +25,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+
+import javax.annotation.Nullable;
 
 import static com.deeplake.exp1182.util.IDLNBTDef.SPAWN_POINT;
+import static net.minecraft.nbt.NbtUtils.readBlockPos;
+import static net.minecraft.nbt.NbtUtils.writeBlockPos;
 
 public class EntityMJDSBat extends Bat implements IMjdsMonster  {
     public BlockPos spawnPoint;
@@ -38,18 +41,18 @@ public class EntityMJDSBat extends Bat implements IMjdsMonster  {
         this.xpReward = 5;
     }
 
-    @Override
-    public void onRemovedFromWorld() {
-        super.onRemovedFromWorld();
-        if (!level.isClientSide && DesignUtil.canRevive(this))
-        {
-            //IdlFramework.Log("That is not dead which can eternal lie...");
-            EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level);
-            mist.setWith(this);
-            mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
-            level.addFreshEntity(mist);
-        }
-    }
+//    @Override
+//    public void onRemovedFromWorld() {
+//        super.onRemovedFromWorld();
+//        if (!level.isClientSide && DesignUtil.canRevive(this))
+//        {
+//            //IdlFramework.Log("That is not dead which can eternal lie...");
+//            EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level);
+//            mist.setWith(this);
+//            mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
+//            level.addFreshEntity(mist);
+//        }
+//    }
 
     @Override
     public void readAdditionalSaveData(CompoundTag nbt) {
@@ -180,4 +183,28 @@ public class EntityMJDSBat extends Bat implements IMjdsMonster  {
             this.spawnAtLocation(itemStack);
         }
     }
+
+    @Nullable
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_32146_, DifficultyInstance p_32147_, MobSpawnType p_32148_, @Nullable SpawnGroupData p_32149_, @Nullable CompoundTag p_32150_) {
+        p_32149_ = super.finalizeSpawn(p_32146_, p_32147_, p_32148_, p_32149_, p_32150_);
+        spawnPoint = blockPosition();
+        return p_32149_;
+    }
+
+    @Override
+    public void remove(RemovalReason p_146834_) {
+        super.remove(p_146834_);
+        if (p_146834_ == RemovalReason.KILLED || p_146834_ == RemovalReason.DISCARDED)
+        {
+            if (!level.isClientSide && DesignUtil.canRevive(this))
+            {
+                //IdlFramework.Log("That is not dead which can eternal lie...");
+                EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level);
+                mist.setWith(this);
+                mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
+                level.addFreshEntity(mist);
+            }
+        }
+    }
+
 }

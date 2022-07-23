@@ -211,19 +211,6 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
         return p_32149_;
     }
 
-//    @Override
-//    public void onRemovedFromWorld() {
-//        super.onRemovedFromWorld();
-//        if (!level.isClientSide && DesignUtil.canRevive(this))
-//        {
-//            //IdlFramework.Log("That is not dead which can eternal lie...");
-//            EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level);
-//            mist.setWith(this);
-//            mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
-//            level.addFreshEntity(mist);
-//        }
-//    }
-
     @Override
     public void remove(RemovalReason p_146834_) {
         super.remove(p_146834_);

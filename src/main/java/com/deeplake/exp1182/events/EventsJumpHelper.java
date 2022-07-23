@@ -8,6 +8,7 @@ import com.deeplake.exp1182.util.AdvancementUtil;
 import com.deeplake.exp1182.util.CommonDef;
 import com.deeplake.exp1182.util.DesignUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -52,8 +53,13 @@ public class EventsJumpHelper {
                     boolean nullify = true;
                     if (livingEntity instanceof Player player)
                     {
-                        nullify = AdvancementUtil.hasAdvancement(player, AdvancementUtil.FEATHER) ||
-                                ((player.getEffect(ModEffects.INSIDE_MAJOU.get()).getAmplifier() & AdvancementUtil.FEATHER_BIT) > 0);
+                        MobEffectInstance effect = player.getEffect(ModEffects.INSIDE_MAJOU.get());
+                        if (effect != null)
+                        {
+                            int amplifier = effect.getAmplifier();
+                            nullify = AdvancementUtil.hasAdvancement(player, AdvancementUtil.FEATHER) ||
+                                    ((amplifier & AdvancementUtil.FEATHER_BIT) > 0);
+                        }
                     }
 
                     if (nullify)
