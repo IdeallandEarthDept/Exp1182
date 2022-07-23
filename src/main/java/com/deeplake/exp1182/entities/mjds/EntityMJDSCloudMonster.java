@@ -53,9 +53,9 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
 
     static
     {
-        ATTCK_SEQUENCE.add(CommonDef.TICK_PER_SECOND * 2);
+//        ATTCK_SEQUENCE.add(CommonDef.TICK_PER_SECOND * 2);
         ATTCK_SEQUENCE.add(CommonDef.TICK_PER_SECOND * 3);
-        ATTCK_SEQUENCE.add(CommonDef.TICK_PER_SECOND * 4);
+//        ATTCK_SEQUENCE.add(CommonDef.TICK_PER_SECOND * 4);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
