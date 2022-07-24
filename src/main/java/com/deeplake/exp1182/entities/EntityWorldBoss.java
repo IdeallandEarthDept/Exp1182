@@ -26,6 +26,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Fireball;
 import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.entity.projectile.SmallFireball;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
@@ -453,5 +458,39 @@ public class EntityWorldBoss extends Monster {
     @Override
     protected SoundEvent getDeathSound() {
         return ModSounds.MONSTER_DEATH.get();
+    }
+
+    @Override
+    protected void dropCustomDeathLoot(DamageSource p_21385_, int p_21386_, boolean p_21387_) {
+        super.dropCustomDeathLoot(p_21385_, p_21386_, p_21387_);
+        int playerCount = level.players().size();
+        for (int i = 0; i < playerCount; i++)
+        {
+            ItemStack itemStack;
+            switch (random.nextInt(4))
+            {
+                case 0:
+                    itemStack = new ItemStack(Items.CHAINMAIL_HELMET, 1);
+                    break;
+                case 1:
+                    itemStack = new ItemStack(Items.CHAINMAIL_CHESTPLATE, 1);
+                    break;
+                case 2:
+                    itemStack = new ItemStack(Items.CHAINMAIL_LEGGINGS, 1);
+                    break;
+                case 3:
+                    itemStack = new ItemStack(Items.CHAINMAIL_BOOTS, 1);
+                    break;
+                default:
+                    itemStack = null;
+                    break;
+            }
+
+            if (itemStack != null)
+            {
+                EnchantmentHelper.enchantItem(random, itemStack, 30, true);
+                this.spawnAtLocation(itemStack);
+            }
+        }
     }
 }
