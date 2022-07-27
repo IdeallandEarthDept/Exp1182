@@ -148,12 +148,12 @@ public class DesignUtil {
             if (level != 0)
             {
                 serverPlayer.addEffect(new MobEffectInstance(ModEffects.INSIDE_MAJOU.get(),
-                        100, level, true, false, true, null));
+                        100, level, true, false, !ignoreAdv, null));
             }
         }
         else {
             living.addEffect(new MobEffectInstance(ModEffects.INSIDE_MAJOU.get(),
-                    100, 0, true, false, true, null));
+                    100, 0, true, false, !ignoreAdv, null));
         }
     }
 }

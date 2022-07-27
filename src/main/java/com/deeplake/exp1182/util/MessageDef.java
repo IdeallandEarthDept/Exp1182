@@ -13,6 +13,7 @@ public class MessageDef {
     public static String BOX_FAIL = MOD_ID + ".msg.box.already_get";
 
     public static String NO_SPAWN = MOD_ID + ".msg.teleport.no_spawn";
+    public static String BOSS_READY = MOD_ID + ".msg.boss.ready";
 
     public static String REQ_POPOLON = MOD_ID + ".msg.ego.req.popolon";
     public static String REQ_APHRODITE = MOD_ID + ".msg.ego.req.aphrodite";

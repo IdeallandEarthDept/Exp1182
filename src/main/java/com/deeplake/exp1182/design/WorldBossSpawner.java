@@ -4,6 +4,8 @@ import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.blocks.demo.WorldBossConfig;
 import com.deeplake.exp1182.items.ItemTeleport;
 import com.deeplake.exp1182.setup.ModItems;
+import com.deeplake.exp1182.util.CommonFunctions;
+import com.deeplake.exp1182.util.MessageDef;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -69,12 +71,17 @@ public class WorldBossSpawner {
                     shouldSpawn = true;
                     List<? extends Player> list = level.players();
 
+                    ItemStack stack = new ItemStack(ModItems.TP_GO.get());
                     for (Player player :
                             list) {
                         if (ItemTeleport.isSubscribed(player))
                         {
                             Main.Log("player %s is given a teleport.", player.getName());
-                            player.addItem(new ItemStack(ModItems.TP_GO.get()));
+                            if (!player.getInventory().contains(stack))
+                            {
+                                player.addItem(new ItemStack(ModItems.TP_GO.get()));
+                            }
+                            CommonFunctions.SafeSendMsgToPlayer(player, MessageDef.BOSS_READY);
                         }
                     }
 

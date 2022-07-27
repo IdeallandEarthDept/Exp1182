@@ -101,6 +101,7 @@
 
   "exp1182.desc.key_subscribed": "已订阅世界BOSS传送邀请服务。",
   "exp1182.desc.key_unsubscribed": "你已【退订】世界BOSS传送邀请服务。",
+  "exp1182.msg.boss.ready": "世界BOSS已出现，请查收传送邀请。您可以潜行+右键该邀请以退订此通知。",
 
   "item.exp1182.bullet1": "Bullet A 贴图",
   "item.exp1182.bullet2": "Bullet B 贴图",
