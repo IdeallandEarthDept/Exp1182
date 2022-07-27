@@ -13,7 +13,7 @@ import net.minecraft.world.entity.Mob;
 import javax.annotation.Nonnull;
 
 public class HumanoidRenderer extends MobRenderer<Mob, HumanModel> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/entity/boss_test.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/entity/cloud_mob.png");
 
     public HumanoidRenderer(EntityRendererProvider.Context context) {
         super(context, new HumanModel(context.bakeLayer(HumanModel.NORMAL_LAYER)), 1f);
