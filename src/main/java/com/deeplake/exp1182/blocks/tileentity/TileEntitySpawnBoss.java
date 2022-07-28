@@ -25,6 +25,8 @@ public class TileEntitySpawnBoss extends BlockEntity {
     public void tickServer() {
         if (WorldBossConfig.ENABLE_BOSS_SPAWN.get() &&  WorldBossSpawner.checkSpawn())
         {
+            WorldBossSpawner.executeSpawn();
+
             Vec3 pos = new Vec3(getBlockPos().getX()+0.5f,
                     getBlockPos().getY()+2,
                     getBlockPos().getZ()+0.5f);
@@ -44,7 +46,7 @@ public class TileEntitySpawnBoss extends BlockEntity {
             boss.setPos(pos);
             level.addFreshEntity(boss);
 
-            WorldBossSpawner.executeSpawn();
+
 //            player.sendMessage(new TranslatableComponent(NOTIFY_NEXT, WorldBossSpawner.getNextSpawnTimeString())
 //                    .withStyle(ChatFormatting.YELLOW), Util.NIL_UUID);
         }
