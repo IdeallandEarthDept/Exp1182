@@ -103,7 +103,7 @@ public class WorldBossSpawner {
         else {
             cur.set(Calendar.MINUTE, 0);
             cur.set(Calendar.SECOND, 0);
-            cur.add(Calendar.HOUR, 1);
+            cur.set(Calendar.HOUR_OF_DAY, 20);
         }
 
         nextSpawnTime = cur;

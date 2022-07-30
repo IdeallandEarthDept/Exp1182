@@ -135,6 +135,7 @@ public class EntityMJDSBat extends Bat implements IMjdsMonster  {
         } else if (p_70097_1_ == DamageSource.CRAMMING || p_70097_1_ == DamageSource.IN_WALL) {
             return false;
         }
+        invulnerableTime = 0;
         return super.hurt(p_70097_1_, p_70097_2_);
     }
 
@@ -206,5 +207,4 @@ public class EntityMJDSBat extends Bat implements IMjdsMonster  {
             }
         }
     }
-
 }

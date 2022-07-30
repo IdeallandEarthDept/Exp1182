@@ -2,20 +2,21 @@ package com.deeplake.exp1182.entities;
 
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.client.ModSounds;
-import com.deeplake.exp1182.util.CommonDef;
-import com.deeplake.exp1182.util.CommonFunctions;
-import com.deeplake.exp1182.util.EntityUtil;
+import com.deeplake.exp1182.entities.mjds.EntityRevivalMist;
+import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletKB;
+import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletPierece;
+import com.deeplake.exp1182.util.*;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.AbstractIllager;
@@ -23,6 +24,7 @@ import net.minecraft.world.entity.monster.Illusioner;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.Fireball;
 import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.entity.projectile.SmallFireball;
@@ -74,7 +76,7 @@ public class EntityWorldBoss extends Monster {
 
     //seconds
     float timeExpected(int playerCount) {
-        return 60f;
+        return 20f + playerCount;
     }
 
     float getExpectedDPS(int playerCount) {
@@ -166,20 +168,117 @@ public class EntityWorldBoss extends Monster {
                 shootFireballAimed(0);
             }
             case BARRAGE_ANTI_AIR -> {
-                //todo
-                for (float angle = 0; angle < 360f; angle += 10f)
-                {
-                    shootFireballFloor(angle);
+
+                if (!level.isClientSide) {
+                    boolean hasTarget = targetList.size() > 0;
+                    if (hasTarget) {
+                        if (level.getGameTime() % 10 == 0) {
+                            for (Entity target : targetList)
+                            {
+                                if (target instanceof Player player)
+                                {
+                                    if (player.isSpectator())
+                                    {
+                                        continue;
+                                    }
+                                }
+
+                                if (!target.isAlive())
+                                {
+                                    continue;
+                                }
+
+                                Vec3 dirRaw =(target.getEyePosition().subtract(getEyePosition())).normalize();
+                                Vec3 dir = dirRaw.scale(getShootAccel());
+
+
+                                Entity entity;
+                                if (target.getEyePosition().y - getEyePosition().y > 2)
+                                {
+                                    entity =
+                                            new EntityMJDSBulletPierece(
+                                                    level,
+                                                    this.getX()+dir.x * 0.5f,
+                                                    this.getEyeY()+dir.y * 0.5f,
+                                                    this.getZ()+dir.z * 0.5f,
+                                                    dir.x,
+                                                    dir.y,
+                                                    dir.z);
+                                }
+                                else {
+                                    entity =
+                                            new EntityMJDSBulletKB(
+                                                    level,
+                                                    this.getX() + dirRaw.x,
+                                                    this.getEyeY() + dirRaw.y,
+                                                    this.getZ() + dirRaw.z,
+                                                    dirRaw.x * 0.5f,
+                                                    dirRaw.y * 0.5f,
+                                                    dirRaw.z * 0.5f);
+                                }
+
+
+                                level.addFreshEntity(entity);
+                            }
+
+                            playSound(ModSounds.MONSTER_SHOOT_1.get(), 2f, 1f);
+                        }
+                    }
+                    else {
+                        for (float angle = 0; angle < 360f; angle += 10f)
+                        {
+                            shootFireballFloor(angle);
+                        }
+                    }
                 }
             }
             default -> throw new IllegalStateException("Unexpected value: " + curState);
         }
+
+        float hpRatio = getHealth() / getMaxHealth();
+        if (revivalSkillLeft > 0 && hpRatio <= 0.5f)
+        {
+            revivalSkillLeft--;
+            reviveNearbyMinions();
+        }
+        if (hpRatio <= 0.6f)
+        {
+             setRemainingFireTicks(20);
+        }
     }
+
+    //Skill: revive nearby minions
+    void reviveNearbyMinions()
+    {
+        if (!level.isClientSide)
+        {
+            List<Entity> entityList = EntityUtil.getEntitiesWithinAABB(level,
+                    getEyePosition(), 16f, EntityUtil.NON_SPEC);
+            for (Entity entity:
+                    entityList) {
+
+                if (entity instanceof EntityRevivalMist mist)
+                {
+                    LightningBolt lightningbolt = EntityType.LIGHTNING_BOLT.create(level);
+                    if (lightningbolt != null)
+                    {
+                        lightningbolt.moveTo(mist.getEyePosition());
+                        lightningbolt.setVisualOnly(true);
+                        level.addFreshEntity(lightningbolt);
+                    }
+                    mist.reviveAndSuicide();
+                }
+            }
+        }
+    }
+
+
+    //fireballs---------------
 
     float shootAccel = 0.1f;
 
     public float getShootAccel() {
-        return 0.1f;
+        return shootAccel;
     }
 
     //yaw is in degrees
@@ -273,7 +372,7 @@ public class EntityWorldBoss extends Monster {
         } else if (entity instanceof Player)
         {
             Player player = (Player) entity;
-            if (player.isCreative() || player.isSpectator())
+            if (player.isSpectator())
             {
                 return false;
             }
@@ -352,6 +451,16 @@ public class EntityWorldBoss extends Monster {
             return super.hurt(damageSource, damage);
         }
 
+        if (damageSource == DamageSource.ON_FIRE)
+        {
+            return false;
+        }
+
+        if (damageSource == DamageSource.IN_FIRE)
+        {
+            return false;
+        }
+
         Entity entity = damageSource.getEntity();
         if (entity instanceof LivingEntity)
         {
@@ -407,6 +516,9 @@ public class EntityWorldBoss extends Monster {
         return super.save(tag);
     }
 
+    int hpBarDivider = 10;
+    int revivalSkillLeft = 1;
+
     //Boss Bar
     private final ServerBossEvent bossEvent =
             (ServerBossEvent) (new ServerBossEvent(this.getDisplayName(),
@@ -417,8 +529,11 @@ public class EntityWorldBoss extends Monster {
                     .setCreateWorldFog(true);
 
     void tickBossBar() {
-        this.bossEvent.setProgress(getHealth() / getMaxHealth() % (0.1f) * 10);
+        float perBar = 1 / (float)hpBarDivider;
+        float percent = getHealth() / getMaxHealth();
+        this.bossEvent.setProgress(percent % (perBar) * hpBarDivider);
         this.bossEvent.setColor(BossEvent.BossBarColor.RED);
+        this.bossEvent.setName(new TranslatableComponent(this.getType().getDescription().getString() + String.format(" %d%%", (int)(percent * 100))));
 //        Main.Log("HP = %s", getHealth());
     }
 
@@ -464,32 +579,44 @@ public class EntityWorldBoss extends Monster {
     protected void dropCustomDeathLoot(DamageSource p_21385_, int p_21386_, boolean p_21387_) {
         super.dropCustomDeathLoot(p_21385_, p_21386_, p_21387_);
         int playerCount = level.players().size();
-        for (int i = 0; i < playerCount; i++)
-        {
-            ItemStack itemStack;
-            switch (random.nextInt(4))
-            {
-                case 0:
-                    itemStack = new ItemStack(Items.CHAINMAIL_HELMET, 1);
-                    break;
-                case 1:
-                    itemStack = new ItemStack(Items.CHAINMAIL_CHESTPLATE, 1);
-                    break;
-                case 2:
-                    itemStack = new ItemStack(Items.CHAINMAIL_LEGGINGS, 1);
-                    break;
-                case 3:
-                    itemStack = new ItemStack(Items.CHAINMAIL_BOOTS, 1);
-                    break;
-                default:
-                    itemStack = null;
-                    break;
-            }
+        List<Entity> entityList = EntityUtil.getEntitiesWithinAABB(level,
+                getEyePosition(), 16f, EntityUtil.NON_SPEC);
+        for (Entity entity:
+                entityList) {
 
-            if (itemStack != null)
+            if (entity instanceof Player player)
             {
-                EnchantmentHelper.enchantItem(random, itemStack, 30, true);
-                this.spawnAtLocation(itemStack);
+                ItemStack itemStack;
+                switch (random.nextInt(4))
+                {
+                    case 0:
+                        itemStack = new ItemStack(Items.CHAINMAIL_HELMET, 1);
+                        break;
+                    case 1:
+                        itemStack = new ItemStack(Items.CHAINMAIL_CHESTPLATE, 1);
+                        break;
+                    case 2:
+                        itemStack = new ItemStack(Items.CHAINMAIL_LEGGINGS, 1);
+                        break;
+                    case 3:
+                        itemStack = new ItemStack(Items.CHAINMAIL_BOOTS, 1);
+                        break;
+                    default:
+                        itemStack = null;
+                        break;
+                }
+
+                if (itemStack != null)
+                {
+                    EnchantmentHelper.enchantItem(random, itemStack, playerCount * 2 + 10, true);
+                    //this.spawnAtLocation(itemStack);
+
+                    CommonFunctions.SafeSendMsgToPlayer(player, MessageDef.BOSS_DROP, itemStack.getDisplayName());
+                    player.addItem(itemStack);
+                    AdvancementUtil.giveAdvancement(player, AdvancementUtil.ACHV_ROOT);
+                    level.playSound(null, getOnPos(), ModSounds.PICKUP.get(), SoundSource.HOSTILE, 1f,1f);
+                }
+
             }
         }
     }

@@ -51,19 +51,7 @@ public class EntityRevivalMist extends Entity {
                 //But will not revive when it's too far from players. Minecraft will despawn it, and thus keep cycling.
                 if (EntityUtil.getEntitiesWithinAABB(level, EntityType.PLAYER, getEyePosition(0),  64, EntityUtil.NON_SPEC).size() != 0)
                 {
-                    Entity entity = entityType.create(level);
-                    if (entity instanceof LivingEntity)
-                    {
-                        entity.load(entityNBT);
-                        entity.copyPosition(this);
-                        entity.setUUID(UUID.randomUUID());
-                        ((LivingEntity) entity).deathTime = 0;
-                        entity.revive();
-                        ((LivingEntity) entity).setHealth(((LivingEntity) entity).getMaxHealth());
-                        level.addFreshEntity(entity);
-                    }
-                    //IdlFramework.Log("...And with strange aeons even death may die. Recovered: %s@%s", entityType.toString(), getEyePosition(0));
-                    remove(RemovalReason.KILLED);
+                    reviveAndSuicide();
                 }
             }
         }
@@ -73,6 +61,22 @@ public class EntityRevivalMist extends Entity {
                     getZ()+ CommonFunctions.flunctate(0, 0.5f, random),
                     0, 0, 0);
         }
+    }
+
+    public void reviveAndSuicide() {
+        Entity entity = entityType.create(level);
+        if (entity instanceof LivingEntity)
+        {
+            entity.load(entityNBT);
+            entity.copyPosition(this);
+            entity.setUUID(UUID.randomUUID());
+            ((LivingEntity) entity).deathTime = 0;
+            entity.revive();
+            ((LivingEntity) entity).setHealth(((LivingEntity) entity).getMaxHealth());
+            level.addFreshEntity(entity);
+        }
+        //IdlFramework.Log("...And with strange aeons even death may die. Recovered: %s@%s", entityType.toString(), getEyePosition(0));
+        remove(RemovalReason.KILLED);
     }
 
     @Override

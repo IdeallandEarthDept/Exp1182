@@ -87,6 +87,7 @@
   "exp1182.msg.ego.req.ego_door_closer": "Come closer to use the door.",
 
   "exp1182.msg.boss.ready": "World Boss Appeared. Check your backpack for invitation. You may shift+RMB that invitation to unsubscibe this notification.",
+  "exp1182.msg.boss.drop": "You get : %s",
 
   "item.exp1182.spawn_worldboss": "Spawn World Boss",
   "item.exp1182.spawn_worldboss.desc": "Spawn a World Boss, use sparingly!",

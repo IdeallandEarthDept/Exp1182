@@ -264,4 +264,10 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
             this.spawnAtLocation(itemStack);
         }
     }
+
+    @Override
+    public boolean hurt(DamageSource p_21016_, float p_21017_) {
+        invulnerableTime = 0;
+        return super.hurt(p_21016_, p_21017_);
+    }
 }

@@ -86,14 +86,19 @@ public class MotorBlockEntityBase extends BlockEntity {
                                 te.getBlockPos().getY() + 1f,
                                 te.getBlockPos().getZ() + 0.5f), 0.5f, EntityUtil.NON_SPEC);
 
-                for (Entity living:
-                        entityList) {
+                //naturally falls down. Teleport in laggy servers will cause the play to fall through.
+                if (te.getOffset().getY() >= 0)
+                {
+                    for (Entity living:
+                            entityList) {
 
-                    living.teleportTo(living.getX() + te.getOffset().getX(),
-                            living.getY() + te.getOffset().getY(),
-                            living.getZ() + te.getOffset().getZ());
+                        living.teleportTo(living.getX() + te.getOffset().getX(),
+                                living.getY() + te.getOffset().getY(),
+                                living.getZ() + te.getOffset().getZ());
 
+                    }
                 }
+
                 te.setRemoved();
                 //find entities
             }

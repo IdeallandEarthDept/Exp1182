@@ -168,4 +168,10 @@ public class EntityMJDSSkeleton extends Skeleton implements IMjdsMonster{
     protected SoundEvent getDeathSound() {
         return ModSounds.MONSTER_DEATH.get();
     }
+
+    @Override
+    public boolean hurt(DamageSource p_21016_, float p_21017_) {
+        invulnerableTime = 0;
+        return super.hurt(p_21016_, p_21017_);
+    }
 }
