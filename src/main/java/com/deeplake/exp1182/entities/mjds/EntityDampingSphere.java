@@ -1,6 +1,7 @@
 package com.deeplake.exp1182.entities.mjds;
 
 import com.deeplake.exp1182.Main;
+import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.util.CommonFunctions;
 import com.deeplake.exp1182.util.EntityUtil;
 import net.minecraft.core.BlockPos;
@@ -16,6 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -45,7 +47,7 @@ public class EntityDampingSphere extends Entity {
     float thetaY = 0f;
     float thetaZ = (float) (Math.PI / 3f);
 
-    public class RecordChange{
+    public static class RecordChange{
         public BlockState state = Blocks.AIR.defaultBlockState();
         public BlockPos pos = BlockPos.ZERO;
 
@@ -57,14 +59,9 @@ public class EntityDampingSphere extends Entity {
 
     List<RecordChange> changes = new ArrayList<>();
     protected Logger logger = LogManager.getLogger();
-    //private static final DataParameter<Integer> COUNTER = EntityDataManager.defineId(EntityDampingSphere.class, DataSerializers.INT);
 
     public EntityDampingSphere(EntityType<?> p_i48580_1_, Level p_i48580_2_) {
         super(p_i48580_1_, p_i48580_2_);
-//        if (!level.isClientSide)
-//        {
-//            CommonFunctions.addToEventBus(this);
-//        }
     }
 
     public boolean isInDistance(BlockPos pos)
@@ -74,15 +71,32 @@ public class EntityDampingSphere extends Entity {
     }
 
     @SubscribeEvent
-    public void onBlockChange(BlockEvent.BreakEvent breakEvent)
+    public static void onBlockChange(BlockEvent.BreakEvent breakEvent)
     {
+        Level level1 = breakEvent.getPlayer().level;
         //if (!breakEvent.getPlayer().isCreative())
+        if (level1 != null)
         {
             BlockPos pos = breakEvent.getPos();
-            if (isInDistance(pos))
+            AABB aabb = new AABB(
+                    pos.getX() ^ CHUNK_MASK,
+                    -9999,
+                    pos.getZ() ^ CHUNK_MASK,
+
+                    pos.getX() | CHUNK_MASK,
+                    9999,
+                    pos.getZ() | CHUNK_MASK
+            );
+
+            List<EntityDampingSphere> spheres = level1.getEntitiesOfClass(EntityDampingSphere.class, aabb);
+            for (EntityDampingSphere sphere : spheres)
             {
-                changes.add(new RecordChange(breakEvent.getState(), pos));
+//                if (sphere.isInDistance(pos))
+                {
+                    sphere.changes.add(new RecordChange(breakEvent.getState(), pos));
+                }
             }
+
         }
     }
 
@@ -195,19 +209,5 @@ public class EntityDampingSphere extends Entity {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
-    @SubscribeEvent
-    public static void onInit(EntityJoinWorldEvent event)
-    {
-        if (event.getEntity() instanceof EntityDampingSphere)
-        {
-            CommonFunctions.addToEventBus(event.getEntity());
-        }
-    }
-
-    @Override
-    public void remove(RemovalReason p_146834_) {
-        super.remove(p_146834_);
-        removeFromEventBus(this);
-    }
 }
 
