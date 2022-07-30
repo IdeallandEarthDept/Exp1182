@@ -79,13 +79,13 @@ public class EntityDampingSphere extends Entity {
         {
             BlockPos pos = breakEvent.getPos();
             AABB aabb = new AABB(
-                    pos.getX() ^ CHUNK_MASK,
+                    pos.getX() - 8,
                     -9999,
-                    pos.getZ() ^ CHUNK_MASK,
+                    pos.getZ() - 8,
 
-                    pos.getX() | CHUNK_MASK,
+                    pos.getX() + 8,
                     9999,
-                    pos.getZ() | CHUNK_MASK
+                    pos.getZ() + 8
             );
 
             List<EntityDampingSphere> spheres = level1.getEntitiesOfClass(EntityDampingSphere.class, aabb);
