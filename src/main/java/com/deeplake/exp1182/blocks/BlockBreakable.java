@@ -2,11 +2,9 @@ package com.deeplake.exp1182.blocks;
 
 import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.util.AdvancementUtil;
-import com.deeplake.exp1182.util.CommonDef;
 import com.deeplake.exp1182.util.CommonFunctions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -18,7 +16,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class BlockBreakable extends BaseBlockMJDS implements IBlockMJDS{

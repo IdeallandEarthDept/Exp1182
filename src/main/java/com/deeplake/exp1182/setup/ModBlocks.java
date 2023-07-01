@@ -30,7 +30,7 @@ public class ModBlocks {
     static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Main.MOD_ID);
 
     // Some common properties for our blocks and items
-    public static final BlockBehaviour.Properties BLOCK_PROPERTIES = BlockBehaviour.Properties.of(Material.STONE).strength(2f).requiresCorrectToolForDrops();
+    public static final BlockBehaviour.Properties BLOCK_PROPERTIES = BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops();
 //    public static final RegistryObject<Block> MYSTERIOUS_ORE_DEEPSLATE = BLOCKS.register("mysterious_ore_deepslate", () -> new Block(BLOCK_PROPERTIES));
 //    public static final RegistryObject<Item> MYSTERIOUS_ORE_DEEPSLATE_ITEM = fromBlock(MYSTERIOUS_ORE_DEEPSLATE);
 //    public static final RegistryObject<Block> MYSTERIOUS_ORE_END = BLOCKS.register("mysterious_ore_end", () -> new Block(BLOCK_PROPERTIES));
@@ -47,14 +47,14 @@ public class ModBlocks {
     static final float MAX_BLAST_RESIST = 3600000.0F;
 
     //MJDS Blocks
-    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS = BlockBehaviour.Properties.of(Material.STONE).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS_BLOCK);
-    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS_AIR = BlockBehaviour.Properties.of(Material.STONE).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS_BLOCK).noCollission();
-    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS_DARKNESS = BlockBehaviour.Properties.of(Material.STONE).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS_BLOCK).noCollission().noOcclusion()
+    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS = BlockBehaviour.Properties.of().strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS_BLOCK);
+    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS_AIR = BlockBehaviour.Properties.of().strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS_BLOCK).noCollission();
+    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS_DARKNESS = BlockBehaviour.Properties.of().strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS_BLOCK).noCollission().noOcclusion()
             .isViewBlocking(BaseBlockMJDS::neverDo)
             .isValidSpawn(BaseBlockMJDS::neverDo)
             .isRedstoneConductor(BaseBlockMJDS::neverDo)
             .isSuffocating(BaseBlockMJDS::neverDo);
-    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS_GLASS = BlockBehaviour.Properties.of(Material.GLASS).strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS_BLOCK).noOcclusion();
+    public static final BlockBehaviour.Properties BLOCK_PROP_MJDS_GLASS = BlockBehaviour.Properties.of().strength(-1f, MAX_BLAST_RESIST).noDrops().jumpFactor(JUMP_FACTOR_MJDS_BLOCK).noOcclusion();
 
     static final String NAME_FLAME_BG = "flame_bg";
     static int index = 0;

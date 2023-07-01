@@ -30,7 +30,7 @@ public class BaseBlockEgoDoor extends BaseBlockMJDS {
     MJDSDefine.EnumEgo egoReq = MJDSDefine.EnumEgo.POPLON;
 
     public BaseBlockEgoDoor(MJDSDefine.EnumEgo egoReq) {
-        super(Properties.of(Material.STONE).isSuffocating((p_235445_0_, p_235445_1_, p_235445_2_) -> false));
+        super(Properties.of().isSuffocating((p_235445_0_, p_235445_1_, p_235445_2_) -> false));
         this.egoReq = egoReq;
     }
 

@@ -5,6 +5,7 @@ import net.minecraft.Util;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -103,9 +104,9 @@ public class CommonFunctions {
 
 //    public static void teleportToDimension(Player player, int dimension, double x, double y, double z)
 //    {
-//        int oldDimension = player.level.getWorldProvider.getDimension();
+//        int oldDimension = player.level().getWorldProvider.getDimension();
 //        Player Player = (Player) player;
-//        MinecraftServer server = player.level.getMinecraftServer();
+//        MinecraftServer server = player.level().getMinecraftServer();
 //        WorldServer worldServer = server.getWorld(dimension);
 //        player.addExperienceLevel(0);
 //
@@ -142,15 +143,15 @@ public class CommonFunctions {
     }
 
 //    public static void BroadCastByKey(String key, Object... args) {
-//        FMLCommonLaunchHandler.instance().getMinecraftServerInstance().getPlayerList().sendMessage(new TranslatableComponent(key, args));
+//        FMLCommonLaunchHandler.instance().getMinecraftServerInstance().getPlayerList().displayClientMessage(Component.translatable(key, args));
 //    }
 
     public static void SafeSendMsgToPlayer(LivingEntity player, String key, Object... args)
     {
         //Please note that you can only put %s as arguments. If you put %d, it's not going to translate.
-        if ((!player.level.isClientSide) && player instanceof Player)
+        if ((!player.level().isClientSide) && player instanceof Player)
         {
-            player.sendMessage((new TranslatableComponent(key, args)), Util.NIL_UUID);
+            ((Player) player).displayClientMessage((Component.translatable(key, args)), Util.NIL_UUID);
         }
     }
 
@@ -159,28 +160,28 @@ public class CommonFunctions {
         //Please note that you can only put %s as arguments. If you put %d, it's not going to translate.
         if (player instanceof Player)
         {
-            TranslatableComponent translationTextComponent = new TranslatableComponent(key, args);
+            TranslatableComponent translationTextComponent = Component.translatable(key, args);
             translationTextComponent.withStyle(style);
-            player.sendMessage(translationTextComponent, Util.NIL_UUID);
+            player.displayClientMessage(translationTextComponent, Util.NIL_UUID);
         }
     }
 
     public static void SendMsgToPlayer(Player playerMP, String key)
     {
-        playerMP.sendMessage(new TranslatableComponent(key), Util.NIL_UUID);
+        playerMP.displayClientMessage(Component.translatable(key), Util.NIL_UUID);
     }
 
     public static void SendMsgToPlayerStyled(Player playerMP, String key, Style style, Object... args)
     {
-        TranslatableComponent TranslatableComponent = new TranslatableComponent(key, args);
+        TranslatableComponent TranslatableComponent = Component.translatable(key, args);
         TranslatableComponent.withStyle(style);
-        playerMP.sendMessage(TranslatableComponent, Util.NIL_UUID);
+        playerMP.displayClientMessage(TranslatableComponent, Util.NIL_UUID);
     }
 
 
     public static void SendMsgToPlayer(Player playerMP, String key, Object... args)
     {
-        playerMP.sendMessage((new TranslatableComponent(key, args)), Util.NIL_UUID);
+        playerMP.displayClientMessage((Component.translatable(key, args)), Util.NIL_UUID);
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -378,7 +379,7 @@ public class CommonFunctions {
 
     public static void sendBasicMsg(ItemStack stack, Player player, int index)
     {
-        if (player.level.isClientSide)
+        if (player.level().isClientSide)
         {
             return;
         }

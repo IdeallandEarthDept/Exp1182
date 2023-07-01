@@ -29,9 +29,9 @@ public class PacketGatherMana {
         ctx.enqueueWork(() -> {
             // Here we are server side
             ServerPlayer player = ctx.getSender();
-            int extracted = ManaManager.get(player.level).extractMana(player.blockPosition());
+            int extracted = ManaManager.get(player.level()).extractMana(player.blockPosition());
             if (extracted <= 0) {
-                player.sendMessage(new TranslatableComponent(MESSAGE_NO_MANA).withStyle(ChatFormatting.RED), Util.NIL_UUID);
+                player.sendMessage(Component.translatable(MESSAGE_NO_MANA).withStyle(ChatFormatting.RED), Util.NIL_UUID);
             } else {
                 player.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(playerMana -> {
                     playerMana.addMana(extracted);

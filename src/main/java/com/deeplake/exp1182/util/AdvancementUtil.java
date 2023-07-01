@@ -38,7 +38,7 @@ public class AdvancementUtil {
 
     public static boolean giveAdvancement(Player player, String id)
     {
-        if (player.level.isClientSide)
+        if (player.level().isClientSide)
         {
             return false;
         }
@@ -56,7 +56,7 @@ public class AdvancementUtil {
 
     public static boolean giveAdvancement(Player player, Advancement advancement)
     {
-        if (player.level.isClientSide)
+        if (player.level().isClientSide)
         {
             return false;
         }
@@ -80,7 +80,7 @@ public class AdvancementUtil {
 
     public static boolean hasAdvancement(Player player, String id)
     {
-        if (!player.level.isClientSide)
+        if (!player.level().isClientSide)
         {
             return hasAdvancement((ServerPlayer)player, id);
         }

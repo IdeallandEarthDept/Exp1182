@@ -22,6 +22,6 @@ public class BlockAchvDoor extends BaseBlockEgoDoor{
     @Override
     protected void errorMessage(Player playerEntity) {
         CommonFunctions.SafeSendMsgToPlayer(RED, playerEntity, MessageDef.REQ_ACHV,
-                new TranslatableComponent(String.format("exp1182.advancements.%s.title", achvKey)));
+                Component.translatable(String.format("exp1182.advancements.%s.title", achvKey)));
     }
 }

@@ -1,14 +1,11 @@
 package com.deeplake.exp1182;
 
-import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.setup.ClientSetup;
 import com.deeplake.exp1182.setup.ModConfig;
 import com.deeplake.exp1182.setup.ModSetup;
 import com.deeplake.exp1182.setup.Registration;
-import com.deeplake.exp1182.util.CommonFunctions;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -18,12 +15,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.stream.Collectors;
 
 @Mod(Main.MOD_ID)
 public class Main {

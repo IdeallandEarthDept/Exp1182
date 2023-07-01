@@ -55,7 +55,7 @@
 //
 //    @Override
 //    public void appendHoverText(ItemStack stack, @javax.annotation.Nullable BlockGetter reader, List<Component> list, TooltipFlag flags) {
-//        list.add(new TranslatableComponent(MESSAGE_GENERATOR).withStyle(ChatFormatting.BLUE));
+//        list.add(Component.translatable(MESSAGE_GENERATOR).withStyle(ChatFormatting.BLUE));
 //    }
 //
 //    @Override

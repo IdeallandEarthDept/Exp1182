@@ -39,7 +39,7 @@ public class EventsBulletHit {
                     {
                         projectile.setDeltaMovement(projectile.getDeltaMovement().scale(-1f));
                         event.setCanceled(true);
-                        player.level.playSound(null, player.getOnPos(), DEFLECT.get(), SoundSource.PLAYERS, 1f, 1f);
+                        player.level().playSound(null, player.getOnPos(), DEFLECT.get(), SoundSource.PLAYERS, 1f, 1f);
                     }
                 }
             }

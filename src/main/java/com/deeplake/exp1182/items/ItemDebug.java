@@ -48,7 +48,7 @@ public class ItemDebug extends Item {
                 level.addFreshEntity(boss);
 
                 WorldBossSpawner.executeSpawn();
-                player.sendMessage(new TranslatableComponent(NOTIFY_NEXT, WorldBossSpawner.getNextSpawnTimeString())
+                player.sendMessage(Component.translatable(NOTIFY_NEXT, WorldBossSpawner.getNextSpawnTimeString())
                         .withStyle(ChatFormatting.YELLOW), Util.NIL_UUID);
             }
         }

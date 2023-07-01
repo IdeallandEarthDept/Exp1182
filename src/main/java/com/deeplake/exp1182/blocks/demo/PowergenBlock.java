@@ -59,7 +59,7 @@
 //
 //    @Override
 //    public void appendHoverText(ItemStack stack, @Nullable BlockGetter reader, List<Component> list, TooltipFlag flags) {
-//        list.add(new TranslatableComponent(MESSAGE_POWERGEN, Integer.toString(PowergenConfig.POWERGEN_GENERATE.get()))
+//        list.add(Component.translatable(MESSAGE_POWERGEN, Integer.toString(PowergenConfig.POWERGEN_GENERATE.get()))
 //                .withStyle(ChatFormatting.BLUE));
 //    }
 //
@@ -103,7 +103,7 @@
 //                MenuProvider containerProvider = new MenuProvider() {
 //                    @Override
 //                    public Component getDisplayName() {
-//                        return new TranslatableComponent(SCREEN_TUTORIAL_POWERGEN);
+//                        return Component.translatable(SCREEN_TUTORIAL_POWERGEN);
 //                    }
 //
 //                    @Override

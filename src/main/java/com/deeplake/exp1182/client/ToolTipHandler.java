@@ -42,21 +42,21 @@ public class ToolTipHandler {
         {
             String key = itemType.getDescriptionId() + DESC;
             if (I18n.exists(key)) {
-                event.getToolTip().add(new TranslatableComponent(key));
+                event.getToolTip().add(Component.translatable(key));
             }
 
             if (itemType instanceof ItemTeleport)
             {
                 boolean state = ItemTeleport.isSubscribed(stack);
                 String key2 = state ? KEY_SUBSCRIBED : KEY_UNSUBSCRIBED;
-                event.getToolTip().add(new TranslatableComponent(key2));
+                event.getToolTip().add(Component.translatable(key2));
             }
 
             if (itemType instanceof BlockItem blockItem)
             {
                 if (blockItem.getBlock() instanceof BlockAchvBox blockAchvBox)
                 {
-                    event.getToolTip().add(new TranslatableComponent(String.format(blockAchvBox.getAchvName())));
+                    event.getToolTip().add(Component.translatable(String.format(blockAchvBox.getAchvName())));
                 }
             }
         }

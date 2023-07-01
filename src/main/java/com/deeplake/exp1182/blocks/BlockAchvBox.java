@@ -35,7 +35,7 @@ public class BlockAchvBox extends BaseBlockMJDS {
     Style YELLOW = Style.EMPTY.withColor(TextColor.fromLegacyFormat(ChatFormatting.YELLOW));
 
     public BlockAchvBox(Supplier<Item> sellItemSupp, String achvName) {
-        super(Properties.of(Material.GLASS).noOcclusion().isViewBlocking(BaseBlockMJDS::neverDo));
+        super(Properties.of().noOcclusion().isViewBlocking(BaseBlockMJDS::neverDo));
         this.sellItemSupp = sellItemSupp;
         this.achvName = achvName;
     }
@@ -90,7 +90,7 @@ public class BlockAchvBox extends BaseBlockMJDS {
             if (AdvancementUtil.hasAdvancement(Player, achvName))
             {
                 CommonFunctions.SafeSendMsgToPlayer(YELLOW, Player, MessageDef.BOX_FAIL,
-                        new TranslatableComponent(getAchvName()));
+                        Component.translatable(getAchvName()));
 //                world.playSound(null, pos, ModSounds.PICKUP.get(), SoundSource.BLOCKS, 1f, 1f);
                 return InteractionResult.FAIL;
             }

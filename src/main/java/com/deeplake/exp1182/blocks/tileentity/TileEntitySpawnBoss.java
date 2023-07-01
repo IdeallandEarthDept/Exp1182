@@ -47,7 +47,7 @@ public class TileEntitySpawnBoss extends BlockEntity {
             level.addFreshEntity(boss);
 
 
-//            player.sendMessage(new TranslatableComponent(NOTIFY_NEXT, WorldBossSpawner.getNextSpawnTimeString())
+//            player.sendMessage(Component.translatable(NOTIFY_NEXT, WorldBossSpawner.getNextSpawnTimeString())
 //                    .withStyle(ChatFormatting.YELLOW), Util.NIL_UUID);
         }
     }

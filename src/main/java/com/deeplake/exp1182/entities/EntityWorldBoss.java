@@ -533,7 +533,7 @@ public class EntityWorldBoss extends Monster {
         float percent = getHealth() / getMaxHealth();
         this.bossEvent.setProgress(percent % (perBar) * hpBarDivider);
         this.bossEvent.setColor(BossEvent.BossBarColor.RED);
-        this.bossEvent.setName(new TranslatableComponent(this.getType().getDescription().getString() + String.format(" %d%%", (int)(percent * 100))));
+        this.bossEvent.setName(Component.translatable(this.getType().getDescription().getString() + String.format(" %d%%", (int)(percent * 100))));
 //        Main.Log("HP = %s", getHealth());
     }
 
