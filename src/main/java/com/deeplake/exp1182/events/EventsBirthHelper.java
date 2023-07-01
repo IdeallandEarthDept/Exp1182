@@ -12,7 +12,7 @@ import net.minecraft.world.item.BannerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -30,15 +30,15 @@ public class EventsBirthHelper {
     }
 
     @SubscribeEvent
-    public static void onBirth(LivingSpawnEvent.SpecialSpawn event)
+    public static void onBirth(MobSpawnEvent.FinalizeSpawn event)
     {
-        Level Level = event.getEntityLiving().level;
+        Level Level = event.getEntity().level();
         if (Level.isClientSide)
         {
             return;
         }
 
-        LivingEntity livingEntity = event.getEntityLiving();
+        LivingEntity livingEntity = event.getEntity();
         boolean inMJDS = DesignUtil.isInMJDS(livingEntity);
         //Skeletons -> Skeleton Soldier
         if (livingEntity instanceof Skeleton)
@@ -53,6 +53,6 @@ public class EventsBirthHelper {
 
     @SubscribeEvent
     public static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        AdvancementUtil.giveAdvancement(event.getPlayer(), "root");
+        AdvancementUtil.giveAdvancement(event.getEntity(), "root");
     }
 }
