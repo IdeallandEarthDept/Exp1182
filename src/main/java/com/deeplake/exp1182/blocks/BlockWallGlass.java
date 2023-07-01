@@ -1,8 +1,7 @@
 package com.deeplake.exp1182.blocks;
 
 import net.minecraft.world.level.block.AbstractGlassBlock;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.material.Material;
+
 
 public class BlockWallGlass extends AbstractGlassBlock implements IBlockMJDS{
     public BlockWallGlass() {

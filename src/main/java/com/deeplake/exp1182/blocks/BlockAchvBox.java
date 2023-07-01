@@ -9,10 +9,11 @@ import com.deeplake.exp1182.util.MessageDef;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -20,10 +21,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
 public class BlockAchvBox extends BaseBlockMJDS {
@@ -65,7 +64,7 @@ public class BlockAchvBox extends BaseBlockMJDS {
     }
 
     @Override
-    public void animateTick(BlockState p_180655_1_, Level world, BlockPos pos, Random random) {
+    public void animateTick(BlockState p_180655_1_, Level world, BlockPos pos, RandomSource random) {
         super.animateTick(p_180655_1_, world, pos, random);
         if (world.isClientSide)
         {

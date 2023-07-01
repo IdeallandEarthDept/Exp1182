@@ -6,13 +6,10 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-
-import static net.minecraft.world.level.material.Material.*;
 
 public class BlockIllusion extends BaseBlockMJDS  {
     public BlockIllusion(Properties p_49795_) {
-        super(Properties.of(STONE)
+        super(Properties.of()
                 .strength(-1.0F, 3600000.0F)
                 .noCollission());
     }

@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -60,6 +61,11 @@ public class CommonFunctions {
     }
 
     public static double flunctate(double ori, double radius, Random random)
+    {
+        return ori + (random.nextFloat() * 2 - 1) * radius;
+    }
+
+    public static double flunctate(double ori, double radius, RandomSource random)
     {
         return ori + (random.nextFloat() * 2 - 1) * radius;
     }
