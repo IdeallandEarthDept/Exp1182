@@ -8,20 +8,14 @@ import com.deeplake.exp1182.entities.client.render.BossRenderer;
 import com.deeplake.exp1182.entities.client.render.HumanoidRenderer;
 import com.deeplake.exp1182.entities.client.render.ShowerMonsterRenderer;
 import com.deeplake.exp1182.entities.client.render.VoidRenderer;
-import com.deeplake.exp1182.manasystem.client.KeyBindings;
-import com.deeplake.exp1182.manasystem.client.KeyInputHandler;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.BatRenderer;
 import net.minecraft.client.renderer.entity.BlazeRenderer;
 import net.minecraft.client.renderer.entity.SkeletonRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -31,22 +25,11 @@ public class ClientSetup {
 
     public static void init(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-//            MenuScreens.register(ModBlocks.POWERGEN_CONTAINER.get(), PowergenScreen::new);
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.SP_GLASS.get(), RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(ModBlocks.DARKNESS.get(), RenderType.translucent());
-//            PowergenRenderer.register();
-
         });
-        MinecraftForge.EVENT_BUS.addListener(KeyInputHandler::onKeyInput);
-        KeyBindings.init();
 
         ModSounds.initMusic();
-//        OverlayRegistry.registerOverlayAbove(HOTBAR_ELEMENT, "name", ManaOverlay.HUD_MANA);
-    }
-
-    @SubscribeEvent
-    public static void onModelRegistryEvent(ModelRegistryEvent event) {
-//        ModelLoaderRegistry.registerLoader(GeneratorModelLoader.GENERATOR_LOADER, new GeneratorModelLoader());
     }
 
     @SubscribeEvent
@@ -70,13 +53,5 @@ public class ClientSetup {
         event.registerEntityRenderer(ModEntities.CLOUD_MONSTER.get(), HumanoidRenderer::new);
         event.registerEntityRenderer(ModEntities.SHOWER_MONSTER.get(), ShowerMonsterRenderer::new);
         event.registerEntityRenderer(ModEntities.BAT.get(), BatRenderer::new);
-    }
-
-    @SubscribeEvent
-    public static void onTextureStitch(TextureStitchEvent.Pre event) {
-        if (!event.getAtlas().location().equals(TextureAtlas.LOCATION_BLOCKS)) {
-            return;
-        }
-//        event.addSprite(PowergenRenderer.HALO);
     }
 }

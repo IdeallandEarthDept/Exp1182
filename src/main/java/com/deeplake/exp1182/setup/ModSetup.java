@@ -1,10 +1,9 @@
 package com.deeplake.exp1182.setup;
 
 import com.deeplake.exp1182.Main;
-import com.deeplake.exp1182.manasystem.data.ManaEvents;
 import com.deeplake.exp1182.worldgen.dimensions.Dimensions;
 import com.deeplake.exp1182.worldgen.ores.Ores;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -17,20 +16,17 @@ public class ModSetup {
 
     public static final String TAB_NAME = "tab1";
 
-    public static final CreativeModeTab ITEM_GROUP = new CreativeModeTab(Main.MOD_ID + "." +TAB_NAME) {
-        @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(ModBlocks.FLAME_FLOOR.get());
-        }
-    };
-
+    public static final CreativeModeTab ITEM_GROUP =
+            CreativeModeTab.builder()
+                    .title(Component.translatable(Main.MOD_ID + "." +TAB_NAME))
+                    .icon(() -> {
+                        return new ItemStack(ModBlocks.FLAME_FLOOR.get());
+                    })
+                    .build();
+    
     public static void setup() {
         IEventBus bus = MinecraftForge.EVENT_BUS;
         bus.addListener(Ores::onBiomeLoadingEvent);
-        bus.addGenericListener(Entity.class, ManaEvents::onAttachCapabilitiesPlayer);
-        bus.addListener(ManaEvents::onPlayerCloned);
-        bus.addListener(ManaEvents::onRegisterCapabilities);
-        bus.addListener(ManaEvents::onWorldTick);
     }
 
     public static void init(FMLCommonSetupEvent event) {
