@@ -30,8 +30,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import javax.annotation.Nullable;
 
 import static com.deeplake.exp1182.util.IDLNBTDef.SPAWN_POINT;
-import static net.minecraft.nbt.NbtUtils.readBlockPos;
-import static net.minecraft.nbt.NbtUtils.writeBlockPos;
 
 public class EntityMJDSBat extends Bat implements IMjdsMonster  {
     public BlockPos spawnPoint;
@@ -96,7 +94,7 @@ public class EntityMJDSBat extends Bat implements IMjdsMonster  {
 
     protected void dealDamage(LivingEntity p_175451_1_) {
         if (this.isAlive()) {
-            if (this.distanceToSqr(p_175451_1_) < 0.6D && this.hasLineOfSight(p_175451_1_) && p_175451_1_.hurt(DamageSource.mobAttack(this), this.getAttackDamage())) {
+            if (this.distanceToSqr(p_175451_1_) < 0.6D && this.hasLineOfSight(p_175451_1_) && p_175451_1_.hurt(level().damageSources().mobAttack(this), this.getAttackDamage())) {
                 this.playSound(SoundEvents.BAT_TAKEOFF, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
                 this.doEnchantDamageEffects(this, p_175451_1_);
             }
@@ -132,7 +130,7 @@ public class EntityMJDSBat extends Bat implements IMjdsMonster  {
     public boolean hurt(DamageSource p_70097_1_, float p_70097_2_) {
         if (this.isInvulnerableTo(p_70097_1_)) {
             return false;
-        } else if (p_70097_1_ == DamageSource.CRAMMING || p_70097_1_ == DamageSource.IN_WALL) {
+        } else if (p_70097_1_ == level().damageSources().cramming() || p_70097_1_ == level().damageSources().inWall()) {
             return false;
         }
         invulnerableTime = 0;
@@ -147,7 +145,7 @@ public class EntityMJDSBat extends Bat implements IMjdsMonster  {
         return SoundEvents.HOSTILE_DEATH;
     }
 
-    protected boolean shouldDropExperience() {
+    public boolean shouldDropExperience() {
         return true;
     }
 
@@ -197,13 +195,13 @@ public class EntityMJDSBat extends Bat implements IMjdsMonster  {
         super.remove(p_146834_);
         if (p_146834_ == RemovalReason.KILLED || p_146834_ == RemovalReason.DISCARDED)
         {
-            if (!level.isClientSide && DesignUtil.canRevive(this))
+            if (!level().isClientSide && DesignUtil.canRevive(this))
             {
                 //IdlFramework.Log("That is not dead which can eternal lie...");
-                EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level);
+                EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level());
                 mist.setWith(this);
                 mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
-                level.addFreshEntity(mist);
+                level().addFreshEntity(mist);
             }
         }
     }

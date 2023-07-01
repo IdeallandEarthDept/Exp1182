@@ -78,7 +78,7 @@ public class BaseBlockEgoDoor extends BaseBlockMJDS {
                         thisPos.z + Math.signum(delta.z))
                         ;
                 playerEntity.level().levelEvent(playerEntity, 1013, pos, 0);
-                world.playSound(null, pos, ModSounds.DOOR_COMBINED.get(), SoundSource.BLOCKS, 1f, 1f);
+                world.playSound(null, pos, ModSounds.DOOR_COMBINED, SoundSource.BLOCKS, 1f, 1f);
             }
 
             return InteractionResult.SUCCESS;
@@ -87,7 +87,7 @@ public class BaseBlockEgoDoor extends BaseBlockMJDS {
             if (!world.isClientSide)
             {
                 errorMessage(playerEntity);
-                world.playSound(null, pos, ModSounds.ERROR.get(), SoundSource.BLOCKS, 1f, 1f);
+                world.playSound(null, pos, ModSounds.ERROR, SoundSource.BLOCKS, 1f, 1f);
             }
             return InteractionResult.FAIL;
         }

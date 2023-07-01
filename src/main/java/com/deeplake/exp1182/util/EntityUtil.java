@@ -10,7 +10,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -92,15 +91,15 @@ public class EntityUtil {
     {
         public boolean apply(@Nullable Entity entity)
         {
-            return entity != null && entity.level.canSeeSky(new BlockPos(entity.getX(), entity.getY() + (double)entity.getEyeHeight(), entity.getZ()));
+            return entity != null && entity.level().canSeeSky(new BlockPos((int) entity.getX(), (int) (entity.getY() + (double)entity.getEyeHeight()), (int) entity.getZ()));
         }
     };
 
-    public static boolean isSunlit(Entity entity)
-    {
-        float f = entity.getBrightness();
-        return  f > 0.5F && UNDER_SKY.apply(entity);
-    }
+//    public static boolean isSunlit(Entity entity)
+//    {
+//        float f = entity.getBrightness();
+//        return  f > 0.5F && UNDER_SKY.apply(entity);
+//    }
 
     public static boolean isMoonlit(Entity entity)
     {
@@ -109,7 +108,7 @@ public class EntityUtil {
             return false;
         }
 
-        int tickInDay = (int) (entity.level.getGameTime() % 24000);
+        int tickInDay = (int) (entity.level().getGameTime() % 24000);
         if (tickInDay > 167 && tickInDay < 11834)
         {
             return false;

@@ -215,7 +215,7 @@ public class EntityWorldBoss extends Monster {
                                 level().addFreshEntity(entity);
                             }
 
-                            playSound(ModSounds.MONSTER_SHOOT_1.get(), 2f, 1f);
+                            playSound(ModSounds.MONSTER_SHOOT_1, 2f, 1f);
                         }
                     }
                     else {
@@ -561,12 +561,12 @@ public class EntityWorldBoss extends Monster {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource p_33579_) {
-        return ModSounds.MONSTER_HURT.get();
+        return ModSounds.MONSTER_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return ModSounds.MONSTER_DEATH.get();
+        return ModSounds.MONSTER_DEATH;
     }
 
     @Override
@@ -608,7 +608,7 @@ public class EntityWorldBoss extends Monster {
                     CommonFunctions.SafeSendMsgToPlayer(player, MessageDef.BOSS_DROP, itemStack.getDisplayName());
                     player.addItem(itemStack);
                     AdvancementUtil.giveAdvancement(player, AdvancementUtil.ACHV_ROOT);
-                    level().playSound(null, getOnPos(), ModSounds.PICKUP.get(), SoundSource.HOSTILE, 1f,1f);
+                    level().playSound(null, getOnPos(), ModSounds.PICKUP, SoundSource.HOSTILE, 1f,1f);
                 }
 
             }

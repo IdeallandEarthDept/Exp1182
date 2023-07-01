@@ -7,33 +7,28 @@ import com.deeplake.exp1182.util.EntityUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Blaze;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.ProjectileImpactEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import javax.annotation.Nullable;
 
-import static com.deeplake.exp1182.events.EventsBirthHelper.makeBannerShield;
 import static com.deeplake.exp1182.util.IDLNBTDef.SPAWN_POINT;
 import static net.minecraft.nbt.NbtUtils.readBlockPos;
 import static net.minecraft.nbt.NbtUtils.writeBlockPos;
@@ -54,8 +49,8 @@ public class EntityMJDSBlaze extends Blaze implements IMjdsMonster{
     protected boolean isSunBurnTick() {
         return false;
     }
-    protected void populateDefaultEquipmentSlots(DifficultyInstance p_180481_1_) {
-        super.populateDefaultEquipmentSlots(p_180481_1_);
+    protected void populateDefaultEquipmentSlots(RandomSource randomSource, DifficultyInstance p_180481_1_) {
+        super.populateDefaultEquipmentSlots(randomSource, p_180481_1_);
         spawnPoint = blockPosition();
     }
     @Override
@@ -67,13 +62,13 @@ public class EntityMJDSBlaze extends Blaze implements IMjdsMonster{
         super.remove(p_146834_);
         if (p_146834_ == RemovalReason.KILLED || p_146834_ == RemovalReason.DISCARDED)
         {
-            if (!level.isClientSide && DesignUtil.canRevive(this))
+            if (!level().isClientSide && DesignUtil.canRevive(this))
             {
                 //IdlFramework.Log("That is not dead which can eternal lie...");
-                EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level);
+                EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level());
                 mist.setWith(this);
                 mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
-                level.addFreshEntity(mist);
+                level().addFreshEntity(mist);
             }
         }
     }
@@ -85,7 +80,7 @@ public class EntityMJDSBlaze extends Blaze implements IMjdsMonster{
             if (stack.getItem() instanceof ArmorItem)
             {
                 ArmorItem armorItem = (ArmorItem) stack.getItem();
-                setItemSlot(armorItem.getSlot(), stack.copy());
+                setItemSlot(armorItem.getEquipmentSlot(), stack.copy());
             }
             else if (stack.getItem() instanceof ShieldItem)
             {
@@ -128,12 +123,12 @@ public class EntityMJDSBlaze extends Blaze implements IMjdsMonster{
 
     @Override
     protected SoundEvent getHurtSound(DamageSource p_33579_) {
-        return ModSounds.MONSTER_HURT.get();
+        return ModSounds.MONSTER_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return ModSounds.MONSTER_DEATH.get();
+        return ModSounds.MONSTER_DEATH;
     }
 
     @Override

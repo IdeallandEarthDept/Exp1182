@@ -15,11 +15,11 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
@@ -38,7 +38,6 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.HashSet;
-import java.util.List;
 
 import static com.deeplake.exp1182.util.IDLNBTDef.SPAWN_POINT;
 import static net.minecraft.nbt.NbtUtils.readBlockPos;
@@ -85,7 +84,7 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
     @Override
     public void aiStep() {
         LivingEntity target = getTarget();
-        if (!level.isClientSide) {
+        if (!level().isClientSide) {
             boolean hasTarget = target != null && target.isAlive();
             setGlowingTag(hasTarget);
             if (hasTarget) {
@@ -95,15 +94,15 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
 
                         AbstractHurtingProjectile bulletPierece =
                                 new EntityMJDSBulletPierece(
-                                        level,
+                                        level(),
                                         this.getX(),
                                         this.getEyeY(),
                                         this.getZ(),
                                         dir.x,
                                         dir.y,
                                         dir.z);
-                        level.addFreshEntity(bulletPierece);
-                        playSound(ModSounds.MONSTER_SHOOT_1.get(), 2f, 1f);
+                        level().addFreshEntity(bulletPierece);
+                        playSound(ModSounds.MONSTER_SHOOT_1, 2f, 1f);
                     }
                     counter++;
                 } else {
@@ -131,7 +130,7 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
     }
 
     protected boolean teleport() {
-        if (!this.level.isClientSide() && this.isAlive()) {
+        if (!this.level().isClientSide() && this.isAlive()) {
             double d0 = this.getX() + (this.random.nextDouble() - 0.5D) * 64.0D;
             double d1 = this.getY() + (double)(this.random.nextInt(64) - 32);
             double d2 = this.getZ() + (this.random.nextDouble() - 0.5D) * 64.0D;
@@ -155,19 +154,19 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
     private boolean teleport(double p_32544_, double p_32545_, double p_32546_) {
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(p_32544_, p_32545_, p_32546_);
 
-        while(blockpos$mutableblockpos.getY() > this.level.getMinBuildHeight() && !this.level.getBlockState(blockpos$mutableblockpos).getMaterial().blocksMotion()) {
+        while(blockpos$mutableblockpos.getY() > this.level().getMinBuildHeight() && !this.level().getBlockState(blockpos$mutableblockpos).blocksMotion()) {
             blockpos$mutableblockpos.move(Direction.DOWN);
         }
 
-        BlockState blockstate = this.level.getBlockState(blockpos$mutableblockpos);
-        boolean flag = blockstate.getMaterial().blocksMotion() && blockstate.getBlock() instanceof IBlockMJDS;
+        BlockState blockstate = this.level().getBlockState(blockpos$mutableblockpos);
+        boolean flag = blockstate.blocksMotion() && blockstate.getBlock() instanceof IBlockMJDS;
         boolean flag1 = blockstate.getFluidState().is(FluidTags.WATER);
         if (flag && !flag1) {
             net.minecraftforge.event.entity.EntityTeleportEvent.EnderEntity event = net.minecraftforge.event.ForgeEventFactory.onEnderTeleport(this, p_32544_, p_32545_, p_32546_);
             if (event.isCanceled()) return false;
             boolean flag2 = this.randomTeleport(event.getTargetX(), event.getTargetY(), event.getTargetZ(), true);
             if (flag2 && !this.isSilent()) {
-                this.level.playSound((Player)null, this.xo, this.yo, this.zo, SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 1.0F, 1.0F);
+                this.level().playSound((Player)null, this.xo, this.yo, this.zo, SoundEvents.ENDERMAN_TELEPORT, this.getSoundSource(), 1.0F, 1.0F);
                 this.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 1.0F);
             }
 
@@ -179,12 +178,12 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource p_33579_) {
-        return ModSounds.MONSTER_HURT.get();
+        return ModSounds.MONSTER_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return ModSounds.MONSTER_DEATH.get();
+        return ModSounds.MONSTER_DEATH;
     }
 
     @Override
@@ -216,13 +215,13 @@ public class EntityMJDSCloudMonster extends Monster implements IMjdsMonster {
         super.remove(p_146834_);
         if (p_146834_ == RemovalReason.KILLED || p_146834_ == RemovalReason.DISCARDED)
         {
-            if (!level.isClientSide && DesignUtil.canRevive(this))
+            if (!level().isClientSide && DesignUtil.canRevive(this))
             {
                 //IdlFramework.Log("That is not dead which can eternal lie...");
-                EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level);
+                EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level());
                 mist.setWith(this);
                 mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
-                level.addFreshEntity(mist);
+                level().addFreshEntity(mist);
             }
         }
     }

@@ -2,9 +2,16 @@ package com.deeplake.exp1182.setup;
 
 import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.client.ModSounds;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.RegisterEvent;
+
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class Registration {
 
@@ -18,7 +25,8 @@ public class Registration {
         ModBlocks.BLOCK_ENTITIES.register(bus);
 //        CONTAINERS.register(bus);
         ModEntities.ENTITIES.register(bus);
-        ModSounds.SOUNDS.register(bus);
+        bind(Registries.SOUND_EVENT, ModSounds::init);
+
         ModEffects.EFFECTS.register(bus);
 //        STRUCTURES.register(bus);
     }
@@ -30,5 +38,11 @@ public class Registration {
 //    public static final TagKey<Biome> HAS_PORTAL = TagKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(Main.MOD_ID, "has_structure/portal"));
 //    public static final TagKey<Biome> HAS_THIEFDEN = TagKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(Main.MOD_ID, "has_structure/thiefden"));
 //    public static final TagKey<StructureSet> MYSTERIOUS_DIMENSION_STRUCTURE_SET = TagKey.create(Registry.STRUCTURE_SET_REGISTRY, RL_MYSTERIOUS_DIMENSION_SET);
-
+    private static <T> void bind(ResourceKey<Registry<T>> registry, Consumer<BiConsumer<T, ResourceLocation>> source) {
+        FMLJavaModLoadingContext.get().getModEventBus().addListener((RegisterEvent event) -> {
+            if (registry.equals(event.getRegistryKey())) {
+                source.accept((t, rl) -> event.register(registry, rl, () -> t));
+            }
+        });
+    }
 }

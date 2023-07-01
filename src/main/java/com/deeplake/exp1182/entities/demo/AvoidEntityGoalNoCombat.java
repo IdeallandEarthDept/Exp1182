@@ -47,8 +47,8 @@ public class AvoidEntityGoalNoCombat<T extends LivingEntity> extends Goal {
     * method as well.
     */
    public boolean canUse() {
-      List<T> entitiesOfClass = this.mob.level.getEntitiesOfClass(this.avoidClass, this.mob.getBoundingBox().inflate(this.maxDist, 3.0D, this.maxDist), (ent) -> true);
-      this.toAvoid = this.mob.level.getNearestEntity(entitiesOfClass, this.avoidEntityTargeting, this.mob, this.mob.getX(), this.mob.getY(), this.mob.getZ());
+      List<T> entitiesOfClass = this.mob.level().getEntitiesOfClass(this.avoidClass, this.mob.getBoundingBox().inflate(this.maxDist, 3.0D, this.maxDist), (ent) -> true);
+      this.toAvoid = this.mob.level().getNearestEntity(entitiesOfClass, this.avoidEntityTargeting, this.mob, this.mob.getX(), this.mob.getY(), this.mob.getZ());
       if (this.toAvoid == null) {
          return false;
       } else {

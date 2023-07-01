@@ -41,8 +41,8 @@ public class EventsJumpHelper {
     @SubscribeEvent
     public static void onFall(LivingFallEvent event)
     {
-        Level world = event.getEntity().level;
-        LivingEntity livingEntity = event.getEntityLiving();
+        Level world = event.getEntity().level();
+        LivingEntity livingEntity = event.getEntity();
 
         //takes no damage if near MJDS
         for (BlockPos pos: posDeltaList) {
@@ -71,7 +71,7 @@ public class EventsJumpHelper {
                 {
                     if (livingEntity instanceof Player)
                     {
-                        livingEntity.playSound(ModSounds.FALL.get(), 1f, 1f);
+                        livingEntity.playSound(ModSounds.FALL, 1f, 1f);
                     }
                 }
                 return;
@@ -82,12 +82,12 @@ public class EventsJumpHelper {
     @SubscribeEvent
     public static void onJump(LivingEvent.LivingJumpEvent event)
     {
-        Level world = event.getEntity().level;
-        LivingEntity livingEntity = event.getEntityLiving();
+        Level world = event.getEntity().level();
+        LivingEntity livingEntity = event.getEntity();
         if (world.isClientSide)//Yep. Client for players
         {
 
-            if (!livingEntity.isOnGround())
+            if (!livingEntity.onGround())
             {
                 return;
             }
@@ -122,7 +122,7 @@ public class EventsJumpHelper {
 
                 if (livingEntity instanceof Player player)
                 {
-                    player.playSound(ModSounds.JUMP.get(), 4f, 1f);
+                    player.playSound(ModSounds.JUMP, 4f, 1f);
                 }
             }
         }
@@ -130,7 +130,7 @@ public class EventsJumpHelper {
 
     //copied from net.minecraft.entity.Entity
     public static BlockPos getBlockPosBelowThatAffectsMyMovement(Entity entity) {
-        return new BlockPos(entity.position().x, entity.getBoundingBox().minY - 0.5000001D, entity.position().z);
+        return new BlockPos((int) entity.position().x, (int) (entity.getBoundingBox().minY - 0.5000001D), (int) entity.position().z);
     }
 
     static float getFactor(Level world, BlockPos pos, Entity entity)

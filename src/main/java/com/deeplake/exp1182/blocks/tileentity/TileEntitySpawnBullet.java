@@ -28,7 +28,7 @@ public class TileEntitySpawnBullet extends BlockEntity {
                 {
                     Vec3i dir = direction.getNormal();
                     BlockState state = level.getBlockState(getBlockPos().offset(dir));
-                    if (!state.getMaterial().blocksMotion())
+                    if (!state.canOcclude())//originally material.block motion
                     {
                         AbstractHurtingProjectile bulletPierece =
                                 new EntityMJDSBulletKB(

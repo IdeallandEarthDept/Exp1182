@@ -9,7 +9,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -39,7 +38,7 @@ public class EventsBulletHit {
                     {
                         projectile.setDeltaMovement(projectile.getDeltaMovement().scale(-1f));
                         event.setCanceled(true);
-                        player.level().playSound(null, player.getOnPos(), DEFLECT.get(), SoundSource.PLAYERS, 1f, 1f);
+                        player.level().playSound(null, player.getOnPos(), DEFLECT, SoundSource.PLAYERS, 1f, 1f);
                     }
                 }
             }

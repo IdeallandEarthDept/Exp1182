@@ -96,7 +96,7 @@ public class BlockAchvBox extends BaseBlockMJDS {
             else {
                 AdvancementUtil.giveAdvancement(Player, achvName);
                 Player.addItem(getAwardStack(state, world, pos, Player, hand, blockRayTraceResult));
-                world.playSound(null, pos, ModSounds.PICKUP.get(), SoundSource.BLOCKS, 1f, 1f);
+                world.playSound(null, pos, ModSounds.PICKUP, SoundSource.BLOCKS, 1f, 1f);
                 return InteractionResult.SUCCESS;
             }
         }

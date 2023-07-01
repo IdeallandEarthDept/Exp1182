@@ -7,8 +7,6 @@ import com.deeplake.exp1182.util.CommonDef;
 import com.deeplake.exp1182.util.DesignUtil;
 import com.deeplake.exp1182.util.EntityUtil;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
@@ -26,23 +24,16 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Turtle;
 import net.minecraft.world.entity.monster.Monster;
-
-import net.minecraft.world.entity.monster.Vex;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
-import java.util.Random;
 
 import static com.deeplake.exp1182.util.IDLNBTDef.SPAWN_POINT;
 import static net.minecraft.nbt.NbtUtils.readBlockPos;
@@ -104,7 +95,7 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
         LivingEntity target = getTarget();
         boolean hasTarget = target != null && target.isAlive();
         this.setGlowingTag(hasTarget);
-        if (!level.isClientSide && hasTarget)
+        if (!level().isClientSide && hasTarget)
         {
             if (counter < MAX_COUNTER)
             {
@@ -125,17 +116,17 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
 
                             AbstractHurtingProjectile bulletPierece =
                                     new EntityMJDSBulletShower(
-                                            level,
+                                            level(),
                                             this.getX(),
                                             this.getEyeY(),
                                             this.getZ(),
                                             dir.x,
                                             dir.y,
                                             dir.z);
-                            level.addFreshEntity(bulletPierece);
+                            level().addFreshEntity(bulletPierece);
                         }
 
-                        playSound(ModSounds.MONSTER_SHOOT_2.get(), 2f, 1f);
+                        playSound(ModSounds.MONSTER_SHOOT_2, 2f, 1f);
                     } else {
                         setNoAi(false);
                     }
@@ -155,12 +146,12 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
 
     @Override
     protected SoundEvent getHurtSound(DamageSource p_33579_) {
-        return ModSounds.MONSTER_HURT.get();
+        return ModSounds.MONSTER_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return ModSounds.MONSTER_DEATH.get();
+        return ModSounds.MONSTER_DEATH;
     }
 
     @Override
@@ -190,13 +181,13 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
 //    @Override
 //    public void onRemovedFromWorld() {
 //        super.onRemovedFromWorld();
-//        if (!level.isClientSide && DesignUtil.canRevive(this))
+//        if (!level().isClientSide && DesignUtil.canRevive(this))
 //        {
 //            //IdlFramework.Log("That is not dead which can eternal lie...");
-//            EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level);
+//            EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level());
 //            mist.setWith(this);
 //            mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
-//            level.addFreshEntity(mist);
+//            level().addFreshEntity(mist);
 //        }
 //    }
 
@@ -253,7 +244,7 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
             //only in X dir
             for(int i = 0; i < 3; ++i) {
                 BlockPos blockpos1 = blockpos.offset(EntityMJDSStoneEmitter.this.random.nextInt(15) - 7, EntityMJDSStoneEmitter.this.random.nextInt(11) - 5, 0);
-                if (EntityMJDSStoneEmitter.this.level.isEmptyBlock(blockpos1)) {
+                if (EntityMJDSStoneEmitter.this.level().isEmptyBlock(blockpos1)) {
                     EntityMJDSStoneEmitter.this.moveControl.setWantedPosition((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 0.25D);
                     if (EntityMJDSStoneEmitter.this.getTarget() == null) {
                         EntityMJDSStoneEmitter.this.getLookControl().setLookAt((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 180.0F, 20.0F);
@@ -270,13 +261,13 @@ public class EntityMJDSStoneEmitter extends Monster implements IMjdsMonster {
         super.remove(p_146834_);
         if (p_146834_ == RemovalReason.KILLED || p_146834_ == RemovalReason.DISCARDED)
         {
-            if (!level.isClientSide && DesignUtil.canRevive(this))
+            if (!level().isClientSide && DesignUtil.canRevive(this))
             {
                 //IdlFramework.Log("That is not dead which can eternal lie...");
-                EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level);
+                EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level());
                 mist.setWith(this);
                 mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
-                level.addFreshEntity(mist);
+                level().addFreshEntity(mist);
             }
         }
     }

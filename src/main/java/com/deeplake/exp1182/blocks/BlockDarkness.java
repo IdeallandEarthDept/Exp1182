@@ -1,15 +1,13 @@
 package com.deeplake.exp1182.blocks;
 
 import com.deeplake.exp1182.util.AdvancementUtil;
-import com.deeplake.exp1182.util.EntityUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.effect.MobEffect;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -18,15 +16,13 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import java.util.Random;
-
 public class BlockDarkness extends BaseBlockMJDS{
     public BlockDarkness(Properties p_49795_) {
         super(p_49795_);
     }
 
     @Override
-    public void animateTick(BlockState p_49888_, Level level, BlockPos pos, Random random) {
+    public void animateTick(BlockState p_49888_, Level level, BlockPos pos, RandomSource random) {
         super.animateTick(p_49888_, level, pos, random);
         if (random.nextInt() % 100 == 0)
         {
@@ -41,7 +37,7 @@ public class BlockDarkness extends BaseBlockMJDS{
         {
             if (!AdvancementUtil.hasAdvancement(player, AdvancementUtil.CANDLE))
             {
-                player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS,30, 0, true, false, true, null));
+                player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS,30, 0, true, false));
             }
         }
     }
