@@ -7,6 +7,7 @@ import com.deeplake.exp1182.util.EntityUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -14,9 +15,8 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -50,8 +50,8 @@ public class EntityMJDSSkeleton extends Skeleton implements IMjdsMonster{
         return false;
     }
 
-    protected void populateDefaultEquipmentSlots(DifficultyInstance p_180481_1_) {
-        super.populateDefaultEquipmentSlots(p_180481_1_);
+    protected void populateDefaultEquipmentSlots(RandomSource source,DifficultyInstance p_180481_1_) {
+        super.populateDefaultEquipmentSlots(source,p_180481_1_);
         this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
         this.setItemSlot(EquipmentSlot.OFFHAND, makeBannerShield(new ItemStack(Items.SHIELD), new ItemStack(Items.WHITE_BANNER)));
 
@@ -63,13 +63,13 @@ public class EntityMJDSSkeleton extends Skeleton implements IMjdsMonster{
         super.remove(p_146834_);
         if (p_146834_ == RemovalReason.KILLED || p_146834_ == RemovalReason.DISCARDED)
         {
-            if (!level.isClientSide && DesignUtil.canRevive(this))
+            if (!level().isClientSide && DesignUtil.canRevive(this))
             {
                 //IdlFramework.Log("That is not dead which can eternal lie...");
-                EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level);
+                EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level());
                 mist.setWith(this);
                 mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
-                level.addFreshEntity(mist);
+                level().addFreshEntity(mist);
             }
         }
     }
@@ -77,13 +77,13 @@ public class EntityMJDSSkeleton extends Skeleton implements IMjdsMonster{
 //    @Override
 //    public void onRemovedFromWorld() {
 //        super.onRemovedFromWorld();
-//        if (!level.isClientSide && DesignUtil.canRevive(this))
+//        if (!level().isClientSide && DesignUtil.canRevive(this))
 //        {
 //            //IdlFramework.Log("That is not dead which can eternal lie...");
-//            EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level);
+//            EntityRevivalMist mist = new EntityRevivalMist(ModEntities.REVIVE_MIST.get(), level());
 //            mist.setWith(this);
 //            mist.setPos(spawnPoint.getX()+0.5f, spawnPoint.getY()+1f, spawnPoint.getZ()+0.5f);
-//            level.addFreshEntity(mist);
+//            level().addFreshEntity(mist);
 //        }
 //    }
 
@@ -101,7 +101,7 @@ public class EntityMJDSSkeleton extends Skeleton implements IMjdsMonster{
             if (stack.getItem() instanceof ArmorItem)
             {
                 ArmorItem armorItem = (ArmorItem) stack.getItem();
-                setItemSlot(armorItem.getSlot(), stack.copy());
+                setItemSlot(LivingEntity.getEquipmentSlotForItem(stack), stack.copy());
             }
             else if (stack.getItem() instanceof ShieldItem)
             {
@@ -132,7 +132,7 @@ public class EntityMJDSSkeleton extends Skeleton implements IMjdsMonster{
     {
         Entity bullet = event.getEntity();
         HitResult rayTraceResult = event.getRayTraceResult();
-        if (rayTraceResult.getType().equals(HitResult.Type.ENTITY) && !bullet.level.isClientSide)
+        if (rayTraceResult.getType().equals(HitResult.Type.ENTITY) && !bullet.level().isClientSide)
         {
             EntityHitResult result = (EntityHitResult) rayTraceResult;
             Entity hurtOne = result.getEntity();
@@ -161,12 +161,12 @@ public class EntityMJDSSkeleton extends Skeleton implements IMjdsMonster{
 
     @Override
     protected SoundEvent getHurtSound(DamageSource p_33579_) {
-        return ModSounds.MONSTER_HURT.get();
+        return ModSounds.MONSTER_HURT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return ModSounds.MONSTER_DEATH.get();
+        return ModSounds.MONSTER_DEATH;
     }
 
     @Override

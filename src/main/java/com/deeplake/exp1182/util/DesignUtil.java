@@ -11,10 +11,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Witch;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ShieldItem;
-import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
@@ -41,7 +38,7 @@ public class DesignUtil {
 
     public static boolean isInMJDS(Entity entity)
     {
-        Block block = entity.level.getBlockState(getBlockPosBelowThatAffectsMyMovement(entity)).getBlock();
+        Block block = entity.level().getBlockState(getBlockPosBelowThatAffectsMyMovement(entity)).getBlock();
         return block instanceof BaseBlockMJDS;// || block instanceof LadderBlockMJDS || block instanceof BlockWallGlass;
     }
 
@@ -68,7 +65,7 @@ public class DesignUtil {
     }
 
     public static void applyMajou(Entity entity) {
-        Level level = entity.getLevel();
+        Level level = entity.level();
         if (entity instanceof LivingEntity living)
         {
             if (!level.isClientSide) {
@@ -80,7 +77,7 @@ public class DesignUtil {
     }
 
     public static void applyMajouNoMusic(Entity entity) {
-        Level level = entity.getLevel();
+        Level level = entity.level();
         if (entity instanceof LivingEntity living)
         {
             if (!level.isClientSide) {
@@ -92,7 +89,7 @@ public class DesignUtil {
     }
 
     public static void applyMajouNoAdv(Entity entity) {
-        Level level = entity.getLevel();
+        Level level = entity.level();
         if (entity instanceof LivingEntity living)
         {
             if (!level.isClientSide) {
@@ -148,12 +145,12 @@ public class DesignUtil {
             if (level != 0)
             {
                 serverPlayer.addEffect(new MobEffectInstance(ModEffects.INSIDE_MAJOU.get(),
-                        100, level, true, false, !ignoreAdv, null));
+                        100, level, true, false, !ignoreAdv));
             }
         }
         else {
             living.addEffect(new MobEffectInstance(ModEffects.INSIDE_MAJOU.get(),
-                    100, 0, true, false, !ignoreAdv, null));
+                    100, 0, true, false, !ignoreAdv));
         }
     }
 }

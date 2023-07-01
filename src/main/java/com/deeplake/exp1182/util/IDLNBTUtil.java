@@ -372,13 +372,13 @@ public class IDLNBTUtil {
     public static BlockPos getMarkedPos(ItemStack stack)
     {
         CompoundTag NBT = IDLNBTUtil.getNBT(stack);
-        return new BlockPos(NBT.getDouble(ANCHOR_X), NBT.getDouble(ANCHOR_Y), NBT.getDouble(ANCHOR_Z));
+        return new BlockPos((int)NBT.getDouble(ANCHOR_X), (int)NBT.getDouble(ANCHOR_Y), (int)NBT.getDouble(ANCHOR_Z));
     }
 
     public static BlockPos getMarkedPos2(ItemStack stack)
     {
         CompoundTag NBT = IDLNBTUtil.getNBT(stack);
-        return new BlockPos(NBT.getDouble(ANCHOR_X_2), NBT.getDouble(ANCHOR_Y_2), NBT.getDouble(ANCHOR_Z_2));
+        return new BlockPos((int)NBT.getDouble(ANCHOR_X_2), (int)NBT.getDouble(ANCHOR_Y_2), (int)NBT.getDouble(ANCHOR_Z_2));
     }
 
     public static void markPosToStack(ItemStack stack, BlockPos pos)

@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 @Mod.EventBusSubscriber(modid = Main.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEntities {
-    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, Main.MOD_ID);
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Main.MOD_ID);
 
     public static final String NAME_WORLD_BOSS = "world_boss";
     public static final RegistryObject<EntityType<EntityWorldBoss>> WORLD_BOSS =

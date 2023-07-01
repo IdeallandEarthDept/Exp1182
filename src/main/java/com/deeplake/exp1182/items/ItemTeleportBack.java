@@ -29,6 +29,6 @@ public class ItemTeleportBack extends ItemTeleport{
     @Override
     public void playsound(Player player)
     {
-        player.playSound(ModSounds.PAUSE.get(), 1f, 1f);
+        player.playSound(ModSounds.PAUSE, 1f, 1f);
     }
 }

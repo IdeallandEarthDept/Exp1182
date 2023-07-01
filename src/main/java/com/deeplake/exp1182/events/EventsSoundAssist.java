@@ -7,10 +7,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.sounds.MusicManager;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -23,14 +23,14 @@ public class EventsSoundAssist {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onDeath(LivingDeathEvent event)
     {
-        Level world = event.getEntity().level;
+        Level world = event.getEntity().level();
         if (!event.isCanceled())
         {
             if (event.getEntity() instanceof Player player)
             {
                 if (player.hasEffect(ModEffects.INSIDE_MAJOU.get()))
                 {
-                    SoundEvent soundEvent = ModSounds.PLAYER_DEATH.get();
+                    SoundEvent soundEvent = ModSounds.PLAYER_DEATH;
                     world.playSound(null, player.getOnPos(), soundEvent, SoundSource.PLAYERS,1f, 1f);
                 }
             }
@@ -49,7 +49,7 @@ public class EventsSoundAssist {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onHurt(LivingHurtEvent event)
     {
-        Level world = event.getEntity().level;
+        Level world = event.getEntity().level();
         if (!event.isCanceled())
         {
             if (event.getEntity() instanceof Player player)
@@ -57,8 +57,8 @@ public class EventsSoundAssist {
                 if (player.hasEffect(ModEffects.INSIDE_MAJOU.get()) && player.getHealth() > event.getAmount())
                 {
                     SoundEvent soundEvent = player.getHealth() / player.getMaxHealth() > 0.33f ?
-                            ModSounds.PLAYER_HURT.get() :
-                            ModSounds.LOW_HEALTH.get();
+                            ModSounds.PLAYER_HURT:
+                            ModSounds.LOW_HEALTH;
                     world.playSound(null, player.getOnPos(), soundEvent, SoundSource.PLAYERS,1f, 1f);
                 }
             }
@@ -67,14 +67,19 @@ public class EventsSoundAssist {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onPickup(PlayerEvent.ItemPickupEvent event) {
-        Level world = event.getEntity().level;
-        Player player = event.getPlayer();
+        Level world = event.getEntity().level();
+        Player player = event.getEntity();
         if (!event.isCanceled()) {
-            boolean samePerson = event.getOriginalEntity().getOwner() == player.getUUID();
+            Entity owner = event.getOriginalEntity().getOwner();
+            if (owner == null)
+            {
+                return;
+            }
+            boolean samePerson = owner.getUUID() == player.getUUID();
 
             if (player.hasEffect(ModEffects.INSIDE_MAJOU.get()) && !samePerson)
             {
-                world.playSound(null, player.getOnPos(), ModSounds.PICKUP.get(), SoundSource.PLAYERS,1f, 1f);
+                world.playSound(null, player.getOnPos(), ModSounds.PICKUP, SoundSource.PLAYERS,1f, 1f);
             }
         }
     }

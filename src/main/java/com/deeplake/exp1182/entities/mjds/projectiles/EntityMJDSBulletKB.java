@@ -4,7 +4,6 @@ import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.setup.ModItems;
 import com.deeplake.exp1182.util.AdvancementUtil;
 import com.deeplake.exp1182.util.EntityUtil;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -61,13 +60,13 @@ public class EntityMJDSBulletKB extends EntityMJDSBulletBase{
     private void normalTick() {
         if (!this.isNoGravity()) {
             Entity entity = this.getOwner();
-            if (this.level.isClientSide || (entity == null || !entity.isRemoved()) && this.level.hasChunkAt(this.blockPosition())) {
+            if (this.level().isClientSide || (entity == null || !entity.isRemoved()) && this.level().hasChunkAt(this.blockPosition())) {
 //                super.tick();
                 if (this.shouldBurn()) {
                     this.setSecondsOnFire(1);
                 }
 
-                HitResult hitresult = ProjectileUtil.getHitResult(this, this::canHitEntity);
+                HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
                 if (hitresult.getType() != HitResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, hitresult)) {
                     this.onHit(hitresult);
                 }
@@ -81,13 +80,13 @@ public class EntityMJDSBulletKB extends EntityMJDSBulletBase{
                 double d2 = this.getZ() + vec3.z;
                 ProjectileUtil.rotateTowardsMovement(this, 0.2F);
 
-                this.level.addParticle(this.getTrailParticle(), d0, d1 + 0.5D, d2, 0.0D, 0.0D, 0.0D);
+                this.level().addParticle(this.getTrailParticle(), d0, d1 + 0.5D, d2, 0.0D, 0.0D, 0.0D);
                 this.setPos(d0, d1, d2);
             } else {
                 this.discard();
             }
 
-            if (!level.isClientSide)
+            if (!level().isClientSide)
             {
                 if (tickCount >= maxTicks) {
                     this.discard();
@@ -106,6 +105,6 @@ public class EntityMJDSBulletKB extends EntityMJDSBulletBase{
             }
         }
 
-        return entity.hurt(DamageSource.indirectMobAttack(this, entity1).bypassArmor(), 5.0F);
+        return entity.hurt(level().damageSources().mobProjectile(this, entity1), 5.0F);
     }
 }

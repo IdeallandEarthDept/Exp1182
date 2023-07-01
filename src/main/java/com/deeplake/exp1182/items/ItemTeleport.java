@@ -108,7 +108,7 @@ public class ItemTeleport extends Item implements INeedLogNBT{
 
     public void playsound(Player player)
     {
-        player.playSound(ModSounds.GAME_SELECT.get(), 1f, 1f);
+        player.playSound(ModSounds.GAME_SELECT, 1f, 1f);
     }
 
 }

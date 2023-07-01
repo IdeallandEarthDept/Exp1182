@@ -13,7 +13,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Main.MOD_ID);
-    public static final Item.Properties ITEM_PROPERTIES = new Item.Properties().tab(ModSetup.ITEM_GROUP);
+    public static final Item.Properties ITEM_PROPERTIES = new Item.Properties();
     public static final Item.Properties ITEM_PROPERTIES_HIDDEN = new Item.Properties();
     public static final RegistryObject<Item> BOSS_EGG = ITEMS.register("spawn_worldboss", () -> new ForgeSpawnEggItem(ModEntities.WORLD_BOSS, 0xff0000, 0x00ff00, ITEM_PROPERTIES));
     public static final RegistryObject<Item> TP_GO = ITEMS.register("tp_go", () -> new ItemTeleport(ITEM_PROPERTIES));

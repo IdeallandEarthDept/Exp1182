@@ -9,7 +9,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.ItemSupplier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -63,7 +62,7 @@ public class EntityMJDSBulletPierece extends EntityMJDSBulletBase implements Ite
     @Override
     public void tick() {
         super.tick();
-        if (!level.isClientSide())
+        if (!level().isClientSide())
         {
             if (tickCount >= maxTicks)
             {
@@ -83,10 +82,10 @@ public class EntityMJDSBulletPierece extends EntityMJDSBulletBase implements Ite
 
     protected void onHitEntity(EntityHitResult p_37386_) {
         super.onHitEntity(p_37386_);
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             Entity entity = p_37386_.getEntity();
             Entity entity1 = this.getOwner();
-            boolean flag = entity.hurt(DamageSource.indirectMagic(this, entity1), 5.0F);
+            boolean flag = entity.hurt(level().damageSources().indirectMagic(this, entity1), 5.0F);
             if (flag && entity1 instanceof LivingEntity) {
                 this.doEnchantDamageEffects((LivingEntity)entity1, entity);
             }
@@ -95,10 +94,10 @@ public class EntityMJDSBulletPierece extends EntityMJDSBulletBase implements Ite
 
     @Override
     public boolean hurt(DamageSource p_36839_, float p_36840_) {
-        if (level.isClientSide)
+        if (level().isClientSide)
         {
-//            level.addParticle(ParticleTypes.HEART);
-            level.addParticle(ParticleTypes.EXPLOSION, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), 0, 0, 0);
+//            level().addParticle(ParticleTypes.HEART);
+            level().addParticle(ParticleTypes.EXPLOSION, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), 0, 0, 0);
         }
         discard();
         return true;
