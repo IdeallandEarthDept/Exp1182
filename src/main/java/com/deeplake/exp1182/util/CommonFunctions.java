@@ -1,13 +1,12 @@
 package com.deeplake.exp1182.util;
 
 import com.deeplake.exp1182.Main;
-import net.minecraft.Util;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -151,7 +150,7 @@ public class CommonFunctions {
         //Please note that you can only put %s as arguments. If you put %d, it's not going to translate.
         if ((!player.level().isClientSide) && player instanceof Player)
         {
-            ((Player) player).displayClientMessage((Component.translatable(key, args)), Util.NIL_UUID);
+            ((Player) player).displayClientMessage((Component.translatable(key, args)), false);
         }
     }
 
@@ -160,28 +159,28 @@ public class CommonFunctions {
         //Please note that you can only put %s as arguments. If you put %d, it's not going to translate.
         if (player instanceof Player)
         {
-            TranslatableComponent translationTextComponent = Component.translatable(key, args);
+            MutableComponent translationTextComponent = Component.translatable(key, args);
             translationTextComponent.withStyle(style);
-            player.displayClientMessage(translationTextComponent, Util.NIL_UUID);
+            ((Player) player).displayClientMessage(translationTextComponent, false);
         }
     }
 
     public static void SendMsgToPlayer(Player playerMP, String key)
     {
-        playerMP.displayClientMessage(Component.translatable(key), Util.NIL_UUID);
+        playerMP.displayClientMessage(Component.translatable(key), false);
     }
 
     public static void SendMsgToPlayerStyled(Player playerMP, String key, Style style, Object... args)
     {
-        TranslatableComponent TranslatableComponent = Component.translatable(key, args);
-        TranslatableComponent.withStyle(style);
-        playerMP.displayClientMessage(TranslatableComponent, Util.NIL_UUID);
+        MutableComponent MutableComponent = Component.translatable(key, args);
+        MutableComponent.withStyle(style);
+        playerMP.displayClientMessage(MutableComponent, false);
     }
 
 
     public static void SendMsgToPlayer(Player playerMP, String key, Object... args)
     {
-        playerMP.displayClientMessage((Component.translatable(key, args)), Util.NIL_UUID);
+        playerMP.displayClientMessage((Component.translatable(key, args)), false);
     }
 
     @OnlyIn(Dist.CLIENT)
