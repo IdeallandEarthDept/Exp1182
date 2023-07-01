@@ -39,7 +39,7 @@ public class ModSounds {
     public static Music MUSIC_DUNGEON;
     public static ForgeSoundType MJDS_BLOCKS =
             new ForgeSoundType(1.0F, 1.0F,
-                    MONSTER_DEATH,SoundEvents.NETHER_BRICKS_STEP.delegate,CUT,CUT,FALL);
+                    MONSTER_DEATH,()->{return SoundEvents.NETHER_BRICKS_STEP},CUT,CUT,FALL);
 //    public Music(SoundEvent p_11627_, int p_11628_, int p_11629_, boolean p_11630_) {
 //        this.event = p_11627_;
 //        this.minDelay = p_11628_;

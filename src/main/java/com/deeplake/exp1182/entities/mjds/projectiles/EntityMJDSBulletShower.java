@@ -57,7 +57,7 @@ public class EntityMJDSBulletShower extends EntityMJDSBulletBase{
                     this.setSecondsOnFire(1);
                 }
 
-                HitResult hitresult = ProjectileUtil.getHitResult(this, this::canHitEntity);
+                HitResult hitresult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
                 if (hitresult.getType() != HitResult.Type.MISS && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, hitresult)) {
                     this.onHit(hitresult);
                 }
@@ -143,7 +143,7 @@ public class EntityMJDSBulletShower extends EntityMJDSBulletBase{
     public Packet<ClientGamePacketListener> getAddEntityPacket() {
         Entity entity = this.getOwner();
         int i = entity == null ? 0 : entity.getId();
-        return new ClientboundAddEntityPacket(this.getId(), this.getUUID(), this.getX(), this.getY(), this.getZ(), this.getXRot(), this.getYRot(), this.getType(), i, new Vec3(this.xPower, this.yPower, this.zPower));
+        return new ClientboundAddEntityPacket(this.getId(), this.getUUID(), this.getX(), this.getY(), this.getZ(), this.getXRot(), this.getYRot(), this.getType(), i, new Vec3(this.xPower, this.yPower, this.zPower), this.getYHeadRot());
     }
 
     @Override

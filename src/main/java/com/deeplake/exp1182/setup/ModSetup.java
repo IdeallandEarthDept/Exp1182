@@ -1,8 +1,6 @@
 package com.deeplake.exp1182.setup;
 
 import com.deeplake.exp1182.Main;
-import com.deeplake.exp1182.worldgen.dimensions.Dimensions;
-import com.deeplake.exp1182.worldgen.ores.Ores;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -26,13 +24,13 @@ public class ModSetup {
 
     public static void setup() {
         IEventBus bus = MinecraftForge.EVENT_BUS;
-        bus.addListener(Ores::onBiomeLoadingEvent);
+//        bus.addListener(Ores::onBiomeLoadingEvent);
     }
 
     public static void init(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            Ores.registerConfiguredFeatures();
-            Dimensions.register();
+//            Ores.registerConfiguredFeatures();
+//            Dimensions.register();
         });
         Messages.register();
     }

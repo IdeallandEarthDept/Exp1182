@@ -15,6 +15,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -44,20 +45,20 @@ public class EntityRevivalMist extends Entity {
     public void tick() {
         super.tick();
         //has a 3 sec cooldown
-        if (!level.isClientSide && isAlive() && tickCount > CommonDef.TICK_PER_SECOND * 3)
+        if (!level().isClientSide && isAlive() && tickCount > CommonDef.TICK_PER_SECOND * 3)
         {
             //It will revive if it's outside the screen...
-            if (EntityUtil.getEntitiesWithinAABB(level, EntityType.PLAYER, getEyePosition(0),  32, EntityUtil.NON_SPEC).size() == 0)
+            if (EntityUtil.getEntitiesWithinAABB(level(), EntityType.PLAYER, getEyePosition(0),  32, EntityUtil.NON_SPEC).size() == 0)
             {
                 //But will not revive when it's too far from players. Minecraft will despawn it, and thus keep cycling.
-                if (EntityUtil.getEntitiesWithinAABB(level, EntityType.PLAYER, getEyePosition(0),  64, EntityUtil.NON_SPEC).size() != 0)
+                if (EntityUtil.getEntitiesWithinAABB(level(), EntityType.PLAYER, getEyePosition(0),  64, EntityUtil.NON_SPEC).size() != 0)
                 {
                     reviveAndSuicide();
                 }
             }
         }
         else {
-            level.addParticle(ParticleTypes.CLOUD, getX() + CommonFunctions.flunctate(0, 0.5f, random),
+            level().addParticle(ParticleTypes.CLOUD, getX() + CommonFunctions.flunctate(0, 0.5f, random),
                     getY() + CommonFunctions.flunctate(0.5f, 0.5f, random),
                     getZ()+ CommonFunctions.flunctate(0, 0.5f, random),
                     0, 0, 0);
@@ -65,7 +66,7 @@ public class EntityRevivalMist extends Entity {
     }
 
     public void reviveAndSuicide() {
-        Entity entity = entityType.create(level);
+        Entity entity = entityType.create(level());
         if (entity instanceof LivingEntity)
         {
             entity.load(entityNBT);
@@ -74,7 +75,7 @@ public class EntityRevivalMist extends Entity {
             ((LivingEntity) entity).deathTime = 0;
             entity.revive();
             ((LivingEntity) entity).setHealth(((LivingEntity) entity).getMaxHealth());
-            level.addFreshEntity(entity);
+            level().addFreshEntity(entity);
         }
         //IdlFramework.Log("...And with strange aeons even death may die. Recovered: %s@%s", entityType.toString(), getEyePosition(0));
         remove(RemovalReason.KILLED);
@@ -114,7 +115,7 @@ public class EntityRevivalMist extends Entity {
     protected void addAdditionalSaveData(CompoundTag nbt) {
         if (entityType != null)
         {
-            nbt.putString(SPAWNER_TYPE, entityType.getRegistryName().toString());
+            nbt.putString(SPAWNER_TYPE, ForgeRegistries.ENTITY_TYPES.getKey(entityType).toString());
         }
 
         nbt.putString(SPAWNER_NBT, entityNBT.toString());
