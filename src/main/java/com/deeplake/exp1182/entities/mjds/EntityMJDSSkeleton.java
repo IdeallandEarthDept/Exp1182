@@ -95,7 +95,7 @@ public class EntityMJDSSkeleton extends Skeleton implements IMjdsMonster{
 
     @Override
     public InteractionResult interactAt(Player playerEntity, Vec3 p_19981_, InteractionHand hand) {
-        if (!playerEntity.level.isClientSide && playerEntity.isCreative())
+        if (!playerEntity.level().isClientSide && playerEntity.isCreative())
         {
             ItemStack stack = playerEntity.getItemInHand(hand);
             if (stack.getItem() instanceof ArmorItem)

@@ -4,7 +4,7 @@ import com.deeplake.exp1182.util.AdvancementUtil;
 import com.deeplake.exp1182.util.CommonFunctions;
 import com.deeplake.exp1182.util.MJDSDefine;
 import com.deeplake.exp1182.util.MessageDef;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
 public class BlockAchvDoor extends BaseBlockEgoDoor{

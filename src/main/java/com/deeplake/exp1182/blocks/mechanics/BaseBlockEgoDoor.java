@@ -7,7 +7,6 @@ import com.deeplake.exp1182.util.CommonFunctions;
 import com.deeplake.exp1182.util.EgoUtil;
 import com.deeplake.exp1182.util.MJDSDefine;
 import com.deeplake.exp1182.util.MessageDef;
-import com.mojang.math.Vector3d;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Style;
@@ -18,12 +17,9 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-
-import static com.deeplake.exp1182.util.MJDSDefine.EnumEgo.POPLON;
 
 public class BaseBlockEgoDoor extends BaseBlockMJDS {
 
@@ -81,7 +77,7 @@ public class BaseBlockEgoDoor extends BaseBlockMJDS {
                         playerEntity.getY()+disturbanceY,
                         thisPos.z + Math.signum(delta.z))
                         ;
-                playerEntity.level.levelEvent(playerEntity, 1013, pos, 0);
+                playerEntity.level().levelEvent(playerEntity, 1013, pos, 0);
                 world.playSound(null, pos, ModSounds.DOOR_COMBINED.get(), SoundSource.BLOCKS, 1f, 1f);
             }
 

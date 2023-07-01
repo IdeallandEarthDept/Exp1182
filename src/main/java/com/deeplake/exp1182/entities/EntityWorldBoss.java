@@ -7,7 +7,7 @@ import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletKB;
 import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletPierece;
 import com.deeplake.exp1182.util.*;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TranslatableComponent;
+
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;

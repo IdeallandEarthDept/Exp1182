@@ -49,7 +49,7 @@ public class ItemMonsterRemoval extends Item {
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player playerEntity, LivingEntity target, InteractionHand hand) {
 
-        Level world = playerEntity.level;
+        Level world = playerEntity.level();
 
         if (hand == InteractionHand.OFF_HAND || !playerEntity.isCreative())
         {

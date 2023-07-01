@@ -1,24 +1,18 @@
 package com.deeplake.exp1182.blocks.tileentity;
 
-import com.deeplake.exp1182.setup.ModBlocks;
 import com.deeplake.exp1182.util.EntityUtil;
-import com.mojang.math.Vector3d;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-import static com.deeplake.exp1182.util.CommonDef.MAX_BUILD_HEIGHT;
 import static com.deeplake.exp1182.util.CommonDef.TICK_PER_SECOND;
 
 public class MotorBlockEntityBase extends BlockEntity {
