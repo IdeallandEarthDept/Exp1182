@@ -1,6 +1,5 @@
 package com.deeplake.exp1182.setup;
 
-import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.client.ModSounds;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
@@ -33,7 +32,7 @@ public class Registration {
 
 
 //    public static final RegistryObject<StructureFeature<JigsawConfiguration>> THIEFDEN = STRUCTURES.register("thiefden", ThiefDenStructure::new);
-    public static final ResourceLocation RL_MYSTERIOUS_DIMENSION_SET = new ResourceLocation(Main.MOD_ID, "mysterious_dimension_structure_set");
+//    public static final ResourceLocation RL_MYSTERIOUS_DIMENSION_SET = new ResourceLocation(Main.MOD_ID, "mysterious_dimension_structure_set");
 
 //    public static final TagKey<Biome> HAS_PORTAL = TagKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(Main.MOD_ID, "has_structure/portal"));
 //    public static final TagKey<Biome> HAS_THIEFDEN = TagKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(Main.MOD_ID, "has_structure/thiefden"));
