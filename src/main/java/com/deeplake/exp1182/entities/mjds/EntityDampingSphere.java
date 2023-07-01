@@ -1,7 +1,6 @@
 package com.deeplake.exp1182.entities.mjds;
 
 import com.deeplake.exp1182.Main;
-import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.util.CommonFunctions;
 import com.deeplake.exp1182.util.EntityUtil;
 import net.minecraft.core.BlockPos;
@@ -11,6 +10,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -18,21 +18,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.network.NetworkHooks;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.deeplake.exp1182.util.CommonDef.CHUNK_MASK;
 import static com.deeplake.exp1182.util.CommonDef.CHUNK_SIZE;
-import static com.deeplake.exp1182.util.CommonFunctions.removeFromEventBus;
 import static com.deeplake.exp1182.util.EntityUtil.ALL;
 import static com.deeplake.exp1182.util.IDLNBTDef.*;
 
@@ -73,7 +70,7 @@ public class EntityDampingSphere extends Entity {
     @SubscribeEvent
     public static void onBlockChange(BlockEvent.BreakEvent breakEvent)
     {
-        Level level1 = breakEvent.getPlayer().level;
+        Level level1 = breakEvent.getPlayer().level();
         //if (!breakEvent.getPlayer().isCreative())
         if (level1 != null)
         {
@@ -103,11 +100,11 @@ public class EntityDampingSphere extends Entity {
     @Override
     public void tick() {
         super.tick();
-        if (!level.isClientSide)
+        if (!level().isClientSide)
         {
-            if (CommonFunctions.isSecondTick(level))
+            if (CommonFunctions.isSecondTick(level()))
             {
-                if (EntityUtil.getEntitiesWithinAABBignoreY(level,
+                if (EntityUtil.getEntitiesWithinAABBignoreY(level(),
                         EntityType.PLAYER,
                         getEyePosition(0),
                         CHUNK_SIZE,
@@ -118,7 +115,7 @@ public class EntityDampingSphere extends Entity {
                         if (changes.size() > 0)
                         {
                             RecordChange change = changes.get(0);
-                            level.setBlock(change.pos, change.state, 3);
+                            level().setBlock(change.pos, change.state, 3);
                             changes.remove(change);
                         }
                         else {
@@ -136,7 +133,7 @@ public class EntityDampingSphere extends Entity {
             thetaY+=omegaY;
             thetaZ+=omegaZ;
 
-            level.addParticle(ParticleTypes.EFFECT, x, y, z, 0, 0, 0);
+            level().addParticle(ParticleTypes.EFFECT, x, y, z, 0, 0, 0);
         }
     }
 
@@ -153,11 +150,11 @@ public class EntityDampingSphere extends Entity {
         BlockPos pos = placeEvent.getPos();
         if (isInDistance(pos))
         {
-            level.destroyBlock(pos, true);
+            level().destroyBlock(pos, true);
             //placeEvent.setCanceled(true);//wont drop the block
-            if (level.isClientSide)
+            if (level().isClientSide)
             {
-                level.addParticle(ParticleTypes.EXPLOSION, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, 0, 0, 0);
+                level().addParticle(ParticleTypes.EXPLOSION, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, 0, 0, 0);
             }
         }
     }
@@ -205,7 +202,7 @@ public class EntityDampingSphere extends Entity {
     }
 
     @Override
-    public Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 

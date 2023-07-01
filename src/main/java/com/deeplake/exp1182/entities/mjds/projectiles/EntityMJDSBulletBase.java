@@ -32,7 +32,7 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
             this.yPower = vy;
             this.zPower = vz;
         }
-        if (!level.isClientSide)
+        if (!level().isClientSide)
         {
             init();
             setDeltaMovement(vx, vy, vz);
@@ -74,7 +74,7 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
             if (!skipBlock)
             {
                 this.onHitBlock((BlockHitResult)p_37406_);
-                if (!this.level.isClientSide) {
+                if (!this.level().isClientSide) {
                     this.discard();
                 }
             }
@@ -88,7 +88,7 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
     @Override
     public void tick() {
         super.tick();
-        if (!level.isClientSide())
+        if (!level().isClientSide())
         {
             if (tickCount >= maxTicks)
             {
@@ -108,7 +108,7 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
 
     protected void onHitEntity(EntityHitResult p_37386_) {
         super.onHitEntity(p_37386_);
-        if (!this.level.isClientSide) {
+        if (!this.level().isClientSide) {
             Entity entity = p_37386_.getEntity();
             Entity entity1 = this.getOwner();
             if (entity1 == null || entity1 instanceof LivingEntity)
@@ -123,7 +123,7 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
     }
 
     boolean isSuccessfulHit(Entity entity, LivingEntity entity1) {
-        return entity.hurt(DamageSource.indirectMobAttack(this, entity1), 5.0F);
+        return entity.hurt(level().damageSources().mobProjectile(this, entity1), 5.0F);
     }
 
     public void onHitEntityExtra(Entity entity) {
@@ -136,7 +136,7 @@ public abstract class EntityMJDSBulletBase extends AbstractHurtingProjectile imp
             this.markHurt();
             Entity entity = p_36839_.getEntity();
             if (entity != null) {
-                if (!this.level.isClientSide) {
+                if (!this.level().isClientSide) {
                     Vec3 vec3 = entity.getLookAngle();
                     this.setDeltaMovement(vec3);
                     this.xPower = vec3.x * 0.1D;

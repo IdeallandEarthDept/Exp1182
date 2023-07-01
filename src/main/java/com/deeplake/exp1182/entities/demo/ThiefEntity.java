@@ -27,7 +27,6 @@ public class ThiefEntity extends Animal {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new AvoidEntityGoalNoCombat<>(this, Player.class, 6.0F, 1.2, 1.2));
-        this.goalSelector.addGoal(1, new ThiefFindChestGoal(this, 1.3));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 0.8));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));

@@ -1,6 +1,5 @@
 package com.deeplake.exp1182.entities.mjds.projectiles;
 
-import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.entities.mjds.EntityMJDSStoneEmitter;
 import com.deeplake.exp1182.setup.ModEntities;
 import com.deeplake.exp1182.setup.ModItems;
@@ -8,6 +7,7 @@ import com.deeplake.exp1182.util.CommonDef;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -51,7 +51,7 @@ public class EntityMJDSBulletShower extends EntityMJDSBulletBase{
     private void normalTick() {
         if (!this.isNoGravity()) {
             Entity entity = this.getOwner();
-            if (this.level.isClientSide || (entity == null || !entity.isRemoved()) && this.level.hasChunkAt(this.blockPosition())) {
+            if (this.level().isClientSide || (entity == null || !entity.isRemoved()) && this.level().hasChunkAt(this.blockPosition())) {
 //                super.tick();
                 if (this.shouldBurn()) {
                     this.setSecondsOnFire(1);
@@ -71,13 +71,13 @@ public class EntityMJDSBulletShower extends EntityMJDSBulletBase{
                 double d2 = this.getZ() + vec3.z;
                 ProjectileUtil.rotateTowardsMovement(this, 0.2F);
 
-                this.level.addParticle(this.getTrailParticle(), d0, d1 + 0.5D, d2, 0.0D, 0.0D, 0.0D);
+                this.level().addParticle(this.getTrailParticle(), d0, d1 + 0.5D, d2, 0.0D, 0.0D, 0.0D);
                 this.setPos(d0, d1, d2);
             } else {
                 this.discard();
             }
 
-            if (!level.isClientSide)
+            if (!level().isClientSide)
             {
                 if (tickCount >= maxTicks) {
                     this.discard();
@@ -99,7 +99,7 @@ public class EntityMJDSBulletShower extends EntityMJDSBulletBase{
 
         Vec3 vec32 = this.position();
         Vec3 vec33 = vec32.add(vec3);
-        HitResult hitresult = this.level.clip(new ClipContext(vec32, vec33, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
+        HitResult hitresult = this.level().clip(new ClipContext(vec32, vec33, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
 
         vec3 = this.getDeltaMovement();
         double d5 = vec3.x;
@@ -119,7 +119,7 @@ public class EntityMJDSBulletShower extends EntityMJDSBulletBase{
         if (this.isInWater()) {
             for(int j = 0; j < 4; ++j) {
                 float f2 = 0.25F;
-                this.level.addParticle(ParticleTypes.BUBBLE, d7 - d5 * 0.25D, d2 - d6 * 0.25D, d3 - d1 * 0.25D, d5, d6, d1);
+                this.level().addParticle(ParticleTypes.BUBBLE, d7 - d5 * 0.25D, d2 - d6 * 0.25D, d3 - d1 * 0.25D, d5, d6, d1);
             }
 
             f = 0.8f;
@@ -140,7 +140,7 @@ public class EntityMJDSBulletShower extends EntityMJDSBulletBase{
         return stack;
     }
 
-    public Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         Entity entity = this.getOwner();
         int i = entity == null ? 0 : entity.getId();
         return new ClientboundAddEntityPacket(this.getId(), this.getUUID(), this.getX(), this.getY(), this.getZ(), this.getXRot(), this.getYRot(), this.getType(), i, new Vec3(this.xPower, this.yPower, this.zPower));

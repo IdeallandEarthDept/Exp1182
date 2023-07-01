@@ -28,12 +28,12 @@ public class ItemMonsterRemoval extends Item {
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void onHit(LivingHurtEvent event) {
-        Level world = event.getEntityLiving().level;
+        Level world = event.getEntity().level();
         if (world.isClientSide) {
             return;
         }
 
-        LivingEntity hurtOne = event.getEntityLiving();
+        LivingEntity hurtOne = event.getEntity();
 
         if (event.getSource().getEntity() instanceof LivingEntity) {
             LivingEntity attacker = (LivingEntity) event.getSource().getEntity();
