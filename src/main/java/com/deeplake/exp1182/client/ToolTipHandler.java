@@ -6,7 +6,6 @@ import com.deeplake.exp1182.items.INeedLogNBT;
 import com.deeplake.exp1182.items.ItemTeleport;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -26,15 +25,14 @@ public class ToolTipHandler {
     @SubscribeEvent
     public static void onDesc(ItemTooltipEvent event)
     {
-        Player playerEntity = event.getPlayer();
+        Player playerEntity = event.getEntity();
         ItemStack stack = event.getItemStack();
         Item itemType = stack.getItem();
         if (itemType instanceof INeedLogNBT)
         {
-            event.getToolTip().add(new TextComponent(event.getItemStack().getOrCreateTag().toString()));
+            event.getToolTip().add(Component.translatable(event.getItemStack().getOrCreateTag().toString()));
         }
-
-        final ResourceLocation registryName = itemType.getRegistryName();
+        final ResourceLocation registryName = net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(itemType);
         if (registryName != null
                 && registryName.getNamespace().equals(Main.MOD_ID))
         {
