@@ -34,7 +34,7 @@ public class ManaEvents {
         event.register(PlayerMana.class);
     }
 
-    public static void onWorldTick(TickEvent.WorldTickEvent event) {
+    public static void onWorldTick(TickEvent.LevelTickEvent event) {
         // Don't do anything client side
         if (event.world.isClientSide) {
             return;

@@ -46,16 +46,16 @@ public class WorldBossSpawner {
     }
 
     @SubscribeEvent
-    public static void onWorldTick(TickEvent.WorldTickEvent event)
+    public static void onWorldTick(TickEvent.LevelTickEvent event)
     {
         if (!WorldBossConfig.ENABLE_BOSS_SPAWN.get())
         {
             return;
         }
 
-        if (event.side == LogicalSide.SERVER && event.type == TickEvent.Type.WORLD && event.phase == TickEvent.Phase.START)
+        if (event.side == LogicalSide.SERVER && event.type == TickEvent.Type.LEVEL && event.phase == TickEvent.Phase.START)
         {
-            Level level = event.world;
+            Level level = event.level;
             if (level.dimension() == Level.OVERWORLD)
             {
 

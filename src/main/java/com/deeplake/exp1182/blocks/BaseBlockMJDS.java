@@ -1,6 +1,5 @@
 package com.deeplake.exp1182.blocks;
 
-import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.util.DesignUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -38,7 +37,7 @@ public class BaseBlockMJDS extends Block implements IBlockMJDS {
         return MJDS_BLOCKS;
     }
 
-    public static boolean neverDo(BlockState p_50779_, BlockGetter p_50780_, BlockPos p_50781_, EntityType<?> p_50782_) {
+    public static boolean neverDoET(BlockState p_50779_, BlockGetter p_50780_, BlockPos p_50781_, EntityType<?> p_50782_) {
         return (boolean)false;
     }
 

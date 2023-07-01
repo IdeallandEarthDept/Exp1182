@@ -9,7 +9,7 @@ public class BlockWallGlass extends AbstractGlassBlock implements IBlockMJDS{
                 .strength(-1.0F, 3600000.0F)
                 .noOcclusion()
                 .isViewBlocking(BaseBlockMJDS::neverDo)
-                .isValidSpawn(BaseBlockMJDS::neverDo)
+                .isValidSpawn(BaseBlockMJDS::neverDoET)
                 .isRedstoneConductor(BaseBlockMJDS::neverDo)
                 .isSuffocating(BaseBlockMJDS::neverDo)
         );
