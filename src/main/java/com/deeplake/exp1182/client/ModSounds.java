@@ -9,11 +9,14 @@ import net.minecraft.sounds.Music;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraftforge.common.util.ForgeSoundType;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 public class ModSounds {
 //    public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Main.MOD_ID);
@@ -39,7 +42,8 @@ public class ModSounds {
 
     public static final SoundEvent SOUND_MUSIC_DUNGEON = makeSoundEvent("music_dungeon");
 //    public static final Holder.Reference<SoundEvent> SOUND_MUSIC_DUNGEON = registerForHolder(new ResourceLocation(Main.MOD_ID,"music_dungeon"));
-    public static final RegistryObject<net.minecraftforge.client.event.sound.SoundEvent> TEST = null;
+    public static final DeferredRegister<SoundEvent> SOUND_LIST = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Main.MOD_ID);
+//    public static final RegistryObject<SoundEvent> TEST = register("test", () -> new SoundEvent(new ResourceLocation(Main.MOD_ID, "test")));
 
     public static Music MUSIC_DUNGEON;
     public static ForgeSoundType MJDS_BLOCKS =
@@ -61,7 +65,7 @@ public class ModSounds {
 
     public static void initMusic()
     {
-//        MUSIC_DUNGEON = new Music(SOUND_MUSIC_DUNGEON, 1, 1, true);
+        MUSIC_DUNGEON = new Music(Holder.direct(SOUND_MUSIC_DUNGEON), 1, 1, true);
     }
 
     private static SoundEvent makeSoundEvent(String name) {
@@ -83,5 +87,11 @@ public class ModSounds {
     public static Holder.Reference<SoundEvent> registerForHolder(ResourceLocation p_263362_, ResourceLocation p_263424_) {
         return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, p_263362_,
                 SoundEvent.createVariableRangeEvent(p_263424_));
+    }
+
+    public static RegistryObject<SoundEvent> register(final String name, final Supplier<? extends SoundEvent> sup)
+    {
+        RegistryObject<SoundEvent> registryObject = SOUND_LIST.register(name, sup);
+        return registryObject;
     }
 }
