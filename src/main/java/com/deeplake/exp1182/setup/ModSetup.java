@@ -23,7 +23,7 @@ public class ModSetup {
                         return new ItemStack(ModBlocks.FLAME_FLOOR.get());
                     })
                     .build();
-    
+
     public static void setup() {
         IEventBus bus = MinecraftForge.EVENT_BUS;
         bus.addListener(Ores::onBiomeLoadingEvent);

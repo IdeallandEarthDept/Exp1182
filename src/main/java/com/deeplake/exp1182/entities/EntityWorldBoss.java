@@ -1,42 +1,36 @@
 package com.deeplake.exp1182.entities;
 
-import com.deeplake.exp1182.Main;
 import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.entities.mjds.EntityRevivalMist;
 import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletKB;
 import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletPierece;
 import com.deeplake.exp1182.util.*;
 import net.minecraft.nbt.CompoundTag;
-
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.AbstractIllager;
-import net.minecraft.world.entity.monster.Illusioner;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.Fireball;
-import net.minecraft.world.entity.projectile.LargeFireball;
 import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 import static net.minecraft.world.entity.EntitySelector.LIVING_ENTITY_STILL_ALIVE;
 
@@ -90,7 +84,7 @@ public class EntityWorldBoss extends Monster {
 
     //Damage Adjust
     float convertDamage(float raw) {
-        int playerCount = level.players().size();
+        int playerCount = level().players().size();
         float maxDamage = singleHitDamageFactor * getExpectedDPS(playerCount);
         return maxDamage - (steepFactor * maxDamage) / (raw + steepFactor);
     }
@@ -102,7 +96,7 @@ public class EntityWorldBoss extends Monster {
     public void aiStep() {
         super.aiStep();
         handleInvincibleTick();
-        if (!level.isClientSide) {
+        if (!level().isClientSide) {
             handleStateMachine();
         }
     }
@@ -136,7 +130,7 @@ public class EntityWorldBoss extends Monster {
     }
 
     void stateTick() {
-//        if (!level.isClientSide) {
+//        if (!level().isClientSide) {
 //            Main.Log("State = %s", curState);
 //        }
 
@@ -169,10 +163,10 @@ public class EntityWorldBoss extends Monster {
             }
             case BARRAGE_ANTI_AIR -> {
 
-                if (!level.isClientSide) {
+                if (!level().isClientSide) {
                     boolean hasTarget = targetList.size() > 0;
                     if (hasTarget) {
-                        if (level.getGameTime() % 10 == 0) {
+                        if (level().getGameTime() % 10 == 0) {
                             for (Entity target : targetList)
                             {
                                 if (target instanceof Player player)
@@ -197,7 +191,7 @@ public class EntityWorldBoss extends Monster {
                                 {
                                     entity =
                                             new EntityMJDSBulletPierece(
-                                                    level,
+                                                    level(),
                                                     this.getX()+dir.x * 0.5f,
                                                     this.getEyeY()+dir.y * 0.5f,
                                                     this.getZ()+dir.z * 0.5f,
@@ -208,7 +202,7 @@ public class EntityWorldBoss extends Monster {
                                 else {
                                     entity =
                                             new EntityMJDSBulletKB(
-                                                    level,
+                                                    level(),
                                                     this.getX() + dirRaw.x,
                                                     this.getEyeY() + dirRaw.y,
                                                     this.getZ() + dirRaw.z,
@@ -218,7 +212,7 @@ public class EntityWorldBoss extends Monster {
                                 }
 
 
-                                level.addFreshEntity(entity);
+                                level().addFreshEntity(entity);
                             }
 
                             playSound(ModSounds.MONSTER_SHOOT_1.get(), 2f, 1f);
@@ -250,21 +244,21 @@ public class EntityWorldBoss extends Monster {
     //Skill: revive nearby minions
     void reviveNearbyMinions()
     {
-        if (!level.isClientSide)
+        if (!level().isClientSide)
         {
-            List<Entity> entityList = EntityUtil.getEntitiesWithinAABB(level,
+            List<Entity> entityList = EntityUtil.getEntitiesWithinAABB(level(),
                     getEyePosition(), 16f, EntityUtil.NON_SPEC);
             for (Entity entity:
                     entityList) {
 
                 if (entity instanceof EntityRevivalMist mist)
                 {
-                    LightningBolt lightningbolt = EntityType.LIGHTNING_BOLT.create(level);
+                    LightningBolt lightningbolt = EntityType.LIGHTNING_BOLT.create(level());
                     if (lightningbolt != null)
                     {
                         lightningbolt.moveTo(mist.getEyePosition());
                         lightningbolt.setVisualOnly(true);
-                        level.addFreshEntity(lightningbolt);
+                        level().addFreshEntity(lightningbolt);
                     }
                     mist.reviveAndSuicide();
                 }
@@ -283,13 +277,13 @@ public class EntityWorldBoss extends Monster {
 
     //yaw is in degrees
     void shootFireball(float yaw) {
-        if (level.getGameTime() % 7 != 0) {
+        if (level().getGameTime() % 7 != 0) {
             return;
         }
 
         float accel = getShootAccel();
         float yawInRad = (float) (Math.toRadians(yaw));
-        SmallFireball fireball = new SmallFireball(level,
+        SmallFireball fireball = new SmallFireball(level(),
                 this.getX(),
                 this.getEyeY(),
                 this.getZ(),
@@ -297,17 +291,17 @@ public class EntityWorldBoss extends Monster {
                 0,
                 accel * Math.sin(yawInRad));
         fireball.setOwner(this);
-        level.addFreshEntity(fireball);
+        level().addFreshEntity(fireball);
     }
 
     void shootFireballFloor(float yaw) {
-        if (level.getGameTime() % 20 != 0) {
+        if (level().getGameTime() % 20 != 0) {
             return;
         }
 
         float accel = getShootAccel();
         float yawInRad = (float) (Math.toRadians(yaw));
-        SmallFireball fireball = new SmallFireball(level,
+        SmallFireball fireball = new SmallFireball(level(),
                 this.getX(),
                 this.getY()+0.03f,
                 this.getZ(),
@@ -315,7 +309,7 @@ public class EntityWorldBoss extends Monster {
                 0,
                 accel * Math.sin(yawInRad));
         fireball.setOwner(this);
-        level.addFreshEntity(fireball);
+        level().addFreshEntity(fireball);
     }
 
     Entity mainTarget = null;
@@ -329,7 +323,7 @@ public class EntityWorldBoss extends Monster {
         }
         else {
             //find next target
-            List<Entity> entities = level.getEntities(this, CommonFunctions.ServerAABB(getEyePosition(), 4), LIVING_ENTITY_STILL_ALIVE);
+            List<Entity> entities = level().getEntities(this, CommonFunctions.ServerAABB(getEyePosition(), 4), LIVING_ENTITY_STILL_ALIVE);
             for (Entity entity:
                  entities) {
                 if (checkTargetValid(entity))
@@ -338,7 +332,7 @@ public class EntityWorldBoss extends Monster {
                     return;
                 }
             }
-            entities = level.getEntities(this, CommonFunctions.ServerAABB(getEyePosition(), RANGE), LIVING_ENTITY_STILL_ALIVE);
+            entities = level().getEntities(this, CommonFunctions.ServerAABB(getEyePosition(), RANGE), LIVING_ENTITY_STILL_ALIVE);
             for (Entity entity:
                     entities) {
                 if (checkTargetValid(entity))
@@ -386,8 +380,8 @@ public class EntityWorldBoss extends Monster {
 
 
     void shootFireballAimed(float error) {
-        if (level.getGameTime() % 7 != 0) {
-//            Main.Log("time:%d", level.getGameTime());
+        if (level().getGameTime() % 7 != 0) {
+//            Main.Log("time:%d", level().getGameTime());
             return;
         }
 
@@ -398,20 +392,20 @@ public class EntityWorldBoss extends Monster {
 
             float accel = getShootAccel();
 
-            Fireball fireball = new SmallFireball(level,
+            Fireball fireball = new SmallFireball(level(),
                     this.getX(),
                     this.getEyeY(),
                     this.getZ(),
                     accel * dir.x,
                     accel * dir.y,
                     accel * dir.z);
-//            LargeFireball fireball = new LargeFireball(level,
+//            LargeFireball fireball = new LargeFireball(level(),
 //                    this,
 //                    accel * dir.x,
 //                    accel * dir.y,
 //                    accel * dir.z, 2);
             fireball.setOwner(this);
-            level.addFreshEntity(fireball);
+            level().addFreshEntity(fireball);
         }
     }
 
@@ -451,12 +445,12 @@ public class EntityWorldBoss extends Monster {
             return super.hurt(damageSource, damage);
         }
 
-        if (damageSource == DamageSource.ON_FIRE)
+        if (damageSource == level().damageSources().onFire())
         {
             return false;
         }
 
-        if (damageSource == DamageSource.IN_FIRE)
+        if (damageSource == level().damageSources().inFire())
         {
             return false;
         }
@@ -554,7 +548,7 @@ public class EntityWorldBoss extends Monster {
     }
 
     public void checkDespawn() {
-        if (this.level.getDifficulty() == Difficulty.PEACEFUL && this.shouldDespawnInPeaceful()) {
+        if (this.level().getDifficulty() == Difficulty.PEACEFUL && this.shouldDespawnInPeaceful()) {
             this.discard();
         } else {
             this.noActionTime = 0;
@@ -578,8 +572,8 @@ public class EntityWorldBoss extends Monster {
     @Override
     protected void dropCustomDeathLoot(DamageSource p_21385_, int p_21386_, boolean p_21387_) {
         super.dropCustomDeathLoot(p_21385_, p_21386_, p_21387_);
-        int playerCount = level.players().size();
-        List<Entity> entityList = EntityUtil.getEntitiesWithinAABB(level,
+        int playerCount = level().players().size();
+        List<Entity> entityList = EntityUtil.getEntitiesWithinAABB(level(),
                 getEyePosition(), 16f, EntityUtil.NON_SPEC);
         for (Entity entity:
                 entityList) {
@@ -614,7 +608,7 @@ public class EntityWorldBoss extends Monster {
                     CommonFunctions.SafeSendMsgToPlayer(player, MessageDef.BOSS_DROP, itemStack.getDisplayName());
                     player.addItem(itemStack);
                     AdvancementUtil.giveAdvancement(player, AdvancementUtil.ACHV_ROOT);
-                    level.playSound(null, getOnPos(), ModSounds.PICKUP.get(), SoundSource.HOSTILE, 1f,1f);
+                    level().playSound(null, getOnPos(), ModSounds.PICKUP.get(), SoundSource.HOSTILE, 1f,1f);
                 }
 
             }
