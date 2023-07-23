@@ -5,10 +5,8 @@ import com.deeplake.exp1182.blocks.*;
 import com.deeplake.exp1182.blocks.mechanics.BlockAchvDoor;
 import com.deeplake.exp1182.blocks.motor.BlockMotorX;
 import com.deeplake.exp1182.blocks.motor.BlockMotorY;
-import com.deeplake.exp1182.blocks.tileentity.MotorTileEntityHorizontal;
-import com.deeplake.exp1182.blocks.tileentity.MotorTileEntityVertical;
-import com.deeplake.exp1182.blocks.tileentity.TileEntitySpawnBullet;
-import com.deeplake.exp1182.blocks.tileentity.TileEntitySpawnBoss;
+import com.deeplake.exp1182.blocks.motor.BlockMotorZ;
+import com.deeplake.exp1182.blocks.tileentity.*;
 import com.deeplake.exp1182.util.AdvancementUtil;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -16,7 +14,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -98,6 +95,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> BLOCK_MOTOR_X = registerWithItem("motor_x", () -> new BlockMotorX(BLOCK_PROP_MJDS));
 
     public static final RegistryObject<Block> BLOCK_MOTOR_Y = registerWithItem("motor_y", () -> new BlockMotorY(BLOCK_PROP_MJDS));
+    public static final RegistryObject<Block> BLOCK_MOTOR_Z = registerWithItem("motor_z", () -> new BlockMotorZ(BLOCK_PROP_MJDS));
 
     public static final RegistryObject<Block> BOX_FEATHER = registerWithItem("box_1", () -> new BlockAchvBox(null, AdvancementUtil.FEATHER));
     public static final RegistryObject<Block> BOX_SHOES = registerWithItem("box_2", () -> new BlockAchvBox(null, AdvancementUtil.SHOES));
@@ -118,6 +116,7 @@ public class ModBlocks {
     public static final RegistryObject<BlockEntityType<TileEntitySpawnBullet>> TE_SPAWN_BULLET = BLOCK_ENTITIES.register("te_spawn_bullet", () -> BlockEntityType.Builder.of(TileEntitySpawnBullet::new, SPAWN_BULLET.get()).build(null));
     public static final RegistryObject<BlockEntityType<MotorTileEntityHorizontal>> TE_MOTOR_H = BLOCK_ENTITIES.register("te_motor_h", () -> BlockEntityType.Builder.of(MotorTileEntityHorizontal::new, BLOCK_MOTOR_X.get()).build(null));
     public static final RegistryObject<BlockEntityType<MotorTileEntityVertical>> TE_MOTOR_V = BLOCK_ENTITIES.register("te_motor_v", () -> BlockEntityType.Builder.of(MotorTileEntityVertical::new, BLOCK_MOTOR_Y.get()).build(null));
+    public static final RegistryObject<BlockEntityType<MotorTileEntityZDir>> TE_MOTOR_Z = BLOCK_ENTITIES.register("te_motor_z", () -> BlockEntityType.Builder.of(MotorTileEntityZDir::new, BLOCK_MOTOR_Z.get()).build(null));
 //    public static final RegistryObject<Item> POWERGEN_ITEM = fromBlock(POWERGEN);
 //    public static final RegistryObject<GeneratorBlock> GENERATOR = BLOCKS.register("generator", GeneratorBlock::new);
 //    public static final RegistryObject<BlockEntityType<GeneratorBE>> GENERATOR_BE = BLOCK_ENTITIES.register("generator", () -> BlockEntityType.Builder.of(GeneratorBE::new, GENERATOR.get()).build(null));

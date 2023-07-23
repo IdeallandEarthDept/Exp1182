@@ -4,6 +4,7 @@ import com.deeplake.exp1182.client.ModSounds;
 import com.deeplake.exp1182.entities.mjds.EntityRevivalMist;
 import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletKB;
 import com.deeplake.exp1182.entities.mjds.projectiles.EntityMJDSBulletPierece;
+import com.deeplake.exp1182.setup.ModItems;
 import com.deeplake.exp1182.util.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -612,6 +613,8 @@ public class EntityWorldBoss extends Monster {
                     level().playSound(null, getOnPos(), ModSounds.PICKUP, SoundSource.HOSTILE, 1f,1f);
                 }
 
+                itemStack = new ItemStack(ModItems.MEMENTO.get());
+                player.addItem(itemStack);
             }
         }
     }

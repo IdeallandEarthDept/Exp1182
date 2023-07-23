@@ -96,12 +96,12 @@
   "item.exp1182.tp_back.desc": "回到传送前的位置",
 
   "item.exp1182.fire_memento": "鹊桥仙·往事成焰",
-  "item.exp1182.fire_memento.tooltip": "魔城起处，熔岩墙壁，\n火种隐藏其隙。\n寻得圣水一穿过，\n却道是，英豪天地。\n几多艰险，深湖巧计，\n考验皆成过去。\n恶魔岔路尽通关，\n能力锁，又回原地。",
+  "item.exp1182.fire_memento.tooltip": "[TeaCon2022 魔城通关纪念品（复刻）]\n[TeaCon2023 世界BOSS通关留念]\n魔城起处，熔岩墙壁，\n火种隐藏其隙。\n寻得圣水一穿过，\n却道是，英豪天地。\n几多艰险，深湖巧计，\n考验皆成过去。\n恶魔岔路尽通关，\n能力锁，又回原地。",
   "item.exp1182.fire_memento.clue": "魔城起处，熔岩墙壁，\n火种隐藏其隙。\n寻得圣水一穿过，\n却道是，英豪天地……",
 
   "exp1182.desc.key_subscribed": "已订阅世界BOSS传送邀请服务。",
   "exp1182.desc.key_unsubscribed": "你已【退订】世界BOSS传送邀请服务。",
-  "exp1182.msg.boss.ready": "世界BOSS已出现，请查收传送邀请。您可以潜行+右键该邀请以退订此通知。",
+  "exp1182.msg.boss.ready": "世界BOSS已出现，请查收传送邀请。您可以潜行+鼠标右击该邀请以退订此通知。",
   "exp1182.msg.boss.drop": "已讨伐。你获得了奖励 : %s",
 
   "item.exp1182.bullet1": "Bullet A 贴图",
