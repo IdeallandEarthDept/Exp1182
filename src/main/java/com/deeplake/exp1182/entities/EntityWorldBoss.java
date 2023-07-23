@@ -13,6 +13,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -214,7 +215,7 @@ public class EntityWorldBoss extends Monster {
 
                                 level().addFreshEntity(entity);
                             }
-
+                            swing(InteractionHand.MAIN_HAND);
                             playSound(ModSounds.MONSTER_SHOOT_1, 2f, 1f);
                         }
                     }

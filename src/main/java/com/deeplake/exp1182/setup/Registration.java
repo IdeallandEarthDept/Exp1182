@@ -5,9 +5,13 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -28,8 +32,29 @@ public class Registration {
 
         ModEffects.EFFECTS.register(bus);
 //        STRUCTURES.register(bus);
+        bus.addListener(Registration::addCreative);
     }
 
+    private static void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
+        {
+            for (RegistryObject<Block> item:
+                    ModBlocks.BLOCKS.getEntries()) {
+                event.accept(item.get());
+            }
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.accept(ModItems.BOSS_EGG);
+            event.accept(ModItems.MONSTER_REMOVAL);
+            event.accept(ModItems.TP_BACK);
+            event.accept(ModItems.TP_GO);
+//            for (RegistryObject<Item> item :
+//                    ModItems.ITEMS.getEntries()) {
+//                event.accept(item.get());
+//            }
+        }
+    }
 
 //    public static final RegistryObject<StructureFeature<JigsawConfiguration>> THIEFDEN = STRUCTURES.register("thiefden", ThiefDenStructure::new);
 //    public static final ResourceLocation RL_MYSTERIOUS_DIMENSION_SET = new ResourceLocation(Main.MOD_ID, "mysterious_dimension_structure_set");
