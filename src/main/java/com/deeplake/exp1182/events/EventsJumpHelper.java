@@ -25,7 +25,7 @@ import static com.deeplake.exp1182.util.DesignUtil.applyMajou;
 
 @Mod.EventBusSubscriber(modid = Main.MOD_ID)
 public class EventsJumpHelper {
-
+    static BlockPos DOWN = new BlockPos(0,-1,0);
     static BlockPos[] posDeltaList = {
             BlockPos.ZERO,
             BlockPos.ZERO.east(),
@@ -36,6 +36,15 @@ public class EventsJumpHelper {
             BlockPos.ZERO.east().south(),
             BlockPos.ZERO.west().north(),
             BlockPos.ZERO.west().south(),
+            DOWN,
+            DOWN.east(),
+            DOWN.west(),
+            DOWN.south(),
+            DOWN.north(),
+            DOWN.east().north(),
+            DOWN.east().south(),
+            DOWN.west().north(),
+            DOWN.west().south(),
     };
 
     @SubscribeEvent
