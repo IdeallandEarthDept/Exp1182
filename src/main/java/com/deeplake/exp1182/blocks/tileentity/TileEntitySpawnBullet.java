@@ -23,6 +23,16 @@ public class TileEntitySpawnBullet extends BlockEntity {
         long ticks = level.getGameTime();
         if (ticks % 20 == 0)
         {
+//            if (EntityUtil.getEntitiesWithinAABB(level,
+//                    EntityType.PLAYER,
+//                    new Vec3(getBlockPos().getX(),
+//                            getBlockPos().getY(),
+//                            getBlockPos().getZ()),
+//                    64, LivingEntity::isAlive).stream().count() == 0)
+//            {
+//                return;
+//            }
+
             for (Direction direction : Direction.values()) {
                 if (direction.getAxis() != Direction.Axis.Y)
                 {
